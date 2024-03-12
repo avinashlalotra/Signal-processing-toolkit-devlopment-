@@ -15,13 +15,10 @@
 //   Otherwise, if an element of SIZE is larger than the corresponding dimension, then A is resized and padded with zeros.
 //
 // Examples:
-//fftn([6 9 7 ;2 9 9 ;0 3 1],[2 2])
+// fftn([6 9 7 ;2 9 9 ;0 3 1],[2 2])
 // ans  =
-
-//  26.  -10.
-//  4.    4. 
-
-
+//    26.  -10.
+//    4.    4. 
 
 function y = fftn(A, SIZE)
     funcprot(0);
@@ -50,6 +47,6 @@ function y = fftn(A, SIZE)
                 A = resize_matrix(A, SIZE);
             end
             
-            y=fft(A);
+            y = fft(A);
     end
 endfunction
