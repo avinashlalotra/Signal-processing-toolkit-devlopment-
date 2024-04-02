@@ -17,10 +17,9 @@ rhs = argn(2)
 if(rhs<1 | rhs>2)
     error("Wrong number of input arguments.");
 end
-
-
 	select(rhs)
 	case 1 then
+    
     y=fft(A,1);    
 	
 	case 2 then
