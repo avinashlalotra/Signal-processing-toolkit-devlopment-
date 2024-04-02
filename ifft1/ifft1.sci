@@ -49,7 +49,7 @@ len=length(size_x)
 select(rhs)
 	
 	case 1 then
-    //handling multidimensional arrays
+ 
     if len>2 then
         last_dim=size_x(len)
     else
@@ -62,12 +62,20 @@ select(rhs)
 	
 
 	case 2 then
-     //handling multidimensional arrays
+     //check for empty input
+     // if n is not specified as None, then default value will be used
+     if isempty(n) then
+                n = size(x, nsdim);
+            else
+                n = n;
+            end
+    //handling multidimensional arrays        
     if len>2 then
         last_dim=size_x(len)
     else
         last_dim=1    
     end
+    
     res=[]
     for i=1:last_dim
         if (size(x(:,:,i))(1)==1) then
@@ -80,20 +88,21 @@ select(rhs)
     
 
 	case 3 then
-      //handling multidimensional arrays
+      // check for empty input 
+       if isempty(n) then
+                n = size(x, nsdim);
+            else
+                n = n;
+            end
     if len>2 then
         last_dim=size_x(len)
     else
         last_dim=1    
     end
+    size_x(dim)=n;
     res=[]
     for i=1:last_dim
-        if (size(x(:,:,i))(1)==1) then
-           res(:,:,i) =resize_matrix(x(:,:,i),1,n);
-        else
-            res(:,:,i)=resize_matrix(x(:,:,i),n,size(x(:,:,i))(2));    
-        end
-        res(:,:,i)=fft(res(:,:,i),1,dim);
+        res(:,:,i)=fft(resize_matrix(x(:,:,i),size_x),1,dim);
         end
      
 	end
