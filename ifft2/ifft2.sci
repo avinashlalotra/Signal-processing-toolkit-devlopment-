@@ -1,3 +1,7 @@
+//Author : Abinash Singh
+//email: abinashlalotra@gmail.com
+// 
+
 function res = ifft2 (A, m, n)
 //Calculates the inverse two-dimensional discrete Fourier transform of A using a Fast Fourier Transform algorithm.
 //Calling Sequence
@@ -29,18 +33,29 @@ rhs = argn(2)
 if (rhs < 1 | rhs > 3)
 error("Wrong number of input arguments.")
 end
-
+size_x=size(A)
+len=length(size_x)
+if len>2 then
+        last_dim=size_x(len)
+    else
+        last_dim=1
+    end    
 select(rhs)
 	
 	case 1 then
-	res = fft(A,1);
+    res=[]
+    for i=1:last_dim 
+        res(:,:,i)=fft(A(:,:,i),1)
+	end
 
 	case 2 then
 	error("Wrong number of input arguments.")
 
 	case 3 then
-    res=resize_matrix(A,m,n);
-	res =fft(res,1);
+    res=[]
+    for i=1:last_dim 
+        res(:,:,i)=fft(resize_matrix(A(:,:,i),m,n),1)   
+    end
 
 	end
 endfunction
