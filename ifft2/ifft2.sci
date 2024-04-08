@@ -12,11 +12,10 @@ function res = ifft2 (A, m, n)
 //m: number of rows of A to be used
 //n: number of columns of A to be used
 //Description
-//This is an Octave function.
 //It performs inverse two-dimensional FFT on the matrix A. m and n may be used specify the number of rows and columns of A to use. If either of these is larger than the size of A, A is resized and padded with zeros.
 //If A is a multi-dimensional matrix, each two-dimensional sub-matrix of A is treated separately.
 //Examples
-//x = [1 2 3; 4 5 6; 7 8 9]
+//A = [1 2 3; 4 5 6; 7 8 9]
 //m = 4
 //n = 4
 //ifft2 (A, m, n)
