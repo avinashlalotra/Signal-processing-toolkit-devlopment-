@@ -23,8 +23,10 @@ Calculates the two-dimensional discrete Fourier transform of A using a Fast Four
         m: number of rows of A to be used
         n: number of columns of A to be used
     Description
-        It performs two-dimentional FFT on the matrix A. m and n may be used specify the number of rows and columns of A to use. If either of these is larger than t        he size of A, A is resized and padded with zeros.
-        If A is a multi-dimensional matrix, each two-dimensional sub-matrix of A is treated separately.
+        It performs two-dimentional FFT on the matrix A. You can use the variables m and n to specify the number of rows and columns 
+        of A that you want to use. If either of these variables is larger than the size of A,
+        then A will be resized, and zeros will be added as padding.
+        If A is a multi-dimensional matrix, the function will treat each two-dimensional sub-matrix of A separately.
     Examples
         A = [1 2 3; 4 5 6; 7 8 9]
         m = 4
