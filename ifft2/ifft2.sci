@@ -27,8 +27,7 @@ discussions or collaborations!
     A= [1 2 3; 4 5 6; 7 8 9]
     m = 4
     n = 4
-    ifft2 (A, m, n) --function call
-    endfunction
+    ifft2 (A, m, n) --functionCall
     ans =
 
         2.81250 + 0.00000i  -0.37500 + 0.93750i   0.93750 + 0.00000i  -0.37500 - 0.93750i
