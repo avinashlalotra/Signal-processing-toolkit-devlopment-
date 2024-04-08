@@ -23,7 +23,6 @@ Calculates the two-dimensional discrete Fourier transform of A using a Fast Four
         m: number of rows of A to be used
         n: number of columns of A to be used
     Description
-        This is an Octave function.
         It performs two-dimentional FFT on the matrix A. m and n may be used specify the number of rows and columns of A to use. If either of these is larger than t        he size of A, A is resized and padded with zeros.
         If A is a multi-dimensional matrix, each two-dimensional sub-matrix of A is treated separately.
     Examples
