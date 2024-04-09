@@ -14,6 +14,14 @@ of an input array using a Fast Fourier Transform (FFT) algorithm.
 -`A` : The input array for which the Fourier transform is to be computed.
 
 -`size` (optional): A vector specifying the desired dimensions of the output array Y.
+- ```Y = fftn(A)```
+
+- ```Y = fftn(A, size)```
+### Parameters:
+
+- ```A``` : The input array for which the Fourier transform is to be computed.
+
+- ```size``` (optional): A vector specifying the desired dimensions of the output array Y.
 
 ### Details
 `fftn(A)` computes the N-dimensional DFT along each dimension of the input array A.
