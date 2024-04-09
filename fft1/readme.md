@@ -4,23 +4,25 @@
 Calculates the discrete Fourier transform of a matrix using the Fast Fourier Transform (FFT) algorithm. By default, the FFT is computed along the first non-singleton dimension of the input matrix, effectively performing the FFT operation on each column of the matrix.
 
 ## Calling Sequence:
-- `fft1(x)`
-- `fft1(x, n)`
-- `fft1(x, n, dim)`
+- `fft1(D)`
+- `fft1(D, N)`
+- `fft1(D, N, DIM)`
 
 ## Parameters:
-- `x`: Input matrix for which the discrete Fourier transform is to be calculated.
-- `n` (optional): Specifies the number of elements of x to be used in the computation. If n is larger than the dimension along which the FFT is calculated, x is resized and padded with zeros. If n is smaller, x is truncated.
-- `dim` (optional): Specifies the dimension of the matrix along which the FFT is performed. By default, the FFT is computed along the first non-singleton dimension of the array.
+- `D`: Input matrix for which the discrete Fourier transform is to be calculated.
+
+  
+- `N` (optional): The variable 'N' is an integer that determines the number of elements of 'D' to use. If 'N' is larger than the dimension along which the FFT is calculated,         then 'D' is resized and padded with zeros to match the required size.On the other hand, if 'N' is smaller than the size of 'D', then 'D' is truncated to            match the required size.
+- `DIM` (optional): Specifies the dimension of the matrix along which the FFT is performed. By default, the FFT is computed along the first non-singleton dimension of the array.
 
 ## Returns:
-- Matrix containing the discrete Fourier transform of the input matrix x.
+- Matrix containing the discrete Fourier transform of the input matrix D.
 
 ## Examples:
 1. DFT of a 2d array
 ```scilab
-x = [1 2 3; 4 5 6; 7 8 9];
-fft1(x);
+D= [1 2 3; 4 5 6; 7 8 9];
+fft1(D);
 ```
 
 
@@ -31,8 +33,8 @@ fft1(x);
 ```
 2. DFT of a complex array
 ```scilab
-x = [0 %pi 2+3*%i; 3+0.2*%i 2-0.3*%i 15+0.22*%i];
-fft1(x);
+D = [0 %pi 2+3*%i; 3+0.2*%i 2-0.3*%i 15+0.22*%i];
+fft1(D);
 ```
 
 
@@ -42,9 +44,9 @@ fft1(x);
 ```
 3. DFT of a 3D array
 ```scilab
-a=[8 6 0;9 6 2+%i;2 8 3];
-a(:,:,2)=[700 388 267;908 321 678;12 23 78];
-fft1(a,5,1);
+D=[8 6 0;9 6 2+%i;2 8 3];
+D(:,:,2)=[700 388 267;908 321 678;12 23 78];
+fft1(D,5,1);
 ```
 
 
