@@ -48,7 +48,7 @@ Convolve two vectors using the FFT for computation.
          fftX=fft(X);
          fftY=fft(Y);
          y=fft(fftX.*fftY,1);
-         y=real(y(1:nx+ny-1));
+         y=y(1:nx+ny-1);
      case 3 then
          n = 2^(fix(log2(nx+ny))+1);
          X=resize_matrix(X,1,n);
@@ -56,7 +56,7 @@ Convolve two vectors using the FFT for computation.
          fftX=fft(X);
          fftY=fft(Y);
          y=fft(fftX.*fftY,1);
-         y=real(y(1:nx+ny-1));
+         y=y(1:nx+ny-1);
      end
  endfunction
   
