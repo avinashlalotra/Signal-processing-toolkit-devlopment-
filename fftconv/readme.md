@@ -17,7 +17,7 @@ Convolve two vectors using the FFT for computation
 
 `y` : A Vector
 
-`n` : (optional) n is an integer
+`n` : (optional) 
 
 ## Details
 c = fftconv (x, y) returns a vector of length equal to length (x) + length (y) - 1. 
