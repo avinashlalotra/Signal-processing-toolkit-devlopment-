@@ -72,8 +72,12 @@ function res =  ifft1 (x, n, dim)
         if isempty(n) then
             res=fft(x,1,dim)
         else
-            dimension(nsdim)=n;
-            res=fft(resize_matrix(x,dimension),1,nsdim)
+            if (length(dimension) <dim )then
+                error("ifft1: DIM must be a valid dimension along which to perform FFT")
+            end
+            dimension(dim)=n;
+           res=resize_matrix(x,dimension);
+            res=fft(res,1,dim);
         end
     end
 endfunction
