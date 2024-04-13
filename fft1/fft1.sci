@@ -26,7 +26,12 @@ Calculates the discrete Fourier transform of a matrix using Fast Fourier Transfo
 
         The FFT is calculated along the first non-singleton dimension of the array. Thus, FFT is computed for each column of D.
 
-        The variable 'N' is an integer that determines the number of elements of 'D' to use. If 'N' is larger than the dimension along which the FFT is calculated,         then 'D' is resized and padded with zeros to match the required size.On the other hand, if 'N' is smaller than the size of 'D', then 'D' is truncated to            match the required size.
+         The variable 'N' is an integer that determines the number of elements of 'D' to use. 
+         If 'N' is larger than the dimension along which the FFT is calculated, 
+         then 'D' is resized and padded with zeros to match the required size.On the other hand,
+         if 'N' is smaller than the size of 'D', then 'D' is truncated to match the required size.
+
+
 
         DIM is an integer specifying the dimension of the matrix along which the FFT is performed.
    Examples
