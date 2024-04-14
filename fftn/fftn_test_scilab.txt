@@ -1,4 +1,4 @@
- // these results are generated using Scilab 
+ //These results are generated using Scilab 
 
 
 
@@ -43,7 +43,7 @@
   -10.  -2.
 //  -----------------------------------------------------------test case 3.5-------------------------------------------------------------------------------
 -->  fftn([2:5;8 7 5 1;7 3 4 5;0 0 1 6],[2])
-at line    22 of function fftn ( F:\fossee\Signal-processing-toolkit-devlopment-\fftn.sci line 44 )
+at line    22 of function fftn ( F:\fossee\Signal-processing-toolkit-development-\fftn.sci line 44 )
 
 Output size must have at least Ndims
 
