@@ -10,8 +10,7 @@ from the School of Engineering, Cochin University of Science and Technology (CUS
 signal processing, computing, and artificial intelligence (AI). I am particularly passionate about exploring 
 how these fields intersect and can be applied to solve real-world problems. I enjoy contributing to open-source 
 projects and am eager to learn and collaborate with others in the community. Feel free to connect with me for 
-discussions or collaborations!
-*/
+discussions or collaborations!*/
 /* 
     Compute the inverse discrete cosine transform of input.
         Calling Sequence
