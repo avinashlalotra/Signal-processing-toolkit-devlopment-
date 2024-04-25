@@ -1,17 +1,6 @@
-/*
-Author: Abinash Singh
-Email: abinashsinghlalotra@gmail.com
-GitHub: https://github.com/abinash108
-LinkedIn: https://www.linkedin.com/in/abinash-singh-809b89280
-Description: 
-I am currently pursuing a Bachelor of Technology (B.Tech) in Electronics and Communication Engineering (ECE) 
-from the School of Engineering, Cochin University of Science and Technology (CUSAT). My interests lie in 
-signal processing, computing, and artificial intelligence (AI). I am particularly passionate about exploring 
-how these fields intersect and can be applied to solve real-world problems. I enjoy contributing to open-source 
-projects and am eager to learn and collaborate with others in the community. Feel free to connect with me for 
-discussions or collaborations!
+/*2024 
+Author: Abinash Singh <abinashsinghlalotra@gmail.com>
 */
-
 /* 
 Calculates the discrete Fourier transform of a matrix using Fast Fourier Transform algorithm.
    Calling Sequence

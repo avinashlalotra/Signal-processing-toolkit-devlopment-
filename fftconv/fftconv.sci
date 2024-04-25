@@ -1,14 +1,5 @@
-/*
-April 2024
-Author: Abinash Singh
-Email: abinashsinghlalotra@gmail.com
-GitHub: https://github.com/abinash108
-LinkedIn: https://www.linkedin.com/in/abinash-singh-809b89280
-Description: 
-I am currently pursuing a Bachelor of Technology (B.Tech) in Electronics and Communication Engineering (ECE) 
-from the School of Engineering, Cochin University of Science and Technology (CUSAT). I enjoy contributing to open-source 
-projects and am eager to learn and collaborate with others in the community. Feel free to connect with me for 
-discussions or collaborations!
+/*2024 
+Author: Abinash Singh <abinashsinghlalotra@gmail.com>
 */
 /*
 Convolve two vectors using the FFT for computation.
