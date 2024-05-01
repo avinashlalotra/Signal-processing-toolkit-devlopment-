@@ -34,6 +34,7 @@ function res = ifft2(A, m, n)
     end
     size_x=size(A)
     len=length(size_x)
+    //to figure out size of multidimensional array
     if len>2 then
         last_dim=size_x(len)
     else
@@ -42,14 +43,14 @@ function res = ifft2(A, m, n)
     select(rhs)
         case 1 then
         res=[]
-        for i=1:last_dim 
+        for i=1:last_dim //treating each submatrix seperately
             res(:,:,i)=fft(A(:,:,i),1)
         end
     case 2 then
         error("Wrong number of input arguments.")
     case 3 then
         res=[]
-        for i=1:last_dim
+        for i=1:last_dim 
             res(:,:,i)=fft(resize_matrix(A(:,:,i),m,n),1)
         end
     end
