@@ -38,34 +38,78 @@ n: Specifying n allows you to zero-pad or truncate the output to a desired size.
 dim: Setting dim to a specific value performs the FHT along that particular dimension.
 
 ## Examples
-1. FHT of a 1D array (default)
+1. 
 ```scilab
 
-data = [1, 2, 3, 4];
+fht([2 3 4;9 1 0;11 33 26]);
+```
+```output
+ ans  =
 
-transformed_data = fht(data);
+   22.         37.         30.     
+  -9.7320508  -41.712813  -31.51666
+  -6.2679492   13.712813   13.51666
 ```
 
-This computes the FHT of the 1D array data.
-
-2. FHT of a matrix along rows (specifying dim)
+2.
 
 ```scilab
-matrix = [ [1, 2], [3, 4] ];
+fht([9 7;2 0],10,2);
 
-transformed_matrix = fht(matrix, dim=2);
+```output
+ans  =
+
+         column 1 to 7
+
+   16.   18.777616   17.820515   13.494277   7.4513778   2.  -0.7776157
+   2.    2.          2.          2.          2.          2.   2.       
+
+         column 8 to 10
+
+   0.1794854   4.5057233   10.548622
+   2.          2.          2.       
 ```
-This computes the FHT of the matrix matrix along the rows (dimension 2).
 
-3. FHT with zero-padding (using n)
+
+3. 
 ```scilab
+fht([2 7 8;0 0 2;2 4 8;0 9 1],2)
+```
+```output
+ans  =
 
-original_array = [5, 6, 7];
+   2.   7.   10.
+   2.   7.   6. 
+```
+4. 
+```scilab
+d=[1 8 9;7 6 5;2 7 5];d(:,:,2)=[10 11 12;3 8 1;0 7 1]
+fht(d,[],3);
+```
+```output
+ ans  =
 
-desired_size = 8;
+(:,:,1)
 
-transformed_array = fht(original_array, desired_size);
+   11.   19.   21.
+   10.   14.   6. 
+   2.    14.   6. 
+(:,:,2)
+
+  -9.  -3.  -3.
+   4.  -2.   4.
+   2.   0.   4.
+```
+5.
+```scilab
+fht([8 19 7 3]);
+```
+```output
+ ans  =
+
+   37.   17.  -7.  -15.
 ```
 
-This computes the FHT of original_array and zero-pads the output to a size of 8 elements. 
+
+
 
