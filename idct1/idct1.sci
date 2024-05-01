@@ -29,8 +29,8 @@ function y = idct1(x,n)
     siz=size(x);
     len=length(siz);
     for i=1:len
-        if siz(i) ~= 1 then
-            nsdim=i
+        if siz(i) ~= 1 then 
+            nsdim=i//calculating along non-singlton dimension
             break;
         end;
     end;
