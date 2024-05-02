@@ -21,7 +21,7 @@ The inverse discrete cosine transform x can be defined as follows:
 1.
 ```scilab
 a=[1 2 3];a(:,:,2)=[1 4 6];
-idct(a)
+idct1(a)// verify it with matlab idct function.
 ```
 ```output
 ans  =
@@ -58,7 +58,7 @@ idct1([11 23 45 67;87 65 43 58;65 43 21 36],5)
 ```
 4.
 ```scilab
-idct1([1 2 3;4 5 6;7 8 9],2);//truncating example
+idct1([1 2 3;4 5 6;7 8 9],2);//truncating example - verify with Matlab's function
 ```
 ```output
 ans  =
