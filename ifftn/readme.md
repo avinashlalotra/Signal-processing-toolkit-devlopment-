@@ -16,7 +16,7 @@ size is larger than the corresponding dimension then A is resized and padded wit
 ## Examples
 1.
 ```scilab
-A=[1:5;6:10];a(:,:,2)=[3:7;9:13];
+A=[1:5;6:10];A(:,:,2)=[3:7;9:13];
 ifftn(A);
 ```
 ```output
