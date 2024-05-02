@@ -13,7 +13,7 @@ The inverse FFT is calculated along the first non-singleton dimension of the arr
 - `ifft1(x)` : 
   
 - `ifft1(x,n)`:
- - `ifft1(x,n,dim)`
+- `ifft1(x,n,dim)`
 
     
  fft (x) computes the inverse FFT for each column of x.
