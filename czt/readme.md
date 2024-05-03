@@ -28,35 +28,55 @@ a = exp(j*2*pi*f1/Fs);                ## starting at frequency f1
 y = czt(x, m, w, a);
 ```
 
-2. comments if any
+2.
 ```scilab
-Scilab code here
+ czt([1 2 4;8 7 5;0 7 3])
 ```
 ```output
-Output here
+ans =
+
+ Columns 1 and 2:
+
+   9.0000e+00 - 8.8818e-16i   1.6000e+01 - 3.3307e-16i
+  -3.0000e+00 - 6.9282e+00i  -5.0000e+00 - 3.5527e-15i
+  -3.0000e+00 + 6.9282e+00i  -5.0000e+00 - 3.5527e-15i
+
+ Column 3:
+
+   1.2000e+01 - 7.7716e-16i
+   6.6613e-16 - 1.7321e+00i
+   7.7716e-16 + 1.7321e+00i
+```
+3.
+```scilab
+czt([ 12 78 54; 87 43 67 ;98 64 56],2)
+```
+```output
+ans=
+197.000 -   0.000i   185.000 -   0.000i   177.000 -   0.000i
+    23.000 +   0.000i    99.000 +   0.000i    43.000 +   0.000i
 
 ```
-3. comments if any
+4.
 ```scilab
-Scilab code here
+czt([15 26;78 43;90 87;76 43],2,4)
 ```
 ```output
-Output here
+ans =
 
+    259.00    199.00
+   6631.00   4342.00
 ```
-4. comments if any
+5.
 ```scilab
-Scilab code here
+czt([15 34 89;98 54 32],2,4,3)
 ```
 ```output
-Output here
+ans =
 
-```
-5.comments if any
-```scilab
-Scilab code here
-```
-```output
-Output here
+    2.4375    3.7500    5.0625    3.7500    3.3125    1.8750
+    4.7500    6.5000    8.2500    7.5000    6.2500    3.0000
+   12.0000   15.0000   18.0000   18.0000   14.0000    6.0000
+
 
 ```
