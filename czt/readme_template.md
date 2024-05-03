@@ -1,6 +1,7 @@
 # czt
 ## Description
-Chirp z-transform. 
+Chirp z-transform.
+
 Compute the frequency response starting at a and stepping by w for m steps. a is a point in the complex plane, and w is the ratio between points in each step (i.e., radius increases exponentially, and angle increases linearly).
 
 ## Calling Sequence
