@@ -1,17 +1,16 @@
-# Function name
+# idct2
 ## Description
-Function Description
+Compute the inverse 2-D discrete cosine transform of matrix x.
 
 ## Calling Sequence
 
-- `calling sequence`
+- `idct2(x)`
 
-- `calling sequence `
-- ` calling sequence`
+- `idct2(x,m,n)`
+- `idct2(x,[m,n])`
 ## Parameters
-- `Parameter Name` : Parameter Defination
-- `Parameter Name` : Parameter Defination
-- `Parameter Name` : Parameter Defination
+- `x` : A Matrix
+- `[m,n]` : zero-pads or crops the matrix A to size m-by-n before applying the inverse transformation.
 
 ## Examples
 1. comments if any
