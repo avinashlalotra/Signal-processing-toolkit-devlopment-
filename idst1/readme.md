@@ -1,17 +1,16 @@
-# Function name
+# idst1
 ## Description
-Function Description
+Computes the inverse type I discrete sine transform of x.
+If x is a matrix, compute the transform along the columns of the the matrix.
 
 ## Calling Sequence
 
-- `calling sequence`
+- `idst1(x)`
 
-- `calling sequence `
-- ` calling sequence`
+- `idst1(x,n) `
 ## Parameters
-- `Parameter Name` : Parameter Defination
-- `Parameter Name` : Parameter Defination
-- `Parameter Name` : Parameter Defination
+- `x` : A vector or Matrix
+- `n` :  If n is given, then x is padded or trimmed to length n before computing the transform.
 
 ## Examples
 1. comments if any
