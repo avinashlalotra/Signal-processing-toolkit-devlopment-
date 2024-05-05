@@ -2,16 +2,20 @@
 Author: Abinash Singh <abinashsinghlalotra@gmail.com>
 */
 /*
-    Computes the type I discrete sine transform of x
-        Calling Sequence
-            y= dst1(x)
-            y= dst1(x,n)
-        Parameters 
-            x: real or complex valued vector
-            n= Length to which x is trimmed before transform 
-        Description
-            Computes the type I discrete sine transform of x.If n is given,then x is padded or trimmed to length n before computing the transform. If x is a matrix,            compute the transform along the columns of the the matrix.
- */ 
+This function computes the inverse type I discrete sine transform.
+    Calling Sequence
+        Y = idst1(X)
+        Y = idst1(X, N)
+    Parameters
+        X: Matrix or integer
+        N: If N is given, then X is padded or trimmed to length N before computing the transform.
+    Description
+        This function computes the inverse type I discrete sine transform of Y. If N is given, then Y is padded or trimmed to length N before computing the transform. If Y is a matrix, compute the transform along the columns of the the matrix.
+    Examples
+        idst1([1,3,6])
+    ans = 
+         3.97487  -2.50000   0.97487 
+*/
 function y = dst1(x, n)
     funcprot(0);
     lhs= argn(1);
@@ -53,19 +57,7 @@ function y = dst1(x, n)
     end
 endfunction
 function y = idst1(x,n)
-//This function computes the inverse type I discrete sine transform.
-//Calling Sequence
-//Y = idst(X)
-//Y = idst(X, N)
-//Parameters
-//X: Matrix or integer
-//N: If N is given, then X is padded or trimmed to length N before computing the transform.
-//Description
-//This function computes the inverse type I discrete sine transform of Y. If N is given, then Y is padded or trimmed to length N before computing the transform. If Y is a matrix, compute the transform along the columns of the the matrix.
-//Examples
-//idst([1,3,6])
-//ans = 
-//     3.97487  -2.50000   0.97487 
+
 funcprot(0);
 rhs=argn(2);
 if(rhs<1 | rhs>2) then
