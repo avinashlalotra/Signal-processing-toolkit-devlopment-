@@ -9,7 +9,7 @@ Convolve two vectors using the FFT for computation.
     Parameters
         X, Y: Vectors 
     Description
-        Convolve two vectors using the FFT for computation. 'c' = fftconv (X, Y)' returns a vector of length equal to 'length(X) + length (Y) - 1'.  If X and Y are         the coefficient vectors of two polynomials, the returned value is the coefficient vector of the product polynomial.
+        Convolve two vectors using the FFT for computation. c = fftconv (X, Y) returns a vector of length equal to 'length(X) + length (Y) - 1'.  If X and Y are         the coefficient vectors of two polynomials, the returned value is the coefficient vector of the product polynomial.
         If the optional argument n is specified, an N-point FFT is used.
     Examples
         fftconv([1,2,3], [3,4,5])
