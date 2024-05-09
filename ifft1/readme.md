@@ -1,6 +1,6 @@
 # ifft1
 ## Description
-Compute the inverse discrete Fourier transform of A using a Fast Fourier Transform (FFT) algorithm.
+Compute the inverse discrete Fourier transform of x using a Fast Fourier Transform (FFT) algorithm.
 The inverse FFT is calculated along the first non-singleton dimension of the array.
  ## Parameters
 `x` : input matrix
