@@ -47,6 +47,7 @@ Convolve two vectors using the FFT for computation.
          y=fft(fftX.*fftY,1);
          y=y(1:nx+ny-1);
      end
+     y=clean(y);
  endfunction
   
 
