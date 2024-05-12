@@ -38,32 +38,32 @@ n = 1000
 plot(psi,x)
 ```
 
-<img title="OUTPUT" alt="Alt text" src="/images/boo.svg">
+<img title="OUTPUT" alt="Alt text" src="testcase1.svg">
 
 2. 
 ```scilab
-[psi,x]=shanwavf(lb,ub,n,fb,fc);
+[psi,x]=shanwavf(0,10,1000,5,2);
 plot(psi,x)
 ```
-<img title="OUTPUT" alt="Alt text" src="/images/boo.svg">
+<img title="OUTPUT" alt="Alt text" src="testcase2.svg">
 
 3.
 ```scilab
-[psi,x]=shanwavf(lb,ub,n,fb,fc);
+[psi,x]=shanwavf(-8,8,1000,2,1);
 plot(psi,x)
 ```
-<img title="OUTPUT" alt="Alt text" src="/images/boo.svg">
+<img title="OUTPUT" alt="Alt text" src="testcase3.svg">
 
 4.
 ```scilab
-[psi,x]=shanwavf(lb,ub,n,fb,fc);
+[psi,x]=shanwavf(2,15,2000,18,1);
 plot(psi,x)
 ```
-<img title="OUTPUT" alt="Alt text" src="/images/boo.svg">
+<img title="OUTPUT" alt="Alt text" src="testcase4.svg">
 
 5.
 ```scilab
-[psi,x]=shanwavf(lb,ub,n,fb,fc);
+[psi,x]=shanwavf(7,10,2000,1,2);
 plot(psi,x)
 ```
-<img title="OUTPUT" alt="Alt text" src="/images/boo.svg">
+<img title="OUTPUT" alt="Alt text" src="testcase5.svg">
