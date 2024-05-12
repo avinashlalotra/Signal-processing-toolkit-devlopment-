@@ -4,7 +4,7 @@ Compute the Complex Shannon wavelet.
 
 The complex Shannon wavelet is defined by a bandwidth parameter fb, a wavelet center frequency fc, and the expression
 
-# $\psi(x) = f b^{\frac{1}{2}} \text{sinc}(fb \cdot x) e^{\pi i f c x}$
+# $\psi(x) = f b^{\frac{1}{2}} \text{sinc}(fb \cdot x) e^{2\pi i f c x}$
 
 
 on an n-point regular grid in the interval of lb to ub.
