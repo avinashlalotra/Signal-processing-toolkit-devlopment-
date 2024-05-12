@@ -10,8 +10,7 @@ The inverse FFT is calculated along the first non-singleton dimension of the arr
 `dim` : Specifies the dimention of the matrix along which the inverse FFT is performed
 
 ## Calling Sequence
-- `ifft1(x)` : 
-  
+- `ifft1(x)` :   
 - `ifft1(x,n)`:
 - `ifft1(x,n,dim)`
 
