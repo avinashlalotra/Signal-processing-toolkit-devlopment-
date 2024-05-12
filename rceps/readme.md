@@ -1,17 +1,18 @@
-# Function name
+# rceps
 ## Description
-Function Description
+Real cepstrum and minimum-phase reconstruction
 
 ## Calling Sequence
-
-- `calling sequence`
-
-- `calling sequence `
-- ` calling sequence`
+- `[y,ym] = rceps(x)`
 ## Parameters
-- `Parameter Name` : Parameter Defination
-- `Parameter Name` : Parameter Defination
-- `Parameter Name` : Parameter Defination
+# Input
+- `x` : A vector or a Matirx
+# Output
+- `y` : Real cepstrum
+- `ym` : Minimum-phase reconstruction
+If called with two output arguments,
+
+the minimum phase reconstruction of the signal x is returned in ym.
 
 ## Examples
 1. comments if any
