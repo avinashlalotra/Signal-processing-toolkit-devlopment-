@@ -13,7 +13,7 @@ Compute the inverse 2-D discrete cosine transform of matrix x.
 - `[m,n]` : zero-pads or crops the matrix A to size m-by-n before applying the inverse transformation.
 
 ## Examples
-1. comments if any
+1. 
 ```scilab
 idct2([1 2 3;4 5 6;7 8 9])
 ```
@@ -25,7 +25,7 @@ ans  =
    1.4512096  -0.599856    0.1994143
 
 ```
-2. comments if any
+2. 
 ```scilab
 idct2([87 43 56;98 76 54],2,4)
 ```
@@ -36,7 +36,7 @@ idct2([87 43 56;98 76 54],2,4)
   -18.425993  -10.910471   1.7180826   12.062032
 
 ```
-3. comments if any
+3. 
 ```scilab
 idct2([12;24;54;67;43],[5,5])
 ```
@@ -50,7 +50,7 @@ ans =
    69.3688
 
 ```
-4. comments if any
+4. 
 ```scilab
 idct2([87 65 43 21],[5,5])
 ```
@@ -60,7 +60,7 @@ ans =
    89.283   42.976   49.666   34.545   24.608
 
 ```
-5.comments if any
+5.
 ```scilab
 idct2([11 22 33;44 55 66;77 88 99],[2,2])
 //verify with MATLAB's idct2 because Octave's idct2 doesn't support croping of matrix
