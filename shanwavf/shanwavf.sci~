@@ -35,11 +35,9 @@ function [psi,x]=shanwavf(lb,ub,n,fb,fc)
             error("fc and fb must be strictly positive");
         end
         x = linspace(lb,ub,n);
-        sincx=x;
-        for i=1:n
-            sincx(i)=sin(fb*x(i)*%pi)/(fb*x(i)*%pi);
-        end    
-        psi = (fb.^0.5).*(sincx.*exp(2.*%i.*%pi.*fc.*x));
+        psi = (fb.^0.5).*(sinc(fb.*x).*exp(2.*%i.*%pi.*fc.*x));
     end
 endfunction
-
+function [psi,x]]=myshan(lb,ub,n,fb,fc)
+    x=zeros(n)
+endfunction
