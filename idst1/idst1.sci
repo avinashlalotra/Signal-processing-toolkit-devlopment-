@@ -10,7 +10,9 @@ This function computes the inverse type I discrete sine transform.
         X: Matrix or integer
         N: If N is given, then X is padded or trimmed to length N before computing the transform.
     Description
-        This function computes the inverse type I discrete sine transform of Y. If N is given, then Y is padded or trimmed to length N before computing the transform. If Y is a matrix, compute the transform along the columns of the the matrix.
+        This function computes the inverse type I discrete sine transform of X If N is given, 
+        then X is padded or trimmed to length N before computing the transform.
+        If X is a matrix, compute the transform along the columns of the the matrix.
     Examples
         idst1([1,3,6])
     ans = 
