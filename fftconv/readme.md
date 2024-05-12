@@ -4,7 +4,6 @@ Convolve two vectors using the FFT for computation
 ## Calling Sequence
 - `fftconv(x,y)`
 - `fftconv(x,y,n)`
-
 ## fftconv
 ## Description
 Convolve two vectors using the FFT for computation
