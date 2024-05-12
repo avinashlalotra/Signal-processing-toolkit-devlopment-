@@ -1,5 +1,4 @@
 # Function: fft1
-
 ## Description:
 Calculates the discrete Fourier transform of a matrix using the Fast Fourier Transform (FFT) algorithm. By default, the FFT is computed along the first non-singleton dimension of the input matrix, effectively performing the FFT operation on each column of the matrix.
 
