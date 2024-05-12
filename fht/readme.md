@@ -1,5 +1,4 @@
 # fht: Fast Hartley Transform Function 
-
 ## Description
 
 ## Calling sequences
