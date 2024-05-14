@@ -17,10 +17,6 @@ Complex Shannon Wavelet
     1.	[a,b]=shanwavf (2,8,3,1,6)
     	a =   [-3.8982e-17 + 1.1457e-31i   3.8982e-17 - 8.4040e-31i  -3.8982e-17 + 4.5829e-31i]
     	b =   [2   5   8]
-    2.	[a,b]=shanwavf(1,2,1,[2,2;i,2],[-1,2;-i,i])
-    	a =   [-5.5128e-17 - 2.7005e-32i  -5.5128e-17 + 5.4010e-32i;
-    	       8.6404e+06 + 8.6404e+06i  -1.9225e-22 - 0.0000e+00i]
-    	b =  2
 */
 function [psi,x]=shanwavf(lb,ub,n,fb,fc)
     funcprot(0);
