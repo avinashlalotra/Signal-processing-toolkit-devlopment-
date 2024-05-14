@@ -12,7 +12,6 @@ Complex Shannon Wavelet
     	fb: Real or complex valued vector or matrix, strictly positive value for scalar input
     	fc: Real or complex valued vector or matrix, strictly positive value for scalar input
     Description
-    	This is an Octave function
     	This function implements the complex Shannon wavelet function and returns the value obtained. The complex Shannon wavelet is defined by a bandwidth parameter FB, a wavelet center frequency FC on an N point regular grid in the interval [LB,UB].
     Examples
     1.	[a,b]=shanwavf (2,8,3,1,6)
