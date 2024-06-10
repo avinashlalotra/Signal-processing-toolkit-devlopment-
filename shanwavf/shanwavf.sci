@@ -9,8 +9,8 @@ Complex Shannon Wavelet
     	lb: Real or complex valued vector or matrix
     	ub: Real or complex valued vector or matrix
     	n: Real valued integer strictly positive
-    	fb: Real or complex valued vector or matrix, strictly positive value for scalar input
-    	fc: Real or complex valued vector or matrix, strictly positive value for scalar input
+    	fb: strictly positive scalar 
+    	fc: strictly positive scalar 
     Description
     	This function implements the complex Shannon wavelet function and returns the value obtained. The complex Shannon wavelet is defined by a bandwidth parameter FB, a wavelet center frequency FC on an N point regular grid in the interval [LB,UB].
     Examples
