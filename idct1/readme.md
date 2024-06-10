@@ -20,28 +20,26 @@ The inverse discrete cosine transform x can be defined as follows:
 ##  Examples
 1.
 ```scilab
-a=[1 2 3];a(:,:,2)=[1 4 6];
-idct1(a)// verify it with matlab idct function.
+a=[1 4 6];
+idct1(a)
 ```
 ```output
 ans  =
 
-(:,:,1)
-
-   3.2163087  -1.8721395   0.3878816
-(:,:,2)
 
    5.8552671  -4.3216292   0.1984129
 ```
 2.
 ```scilab
-idct1([1 2;4 5;87 66;9 32],2)
+idct1([1 2;4 5;87 66;9 32],4)
 ```
 ```output
  ans  =
-
-   3.5355339   4.9497475
-  -2.1213203  -2.1213203
+                                                                                                    
+   49.049   45.926
+  -47.797  -51.552
+  -38.203  -12.448
+   38.951   22.074
 ```
 3.
 ```scilab
@@ -58,7 +56,9 @@ idct1([11 23 45 67;87 65 43 58;65 43 21 36],5)
 ```
 4.
 ```scilab
-idct1([1 2 3;4 5 6;7 8 9],2);//truncating example - verify with Matlab's function
+idct1([1 2 3;4 5 6;7 8 9],2);//truncating example 
+This operation is not supported by Octave
+You can verify with  Matlab's function
 ```
 ```output
 ans  =
@@ -69,6 +69,7 @@ ans  =
 5.
 ```scilab
 a=[1 2 3;4 5 6];a(:,:,2)=[1 4 6;7 8 9];
+// Multidim operation is also not supported by Octave. You can verify it with Matlab's function.
 idct1(a)
 ```
 ```output
