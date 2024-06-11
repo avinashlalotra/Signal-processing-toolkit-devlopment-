@@ -15,43 +15,58 @@ If called with two output arguments,
 the minimum phase reconstruction of the signal x is returned in ym.
 
 ## Examples
-1. comments if any
+1. 
 ```scilab
-Scilab code here
+ [y, xm]= rceps([1:6]);
+ plot(y,xm)
+```
+<span>
+   <img src='testcase1.svg'>
+</span>
+
+2. 
+```scilab
+[y, xm]= rceps([54:90]);
+plot(y,xm);
+```
+
+<span>
+<img src='testcase2.svg'>
+</span>
+
+3. 
+```scilab
+[y, xm]= rceps([1:3;12:14])
 ```
 ```output
-Output here
+y =
+
+   2.481422   2.552973   2.615554
+   0.083527   0.155077   0.217659
+
+xm =
+
+   11.96755   12.90912   13.86294
+    1.99806    3.98897    5.97335
+    0.16687    0.61814    1.29748
 
 ```
-2. comments if any
-```scilab
-Scilab code here
-```
-```output
-Output here
 
-```
-3. comments if any
-```scilab
-Scilab code here
-```
-```output
-Output here
-
-```
 4. comments if any
 ```scilab
-Scilab code here
+ [y, xm]= rceps([1 23 3;4 5 6;7 8 9]);
+plot(y,xm)
 ```
-```output
-Output here
+<span>
+    <img src='testcase4.svg'>
+</span>
+5.
 
-```
-5.comments if any
 ```scilab
-Scilab code here
-```
-```output
-Output here
+[y, xm]= rceps([1 4;5 6;7 8;9 0])
+plot(y,xm)
 
 ```
+<span>
+    <img src='testcase5.png'>
+</span>
