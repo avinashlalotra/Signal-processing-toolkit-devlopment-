@@ -68,11 +68,23 @@ end
 select(rhs)
 case 1 then
     n=size(x,1);
+    if (size(x,1)==1 | size(x,2)==1) then
+         y = dst1(x, n)/(n+1);
+     else
+          y = dst1(x, n) * 2/(n+1);
+     end
+    
 case 2 then
     if n==1 then
         n=size(x,2)
     end
+     y = dst1(x, n) * 2/(n+1);
+   
     
 end
-    y = dst1(x, n) * 2/(n+1);
+     
+          
+             
+         
+    
 endfunction

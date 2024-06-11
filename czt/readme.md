@@ -22,11 +22,16 @@ If x is a matrix, the transform will be performed column-by-column.
 ## Examples
 1. To evaluate the frequency response for the range f1 to f2 in a signal with sampling frequency Fs, use the following:
 ```scilab
-m = 32;                               ## number of points desired
-w = exp(-%i*2*%pi*(f2-f1)/((m-1)*Fs));  ## freq. step of f2-f1/m
-a = exp(%i*2*%pi*f1/Fs);                ## starting at frequency f1
+m = 32; f1=100;          
+f2=100; Fs=2000;
+w = exp(-%i*2*%pi*(f2-f1)/((m-1)*Fs)); 
+a = exp(%i*2*%pi*f1/Fs);
+x=[1 2 3]
 y = czt(x, m, w, a);
 ```
+```output
+   5.3292 - 2.3814i   5.3292 - 2.3814i   5.3292 - 2.3814i   5.3292 - 2.3814i   5.3292 - 2.3814i
+   ```
 
 2.
 ```scilab
