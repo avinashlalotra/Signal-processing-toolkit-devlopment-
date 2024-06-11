@@ -19,72 +19,49 @@ This function computes the inverse type I discrete sine transform.
          3.97487  -2.50000   0.97487 
 */
 function y = dst1(x, n)
-    funcprot(0);
-    lhs= argn(1);
-    rhs= argn(2);
-    if(rhs>2)
-        error("Wrong number of input arguments");
-    end
-    transpose = (size(x,1) == 1);
-    if transpose then
-        x = x (:);
-    end
-    [nr, nc] = size (x);
-    select(rhs)
-    case 1 then
-        break;
-    case 2 then
-        if n > nr
-            x = [ x ; zeros(n-nr,nc) ];
-        elseif n < nr
-            x (nr-n+1 : n, :) = [];
-        end
-    end
-    D=[ zeros(1,nc); x ; zeros(1,nc); -flipdim(x,1)]
-    dimension = size(D);
-    nsdim = 1;
-    for i = 1:length(dimension)
-        if dimension(i) ~= 1 then
-            nsdim = i;
-            break;
-        end
-    end
-    y = fft (D,-1,nsdim)/2*%i;
-    y = y(2:nr+1,:);
-    if isreal(x) then
-        y = real (y)
-    end
-    if transpose then
-        y = y.'
-    end
-endfunction
-function y = idst1(x,n)
+  funcprot(0);
+  rhs = argn(2);
+  if (rhs < 1 | rhs > 2)
+    error("ds1: wrong number of input arguments");
+  end
 
-funcprot(0);
-rhs=argn(2);
-if(rhs<1 | rhs>2) then
-    error("Wrong number of input arguments.");
-end
-select(rhs)
-case 1 then
-    n=size(x,1);
-    if (size(x,1)==1 | size(x,2)==1) then
-         y = dst1(x, n)/(n+1);
-     else
-          y = dst1(x, n) * 2/(n+1);
-     end
-    
-case 2 then
-    if n==1 then
-        n=size(x,2)
-    end
-     y = dst1(x, n) * 2/(n+1);
-   
-    
-end
-     
-          
-             
-         
-    
+  transpose = (size(x, 'r') == 1);
+  if (transpose)
+    x = x (:);
+  end
+
+  [nr, nc] = size(x);
+  if (rhs == 1)
+    n = nr;
+  elseif (n > nr)
+    x = [ x ; zeros(n-nr, nc) ];
+  elseif (n < nr)
+    x (nr-n+1 : n, :) = [];
+  end
+
+  d = [ zeros(1, nc); x; zeros(1, nc); -flipdim(x, 1) ];
+  y = fft(d, -1, find(size(d) ~= 1, 1))/2*%i;
+  y = y(2:nr+1, :);
+  if (isreal(x))
+    y = real (y);
+  end
+
+  if (transpose)
+    y = y.';
+  end
+
 endfunction
+function x = idst1 (y, n)
+  nargin=argn(2)
+  if (nargin < 1 || nargin > 2)
+    error("invalid input arguments")
+  end
+
+  if nargin == 1,
+    n = size(y,1);
+    if n==1, n = size(y,2); end
+  end
+  x = dst1(y, n) * 2/(n+1);
+
+endfunction
+
