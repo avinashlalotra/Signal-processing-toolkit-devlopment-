@@ -65,5 +65,6 @@ function y = czt(x, m, w, a)
     end
     if row == 1, y = y.';
     end
+    y = clean ( y ) ;
 endfunction
 
