@@ -1,4 +1,17 @@
 function [beta, sigma, r] = ols (y, x)
+    
+    function [u , p] = formatted_chol(z)
+      //p flags whether the matrix A was positive definite and chol does not fail. A zero value of p indicates that matrix A is positive definite and R gives the factorization. Otherwise, p will have a positive value.
+      ierr  = execstr (" u = chol (z);",'errcatch' )
+      if ( ierr == 29 )
+        p = %T ;
+        warning("chol: Matrix is not positive definite.")
+      else
+        p = %F ;
+      end
+
+    endfunction
+
     nargin = argn ( 2 )
     if (nargin ~= 2)
       error ("null");
@@ -27,7 +40,7 @@ function [beta, sigma, r] = ols (y, x)
   
     // Start of algorithm
     z = x' * x;
-    [u, p] = chol (z);
+    [u, p] = formatted_chol (z);
   
     if (p)
       beta = pinv (x) * y;
@@ -40,7 +53,7 @@ function [beta, sigma, r] = ols (y, x)
   
       // z is of full rank, avoid the SVD in rnk
       if (p == 0)
-        rnk = columns (z);
+        rnk = size (z,2);
       else
         rnk = rank (z);
       end
