@@ -1,4 +1,30 @@
-function [beta, sigma, r] = ols (y, x)
+/*2024 
+Author: Abinash Singh <abinashsinghlalotra@gmail.com>
+*/
+/*
+Description:
+            : [bt, sigma, r] = ols (y, x)   bt--> beta
+            Ordinary least squares estimation.
+            
+            OLS applies to the multivariate model y = x*b + e with mean (e) = 0 and cov (vec (e)) = kron (s, I). where y is a t by p matrix, x is a t by k matrix, b is a k by p matrix, and e is a t by p matrix.
+            
+            Each row of y and x is an observation and each column a variable.
+            
+            The return values bt, sigma, and r are defined as follows.
+            
+            bt
+            The OLS estimator for b. bt is calculated directly via inv (x'*x) * x' * y if the matrix x'*x is of full rank. Otherwise, bt = pinv (x) * y where pinv (x) denotes the pseudoinverse of x.
+            
+            sigma
+            The OLS estimator for the matrix s,
+            
+            sigma = (y-x*bt)'
+              * (y-x*bt)
+              / (t-rank(x))
+            r
+            The matrix of OLS residuals, r = y - x*bt.
+*/
+function [bt, sigma, r] = ols (y, x)
     
     function [u , p] = formatted_chol(z)
       //p flags whether the matrix A was positive definite and chol does not fail. A zero value of p indicates that matrix A is positive definite and R gives the factorization. Otherwise, p will have a positive value.
@@ -43,13 +69,13 @@ function [beta, sigma, r] = ols (y, x)
     [u, p] = formatted_chol (z);
   
     if (p)
-      beta = pinv (x) * y;
+      bt = pinv (x) * y;
     else
-      beta = u \ (u' \ (x' * y));
+      bt = u \ (u' \ (x' * y));
     end
   
     if (nargout > 1)
-      r = y - x * beta;
+      r = y - x * bt;
   
       // z is of full rank, avoid the SVD in rnk
       if (p == 0)
