@@ -74,7 +74,7 @@ function [gd,w] = grpdelay (b, a, nfft, whole, Fs)
     elseif (rhs > 3)
       // grpdelay (B, A, F, Fs)
       Fs     = whole;
-      HzFlag = true;
+      HzFlag = %T;
     else
       // grpdelay (B, A, W)
       Fs = 1;
