@@ -21,43 +21,59 @@ The function works by finding the indexes of jumps between consecutive values in
 ## Examples
 1. 
 ```scilab
-
+    xhi = [0 0 1 1 1 0 0 1 0 0 0 1 1];
+    ranges = clustersegment (xhi);
+    ranges{1}
 ```
 ```output
+ranges  = 
+
+  [2x3 constant]
+
+ ans  =
+
+   3.   8.   12.
+   5.   8.   13.
 
     ```
 
 2.
 ```scilab
- 
+xhi =  [ 1 0 0 0 1 1 0 1 1 1 0 1 0 ; 1 0 1 0 1 0 0 0 1 0 0 1 0];
+ ranges = clustersegment (xhi);
+ ranges{1}, ranges{2}
 ```
 ```output
+ ranges  = 
 
+  [2x4 constant]    [2x5 constant]
+
+  ans  =
+
+   1.   5.   8.    12.
+   1.   6.   10.   12.
+
+ ans  =
+
+   1.   3.   5.   9.   12.
+   1.   3.   5.   9.   12.
 
 ```
 3.
 ```scilab
-
+xhi =  [ 1 0 0 0 1 1 0];
+ranges = clustersegment (xhi)
+ranges{1}
 ```
 ```output
+ ranges  = 
+
+  [2x2 constant]
+
+  ans  =
+
+   1.   5.
+   1.   6.
 
 ```
-4.
-```scilab
 
-
-```
-```output
-
-
-```
-5.
-```scilab
-
-
-```
-```output
-
-
-
-```
