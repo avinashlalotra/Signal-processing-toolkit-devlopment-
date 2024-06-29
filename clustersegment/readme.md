@@ -77,3 +77,27 @@ ranges{1}
 
 ```
 
+4.
+```scilab
+ranges = clustersegment ([])
+```
+```output
+ ranges  = 
+
+  {}
+ ```
+ 5.
+ ```scilab
+ xhi =  [ 23 4 5 6 5 43 2];
+
+ranges = clustersegment (xhi)
+ranges{1}
+```
+```output
+
+ ans  =
+
+   3.   4.   6.
+   1.   4.   6.
+
+```   
