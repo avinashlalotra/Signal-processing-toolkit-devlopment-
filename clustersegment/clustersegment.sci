@@ -57,7 +57,7 @@ function contRange = __clustersegment__(xhi)
 endfunction
 //handling the matrix input 
 function contRange = clustersegment (xhi)
-   contRange   = cell (1, size(x,1));
+   contRange   = cell (1, size(xhi,1));
    for i = 1 : size(xhi,1)
        contRange{i} =__clustersegment__(xhi(i,:))
    end
