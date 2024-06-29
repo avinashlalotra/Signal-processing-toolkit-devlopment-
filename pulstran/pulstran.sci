@@ -15,7 +15,7 @@ function y = pulstran(t, d, pulse, varargin)
     // apply function t+d for all d
     for i=1:size(d,1)
       // this one pending
-      y = y+a(i)*feval(pulse,t-d(i,1),varargin(:));
+      y = y+a(i)*execute(pulse,t-d(i,1),varargin(:));
     end
   else
     // interpolate each pulse at the specified times
@@ -40,4 +40,19 @@ function y = pulstran(t, d, pulse, varargin)
     end
   end
 
+endfunction
+// function to call other functions
+function y = execute(fn_name,x,varargin)
+  nargin= argn(2)
+  if nargin<2
+    error("execute:  At least need a function name and its input");
+  end
+  if ~(type(fn_name) == 10) then
+      error(" The function name should be a string")
+  end
+    if isempty(varargin) then
+        execstr( "y =  " + fn_name+ " ( x ) " )
+    else
+        execstr( "y =  " + fn_name+ " ( x , varargin(:) ) " )   
+    end
 endfunction
