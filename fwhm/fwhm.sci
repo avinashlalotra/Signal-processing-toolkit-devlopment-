@@ -1,26 +1,42 @@
 /*2024 
 Author: Abinash Singh <abinashsinghlalotra@gmail.com>
 */
+/* 
+Description:
+        Function File: f = fwhm (y) ¶
+        Function File: f = fwhm (x, y) ¶
+        Function File: f = fwhm (…, "zero") ¶
+        Function File: f = fwhm (…, "min") ¶
+        Function File: f = fwhm (…, "alevel", level) ¶
+        Function File: f = fwhm (…, "rlevel", level) ¶
+        Compute peak full-width at half maximum (FWHM) or at another level of peak maximum for vector or matrix data y, optionally sampled as y(x). If y is a matrix, return FWHM for each column as a row vector.
 
-//helper function
-// to calculate max along the columns of a array
-function max_value = col_max (A)
+        The default option "zero" computes fwhm at half maximum, i.e. 0.5*max(y). The option "min" computes fwhm at the middle curve, i.e. 0.5*(min(y)+max(y)).
+
+        The option "rlevel" computes full-width at the given relative level of peak profile, i.e. at rlevel*max(y) or rlevel*(min(y)+max(y)), respectively. For example, fwhm (…, "rlevel", 0.1) computes full width at 10 % of peak maximum with respect to zero or minimum; FWHM is equivalent to fwhm(…, "rlevel", 0.5).
+
+        The option "alevel" computes full-width at the given absolute level of y.
+
+        Return 0 if FWHM does not exist (e.g. monotonous function or the function does not cut horizontal line at rlevel*max(y) or rlevel*(max(y)+min(y)) or alevel, respectively).
+*/
+function myfwhm = fwhm (y, varargin)
+  //helper function
+  // to calculate max along the columns of a array
+  function max_value = col_max (A)
     max_value = zeros ( 1, size(A,2))
     for i = 1:length(max_value)
         max_value(i) = max(A(:,i))
     end
-endfunction
-// to calculate min along the columns of a array
-function min_value = col_min (A)
+  endfunction
+  // to calculate min along the columns of a array
+  function min_value = col_min (A)
     min_value = zeros ( 1, size(A,2))
     for i = 1:length(min_value)
         min_value(i) = min(A(:,i))
     end
-endfunction
+  endfunction
 
-//
 // main function
-function myfwhm = fwhm (y, varargin)
   nargin = argn (2)
   if nargin < 1 || nargin > 5
         error("invalid inputs");
@@ -66,7 +82,7 @@ function myfwhm = fwhm (y, varargin)
         k = k+1;
         break
       end
-      if ( (type(varargin(k)==10)) && or(~strcmp(varargin(k), {'zero', 'min'})) )
+      if  ~strcmp(varargin(k),'zero') || ~strcmp(varargin(k),'min') 
         opt = varargin(k);
         k = k+1;
       end
