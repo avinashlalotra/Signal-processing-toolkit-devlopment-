@@ -58,22 +58,40 @@ If the denominator of the computation becomes too small, the group delay is set 
 ## Examples
 1. 
 ```scilab
-
+   [gd1,w] = grpdelay([0,1]);
+   [gd2,w] = grpdelay([0,1],1);
+   and( gd1 == gd2 ) // any( gd1 == gd2 ) in octave
 ```
 ```output
+ans  =
+
+  T
 
     ```
 
 2.
 ```scilab
- 
+ [gd,w] = grpdelay([0,1],1,4);
+ gd , w
 ```
 ```output
 
+gd  = 
 
+   1.
+   1.
+   1.
+   1.
+  w  = 
+
+   0.
+   0.7853982
+   1.5707963
+   2.3561945  
 ```
 3.
 ```scilab
+[gd,w] = grpdelay([0,1],1,4,'whole'); // test case failed
 
 ```
 ```output
@@ -81,20 +99,29 @@ If the denominator of the computation becomes too small, the group delay is set 
 ```
 4.
 ```scilab
-
+gd= grpdelay(1,[1,.9],[0,0.125,0.25,0.375],1);
 
 ```
 ```output
 
+gd  = 
 
+  -0.4736842
+  -0.4691838
+  -0.4475138
+  -0.3231597
 ```
 5.
 ```scilab
 
-
+ DR= [1.00000 -0.00000 -3.37219 0.00000 ...
+      5.45710 -0.00000 -5.24394 0.00000 ...
+      3.12049 -0.00000 -1.08770 0.00000 0.17404];
+ N = [-0.0139469 -0.0222376 0.0178631 0.0451737 ...
+       0.0013962 -0.0259712 0.0016338 0.0165189 ...
+       0.0115098 0.0095051 0.0043874];
+  grpdelay(N,DR,1024);     
 ```
-```output
+<img src= " testcase.svg" alt="testcase"/>
 
 
-
-```
