@@ -12,11 +12,16 @@ If instead of a function name you supply a pulse shape sampled at frequency Fs (
 ## Examples
 1. 
 ```scilab
-
+ fs = 11025;                   
+ f0 = 100;                    
+ w = 0.003;                    
+ t = 0:1/fs:0.1; d=0:1/f0:0.1; s
+a =[ 0 0.0955 0.3455 0.6545 0.9045 1.0000 0.9045 0.6545 0.3455 0.0955 0  ]';    
+pulse = sin(2*%pi*[0:0.0001:w]/w).*[w:-0.0001:0];
+x = pulstran(t', [d', a], pulse', 10000);
+ plot([0:length(x)-1]*1000/fs, x);
 ```
-```output
-
-    ```
+<img src ="test-sin-pulse.svg"/>
 
 2.
 ```scilab
