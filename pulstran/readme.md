@@ -1,4 +1,4 @@
-# pulstran
+# FUNCTION CLOSED
 ## Description
 Generate the signal y=sum(func(t+d,...)) for each d. If d is a matrix of two columns, the first column is the delay d and the second column is the amplitude a, and y=sum(a*func(t+d)) for each d,a. Clearly, func must be a function which accepts a vector of times. Any extra arguments needed for the function must be tagged on the end.
 ## Calling Sequence
