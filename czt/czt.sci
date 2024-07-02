@@ -18,8 +18,8 @@ Chirp Z Transform
         and w is the ratio between points in each step (i.e., radius increases exponentially, and angle increases linearly).
     Examples
         m = 32;                               ## number of points desired
-        w = exp(-j*2*pi*(f2-f1)/((m-1)*Fs));  ## freq. step of f2-f1/m
-        a = exp(j*2*pi*f1/Fs);                ## starting at frequency f1
+        w = exp(-j*2*%pi*(f2-f1)/((m-1)*Fs));  ## freq. step of f2-f1/m
+        a = exp(j*2*%pi*f1/Fs);                ## starting at frequency f1
         y = czt(x, m, w, a);
 */
 function y = czt(x, m, w, a)
