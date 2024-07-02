@@ -80,14 +80,14 @@ function [gd,w] = grpdelay (b, a, nfft, whole, Fs)
       Fs = 1;
     end
     w     = 2*%pi*nfft/Fs;
-    nfft  = length (w) * 2;
+    nfft  = max(size (w) ) * 2;
     whole = "";
   else
     if (rhs < 5)
       Fs = 1; // return w in radians per sample
       if (rhs < 4)
           whole = "" ;
-      elseif (type(whole)==10)
+      elseif (~type(whole)==10)
         Fs      = whole;
         HzFlag  = %T;
         whole   = "";
@@ -108,6 +108,7 @@ function [gd,w] = grpdelay (b, a, nfft, whole, Fs)
     if ( strcmp (whole, "whole"))
       nfft = 2*nfft;
     end
+    
     w = Fs*[0:nfft-1]/nfft;
   end
 
