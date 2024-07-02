@@ -25,43 +25,58 @@ ols
 ## Examples
 1. 
 ```scilab
+[a,b] = arch_fit ( [1 2 3 4],[3 4 2 5]',1) // calling sequence arch_fit(y,x,p)
 
 ```
 ```output
+a =
+
+   1.4396
+  -0.2278
+
+b = 0.6160
 
     ```
 
 2.
 ```scilab
+
+[a,b] = arch_fit ( [1 2 3 4],[3 4 2 5]',0,50,0.02, 1,1 )
  
 ```
 ```output
-
+a = 1.4066
+b = 0.7998
 
 ```
 3.
 ```scilab
+[a,b] = arch_fit ( [1 2 3 4],[3 4 2 5]',0 ,50,0.02,0,0)
+
 
 ```
 ```output
-
+a = NaN
+b = NaN
 ```
 4.
 ```scilab
 
+ [a,b] = arch_fit ( [1:100],[1:100]',0 ,5000,0.001,10,12)
 
 ```
 ```output
-
+a = 2730.5
+b = 1.0739
 
 ```
 5.
 ```scilab
 
-
+[a,b] = arch_fit ( [1:100],ones(100,1),0,500,0.1,8,9)
 ```
 ```output
-
-
+a = 833.25
+b = 50.500
 
 ```
