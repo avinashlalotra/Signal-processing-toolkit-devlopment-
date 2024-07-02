@@ -1,14 +1,14 @@
-# shanwavf
+# xcorr2
 ## Description
 Compute the 2D cross-correlation of matrices a and b.
-If b is not specified, a's autocorrelation is computed, i.e., the same as xcorr (a, a).
+If b is not specified, a's autocorrelation is computed, i.e., the same as xcorr2 (a, a).
 
 The optional argument scale defines the type of scaling applied to the cross-correlation matrix.
 ## Calling Sequence
 
-- `y = xcor2( a )`
-- ` y = xcor2( a , b) `
--  ` y = xcor2( a , b , scale) `
+- `y = xcorr2( a )`
+- ` y = xcorr2( a , b) `
+-  ` y = xcorr2( a , b , scale) `
 ## Parameters
 
 - `a, b`
@@ -38,16 +38,92 @@ The optional argument scale defines the type of scaling applied to the cross-cor
 
 ## Examples
 1. 
+```scilab
+a =[17   24    1    8   15;23    5    7   14   16;4    6   13   20   22;10   12   19   21    3;11   18   25    2    9 ];
+ b = [6 13 22; 10 18 23; 8 15 23];
+ xcorr2 (a, b)
+ ```
+```output
 
+ ans = [7x7 double]
+
+   391.   807.    519.    391.    473.    289.    120.
+   920.   1318.   1045.   909.    1133.   702.    278.
+   995.   1476.   1338.   1534.   2040.   1161.   426.
+   828.   1045.   1501.   2047.   2108.   1101.   340.
+   571.   1219.   2074.   2155.   1896.   821.    234.
+   473.   1006.   1643.   1457.   946.    347.    108.
+   242.   539.    850.    477.    374.    129.    54. 
+```
 
 
 2. 
+```scilab
+M1 = [17 24  1  8 15;
+      23  5  7 14 16;
+       4  6 13 20 22;
+      10 12 19 21  3;
+      11 18 25  2  9];
+
+M2 = [8 1 6;
+      3 5 7;
+      4 9 2];
+[r2,c2] = size(M2);
+D = xcorr2(M1,M2);
+DD = D(0+r2,2+c2)
+```
+```output
+ans = 585 ```
+
 
 
 3.
+```scilab
+xcorr2(M2)
 
+```
+```output
+ ans = [5x5 double]
+
+   16.   74.    53.    58.    24.
+   62.   84.    142.   116.   46.
+   77.   118.   285.   118.   77.
+   46.   116.   142.   84.    62.
+   24.   58.    53.    74.    16.
+
+```
 
 4.
+```scilab
+xcorr2(M1)
+```
+```output
+
+ ans = [9x9 double]
+
+   153.   250.    482.    980.    795.    512.    530.    358.    165.
+   258.   520.    1478.   1384.   1380.   1282.   1120.   702.    326.
+   479.   1428.   1515.   1598.   2195.   2086.   1842.   1070.   462.
+   880.   1422.   1710.   2248.   3430.   3450.   1938.   1160.   662.
+   840.   1540.   2060.   3360.   5525.   3360.   2060.   1540.   840.
+   662.   1160.   1938.   3450.   3430.   2248.   1710.   1422.   880.
+   462.   1070.   1842.   2086.   2195.   1598.   1515.   1428.   479.
+   326.   702.    1120.   1282.   1380.   1384.   1478.   520.    258.
+   165.   358.    530.    512.    795.    980.    482.    250.    153.
+```
 
 5.
+```scilab
+X = ones(2,3);
+H = [1 2; 3 4; 5 6];  // H is 3 by 2
+C = xcorr2(X,H)
 
+```
+```output
+ C = [4x4 double]
+
+   6.    11.   11.   5.
+   10.   18.   18.   8.
+   6.    10.   10.   4.
+   2.    3.    3.    1.
+```

@@ -1,25 +1,47 @@
+/*2024 
+Author: Abinash Singh <abinashsinghlalotra@gmail.com>
+*/
+/*
+        Calling Sequence
+        c = xcorr2 (a)
+        c = xcorr2 (a, b)
+        c = xcorr2 (a, b, biasflag)
+        Description:
+            Compute the 2D cross-correlation of matrices a and b.
 
-//
-//Calling Sequence
-//c = xcorr2 (a)
-//c = xcorr2 (a, b)
-//c = xcorr2 (a, b, biasflag)
-//Parameters 
-//a:
-//b:
-//biasflag:
-//Description
+            If b is not specified, computes autocorrelation of a, i.e., same as xcorr (a, a).
+            
+            The optional argument scale, defines the type of scaling applied to the cross-correlation matrix. Possible values are:
+            
+            "none" (default)
+            No scaling.
+            
+            "biased"
+            Scales the raw cross-correlation by the maximum number of elements of a and b involved in the generation of any element of c.
+            
+            "unbiased"
+            Scales the raw correlation by dividing each element in the cross-correlation matrix by the number of products a and b used to generate that element.
+            
+            "coeff"
+            Scales the normalized cross-correlation on the range of [0 1] so that a value of 1 corresponds to a correlation coefficient of 1.
+        
+            Examples
+            xcorr2(5,0.8,'coeff')
+            ans =  1
 
-//Examples
-//xcorr2(5,0.8,'coeff')
-//ans =  1
 
-function c = xcorr2 (a, b, biasflag )
+*/
+function c = xcorr2 (a, b, biasflag)
   funcprot(0);
   nargin=argn(2);
+
+  if nargin < 3 then
+    biasflag = "none"
+  end
+
   if (nargin < 1 || nargin > 3)
     error("Wrong number of inputs")
-  elseif (nargin == 2 && ischar (b))
+  elseif (nargin == 2 && type (b) == 10 )
     biasflag = b;
     b        = a;
   elseif (nargin == 1)
@@ -36,11 +58,10 @@ function c = xcorr2 (a, b, biasflag )
   [ma,na] = size(a);
   [mb,nb] = size(b);
   c = conv2 (a, conj (b (mb:-1:1, nb:-1:1)));
-
   // bias routines by Dave Cogdell (cogdelld@asme.org)
   // optimized by Paul Kienzle (pkienzle@users.sf.net)
   // coeff routine by Carnë Draug (carandraug+dev@gmail.com)
-  switch lower (biasflag)
+  switch  (biasflag)
     case {"none"}
       // do nothing, it's all done
     case {"biased"}
@@ -60,11 +81,12 @@ function c = xcorr2 (a, b, biasflag )
     case {"coeff"}
       a = double (a);
       b = double (b);
-      a = conv2 (a.^2, ones (size (b)));
+      a = conv2 (a.^2, ones (size (b,1) , size( b ,2)));
       b = sum(b(:).* conj(b(:)));
+     
       c(:,:) = c(:,:) ./ sqrt (a(:,:) * b);
 
-    otherwise
+    else
       error ("xcorr2: invalid type of scale %s", biasflag);
   end
 
