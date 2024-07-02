@@ -39,5 +39,6 @@ function y = ifftn(A, SIZE)
         end
         y = fft(A,1);
     end
+    y = clean( y ) ;
 endfunction
 
