@@ -16,11 +16,12 @@ Chirp Z Transform
     Description
         Chirp z-transform. Compute the frequency response starting at a and stepping by w for m steps. a is a point in the complex plane, 
         and w is the ratio between points in each step (i.e., radius increases exponentially, and angle increases linearly).
-    Examples
-        m = 32;                               ## number of points desired
-        w = exp(-j*2*%pi*(f2-f1)/((m-1)*Fs));  ## freq. step of f2-f1/m
-        a = exp(j*2*%pi*f1/Fs);                ## starting at frequency f1
-        y = czt(x, m, w, a);
+    Examples: This example uses the czt function to determine the frequency components of a signal, as shown in the following
+    t=linspace(0,50,1000); 
+    f=linspace(0,3,1000);    
+    x_t=sin(t) + cos(t*2*%pi);  
+    x_f=czt(x_t);   
+    plot(f,abs(x_f)); 
 */
 function y = czt(x, m, w, a)
     funcprot(0);
@@ -33,9 +34,9 @@ function y = czt(x, m, w, a)
         x = x(:); col = 1;
     end
     if nargin < 2 || isempty(m) then
-        m = length(x(:,1));
+        m = max(size(x(:,1)));
     end
-    if length(m) > 1 then
+    if max(size(m) ) > 1 then
         error("czt: m must be a single element\n");
     end
     if nargin < 3 || isempty(w) then
@@ -44,14 +45,14 @@ function y = czt(x, m, w, a)
     if nargin < 4 || isempty(a) then
         a = 1;
     end
-    if length(w) > 1 then
+    if max(size(w)) > 1 then
         error("czt: w must be a single element\n");
     end
-    if length(a) > 1 then
+    if max(size(a)) > 1 then
         error("czt: a must be a single element\n");
     end
     // indexing to make the statements a little more compact
-    n = length(x(:,1));
+    n = max(size(x(:,1)));
     N = [0:n-1]'+n;
     NM = [-(n-1):(m-1)]'+n;
     M = [0:m-1]'+n;

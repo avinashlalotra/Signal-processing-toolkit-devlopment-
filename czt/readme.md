@@ -24,36 +24,25 @@ If x is a matrix, the transform will be performed column-by-column.
 ## Examples
 1. To evaluate the frequency response for the range f1 to f2 in a signal with sampling frequency Fs, use the following:
 ```scilab
-m = 32; f1=100;          
-f2=100; Fs=2000;
-w = exp(-%i*2*%pi*(f2-f1)/((m-1)*Fs)); 
-a = exp(%i*2*%pi*f1/Fs);
-x=[1 2 3]
-y = czt(x, m, w, a);
+ t=linspace(0,50,1000); 
+    f=linspace(0,3,1000);    
+    x_t=sin(t) + cos(t*2*%pi);  
+    x_f=czt(x_t);   
+    plot(f,abs(x_f)); 
+
 ```
-```output
-   5.3292 - 2.3814i   5.3292 - 2.3814i   5.3292 - 2.3814i   5.3292 - 2.3814i   5.3292 - 2.3814i
-   ```
+<img src="testcase.svg" alt="testcase" />
 
 2.
 ```scilab
  czt([1 2 4;8 7 5;0 7 3])
 ```
 ```output
-ans =
+ans  =
 
- Columns 1 and 2:
-
-   9.0000e+00 - 8.8818e-16i   1.6000e+01 - 3.3307e-16i
-  -3.0000e+00 - 6.9282e+00i  -5.0000e+00 - 3.5527e-15i
-  -3.0000e+00 + 6.9282e+00i  -5.0000e+00 - 3.5527e-15i
-
- Column 3:
-
-   1.2000e+01 - 7.7716e-16i
-   6.6613e-16 - 1.7321e+00i
-   7.7716e-16 + 1.7321e+00i
-```
+   9. + 0.i          16. + 0.i   12. + 0.i       
+  -3. - 6.9282032i  -5.  + 0.i   0.  - 1.7320508i
+  -3. + 6.9282032i  -5.  + 0.i   0.  + 1.7320508i
 3.
 ```scilab
 czt([ 12 78 54; 87 43 67 ;98 64 56],2)
