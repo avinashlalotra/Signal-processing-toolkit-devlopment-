@@ -2,13 +2,21 @@
 Author: Abinash Singh <abinashsinghlalotra@gmail.com>
 */
  /*  
- Produce the cepstrum of the signal x, and if desired, the minimum phase reconstruction of the signal x.
-    Calling Sequence
-        [y, xm] = rceps(x)
-    Parameters 
-        x: real or complex vector input
-    Produce the cepstrum of the signal x, and if desired, the minimum phase reconstruction of the signal x. If x is a matrix, do so for each column of the matrix.
-    Examples
+        [y, ym] = rceps (x) ¶
+        Returns  the  real cepstrum y of the signal x.
+
+        If x is a matrix, returns  real cepstrum of each column.
+        
+        If called with two output arguments, the minimum phase reconstruction of the signal x is returned in ym
+        Example
+        // create a 45 Hz sine wave sampled at 100 Hz. 
+        t = 0:0.01:1.27;
+        s1 = sin(2*pi*45*t);
+        s2 = s1 + 0.5*[zeros(1,20) s1(1:108)]; //Add an echo of the signal, with half the amplitude, 0.2 seconds after the beginning of the signal.
+        c = rceps(s2); // real cepstrum of signal 
+        plot(t,c)
+
+        
 */
 function [y, xm]= rceps(x)
     if(argn(2)~= 1 )
