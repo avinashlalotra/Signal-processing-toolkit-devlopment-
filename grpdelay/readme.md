@@ -67,7 +67,7 @@ ans  =
 
   T
 
-    ```
+```
 
 2.
 ```scilab
@@ -91,11 +91,25 @@ gd  =
 ```
 3.
 ```scilab
-[gd,w] = grpdelay([0,1],1,4,'whole'); // test case failed
+[gd,w] = grpdelay([0,1],1,4,'whole');
+gd,w
 
 ```
 ```output
+  gd  = 
 
+   1.
+   1.
+   1.
+   1.
+
+-->w
+ w  = 
+
+   0.
+   1.5707963
+   3.1415927
+   4.7123890
 ```
 4.
 ```scilab
