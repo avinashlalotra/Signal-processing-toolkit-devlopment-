@@ -5,7 +5,7 @@ Author: Abinash Singh <abinashsinghlalotra@gmail.com>
         Calling Sequence
         c = xcorr2 (a)
         c = xcorr2 (a, b)
-        c = xcorr2 (a, b, biasflag)
+        c = xcorr2 (a, b, scale)
         Description:
             Compute the 2D cross-correlation of matrices a and b.
 
@@ -31,18 +31,18 @@ Author: Abinash Singh <abinashsinghlalotra@gmail.com>
 
 
 */
-function c = xcorr2 (a, b, biasflag)
+function c = xcorr2 (a, b, scale)
   funcprot(0);
   nargin=argn(2);
 
   if nargin < 3 then
-    biasflag = "none"
+    scale = "none"
   end
 
   if (nargin < 1 || nargin > 3)
     error("Wrong number of inputs")
   elseif (nargin == 2 && type (b) == 10 )
-    biasflag = b;
+    scale = b;
     b        = a;
   elseif (nargin == 1)
     // we have to set this case here instead of the function line, because if
@@ -61,7 +61,7 @@ function c = xcorr2 (a, b, biasflag)
   // bias routines by Dave Cogdell (cogdelld@asme.org)
   // optimized by Paul Kienzle (pkienzle@users.sf.net)
   // coeff routine by Carnë Draug (carandraug+dev@gmail.com)
-  switch  (biasflag)
+  switch  (scale)
     case {"none"}
       // do nothing, it's all done
     case {"biased"}
@@ -87,7 +87,7 @@ function c = xcorr2 (a, b, biasflag)
       c(:,:) = c(:,:) ./ sqrt (a(:,:) * b);
 
     else
-      error ("xcorr2: invalid type of scale %s", biasflag);
+      error ("xcorr2: invalid type of scale %s", scale);
   end
 
 endfunction
