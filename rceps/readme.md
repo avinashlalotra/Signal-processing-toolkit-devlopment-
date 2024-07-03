@@ -1,7 +1,8 @@
 # rceps
 ## Description
 Real cepstrum and minimum-phase reconstruction
-
+## Dependencies
+ fft1 ifft1
 ## Calling Sequence
 - `[y,ym] = rceps(x)`
 ## Parameters
