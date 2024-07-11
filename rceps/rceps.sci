@@ -2,13 +2,16 @@
 Author: Abinash Singh <abinashsinghlalotra@gmail.com>
 */
  /*  
-        [y, ym] = rceps (x) ¶
-        Returns  the  real cepstrum y of the signal x.
-
-        If x is a matrix, returns  real cepstrum of each column.
-        
-        If called with two output arguments, the minimum phase reconstruction of the signal x is returned in ym
-        Example
+    Description
+        Real cepstrum and minimum-phase reconstruction
+    Calling Sequence
+        [y,ym] = rceps(x)
+    Parameters
+     `x` : A vector or a Matirx
+     'y` : Real cepstrum
+      ym` : Minimum-phase reconstruction  
+         If  called with two output arguments,
+        the minimum phase reconstruction of the signal x is returned in ym.
         // create a 45 Hz sine wave sampled at 100 Hz. 
         t = 0:0.01:1.27;
         s1 = sin(2*pi*45*t);
