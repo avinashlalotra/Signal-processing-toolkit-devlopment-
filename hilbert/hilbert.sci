@@ -101,11 +101,11 @@ function f=hilbert(f, N ,dim )
 
   // Restore the original, permuted shape.
   f=matrix(f,permutedsize);
-  /*
+  
   if dim>1
     // Undo the permutation.
-    f=resize_matrix(f,order);
+    f=ipermute(f,order);
   end
-  */
+ 
 
 endfunction
