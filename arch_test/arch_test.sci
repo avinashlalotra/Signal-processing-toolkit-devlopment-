@@ -2,7 +2,19 @@
 Author: Abinash Singh <abinashsinghlalotra@gmail.com>
 */
 /*
-Description:
+        Perform a Lagrange Multiplier (LM) test for conditional heteroscedasticity.
+
+        Calling Sequence
+            [pval, lm] = arch_test (y, x, p)
+        Parameters
+            y: Array-like. Dependent variable of the regression model.
+            x: Array-like. Independent variables of the regression model. If x is a scalar integer k, it represents the order of autoregression.
+            p : Integer. Number of lagged squared residuals to include in the heteroscedasticity model.
+        Returns:
+
+            pval: Float. p-value of the LM test.
+            lm: Float. Lagrange Multiplier test statistic.
+        Description:
             For a linear regression model
 
             y = x * b + e
@@ -31,14 +43,12 @@ function cdf = chi2cdf ( X, n)
     df = resize_matrix ( n , size (X) , "" , n);
     [cdf,Q] = cdfchi ( "PQ" , X ,df);
 endfunction
-
 //main function
 function [pval, lm] = arch_test (y, x, p)
   nargin = argn(2)
   if (nargin ~= 3)
     error ("arch_test: 3 input arguments required");
   end
-
   if (~ (isvector (y)))
     error ("arch_test: Y must be a vector");
   end
@@ -53,16 +63,10 @@ function [pval, lm] = arch_test (y, x, p)
   if (~ (isscalar (p) && (modulo (p, 1) == 0) && (p > 0)))
     error ("arch_test: P must be a positive integer");
   end
-
   [b, v_b, e] = ols (y, x);
   Z    = autoreg_matrix (e.^2, p);
   f    = e.^2 / v_b - ones (T, 1);
   f    = Z' * f;
   lm   = f' * inv (Z'*Z) * f / 2;
   pval = 1 - chi2cdf (lm, p);
-
 endfunction
-
-// input validation
-
-// testing
