@@ -1,7 +1,6 @@
 # hilbert
 ## Dependencies
 fft1 ifft1 ipermute
-
 ## Calling Sequence  and  Parameters
 
 - `   h = hilbert (f) `  
