@@ -2,15 +2,24 @@
 Author: Abinash Singh <abinashsinghlalotra@gmail.com>
 */
 /*
-Description:
+    Dependencies:fft1 ifft1
+    Calling Sequence
+        spectral_xdf (x)
+        spectral_xdf (x, win)
+        spectral_xdf (x, win, b)
+    Parameters
+        x : Data vector
+        win : the window name . Default "triangle" is used .
+        b : Bandwidth . Default value 1/sqrt(length(x))
+    Description
+        Return the spectral density estimator given a data vector x, window name win, and bandwidth, b.
+        
+        The window name, e.g., "triangle" or "rectangle" is used to search for a function called win_sw.
+        
+        If win is omitted, the triangle window is used.
+        
+        If b is omitted, 1 / sqrt (length (x)) is used.
 
-    Return the spectral density estimator given a data vector x, window name win, and bandwidth, b.
-
-    The window name, e.g., "triangle" or "rectangle" is used to select the window.
-
-    If win is omitted, the triangle window is used.
-
-    If b is omitted, 1 / sqrt (length (x)) is used. 
 */
 function sde = spectral_xdf (x, win, b)
     // available windows - rectangle
