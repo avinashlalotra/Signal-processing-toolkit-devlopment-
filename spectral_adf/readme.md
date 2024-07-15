@@ -4,7 +4,10 @@
 - ` spectral_adf (c) `
 - ` spectral_adf (c, win) `
 - ` spectral_adf (c, win, b) `
-
+## Parameters
+- `c` : Vector of autocovariances
+- `win` : The window name . Default window is "triangle"
+- `b` : Bandwidth. Default is 1/sqrt(length(c))
 ## Description
 Return the spectral density estimator given a vector of autocovariances c, window name win, and bandwidth, b.
 
@@ -12,7 +15,7 @@ The window name, e.g., "triangle" or "rectangle" is used to search for a functio
 
 If win is omitted, the triangle window is used.
 
-If b is omitted, 1 / sqrt (length (x)) is used.
+If b is omitted, 1 / sqrt (length (c)) is used.
 
 ### Dependencies: 
 fft1 
