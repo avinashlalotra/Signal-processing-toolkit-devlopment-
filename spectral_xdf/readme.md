@@ -1,6 +1,5 @@
 # spectral_xdf
 ## Calling Sequence
-
 - `spectral_xdf (x)`
 - `spectral_xdf (x, win)`
 - `spectral_xdf (x, win, b)`
