@@ -50,7 +50,7 @@ Description:
               d/dw A(e^-jw) = sum(k a_k e^-jwk)
         which is just the FFT of the coefficients multiplied by a ramp.
 */
-function [gd,w] = grpdelay (b, a, nfft, whole, Fs)
+function [gd,w] = grpdelay (b, a, n, whole, Fs)
     lhs=argn(1);
     rhs= argn(2);
     if (rhs < 1 | rhs > 5) then
@@ -60,15 +60,15 @@ function [gd,w] = grpdelay (b, a, nfft, whole, Fs)
     
     select rhs
      case 1 then
-         Fs=1; whole = "" ; nfft = 512 ; a = 1 ; 
+         Fs=1; whole = "" ; n = 512 ; a = 1 ; 
      case 2 then
-         Fs=1; whole = "" ; nfft = 512 ;  
+         Fs=1; whole = "" ; n = 512 ;  
      case 3 then
          Fs=1; whole = "" ;
      case 4 then
          Fs=1;
     end
-   if (max(size(nfft)) > 1)
+   if (max(size(n)) > 1)
     if (rhs > 4)
       error("invalid inputs");
     elseif (rhs > 3)
@@ -79,8 +79,8 @@ function [gd,w] = grpdelay (b, a, nfft, whole, Fs)
       // grpdelay (B, A, W)
       Fs = 1;
     end
-    w     = 2*%pi*nfft/Fs;
-    nfft  = max(size (w) ) * 2;
+    w     = 2*%pi*n/Fs;
+    n  = max(size (w) ) * 2;
     whole = "";
   else
     if (rhs < 5)
@@ -93,7 +93,7 @@ function [gd,w] = grpdelay (b, a, nfft, whole, Fs)
         whole   = "";
       end
       if (rhs < 3)
-        nfft = 512;
+        n = 512;
       end
       if (rhs < 2)
         a = 1;
@@ -102,14 +102,14 @@ function [gd,w] = grpdelay (b, a, nfft, whole, Fs)
       HzFlag = %T;
     end
 
-    if (isempty (nfft))
-      nfft = 512;
+    if (isempty (n))
+      n = 512;
     end
     if ( strcmp (whole, "whole"))
-      nfft = 2*nfft;
+      n = 2*n;
     end
     
-    w = Fs*[0:nfft-1]/nfft;
+    w = Fs*[0:n-1]/n;
   end
 
   if (~ HzFlag)
@@ -130,8 +130,8 @@ function [gd,w] = grpdelay (b, a, nfft, whole, Fs)
     oc = oa + ob;           // order of c(z)
     c   = conv (b, flipdim(conj (a),2));  // c(z) = b(z)*conj(a)(1/z)*z^(-oa)
     cr  = c.*(0:oc);                    // cr(z) = derivative of c wrt 1/z
-    num = fft1 (cr, nfft);
-    den = fft1 (c, nfft);
+    num = fft1 (cr, n);
+    den = fft1 (c, n);
     minmag    = 10*%eps;
     polebins  = find (abs (den) < minmag);
   for b = polebins
@@ -146,11 +146,11 @@ function [gd,w] = grpdelay (b, a, nfft, whole, Fs)
     gd = real (num ./ den) - oa;
   
     if ( strcmp (whole, "whole"))
-      ns = nfft/2; // Matlab convention ... should be nfft/2 + 1
+      ns = n/2; // Matlab convention ... should be n/2 + 1
       gd = gd(1:ns);
       w  = w(1:ns);
     else
-      ns = nfft; // used in plot below
+      ns = n; // used in plot below
     end
   
     //// compatibility

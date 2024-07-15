@@ -19,7 +19,7 @@ If invoked as arch_fit (y, k, p) with a positive integer k, fit an ARCH(k, p) pr
 Optionally, one can specify the number of iterations iter, the updating factor gamma, and initial values a0 and b0 for the scoring algorithm.
 
 ### Dependencies: 
-ols
+ols autoreg_matrix
 
 
 ## Examples

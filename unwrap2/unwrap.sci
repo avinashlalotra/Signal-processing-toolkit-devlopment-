@@ -1,12 +1,10 @@
-// write ipermute
-
 function retval = unwrap (x, tol, dim)
   nargin = argn(2)
   if (nargin < 1)
     error("invalid inputs");
   end
 
-  if (~ (isnumeric (x) || islogical (x)))
+  if (~ (type(x) == [ 1 5 8]) || or(type(x)==[4,6]))
     error ("unwrap: X must be numeric");
   end
 
@@ -20,30 +18,35 @@ function retval = unwrap (x, tol, dim)
   nd = ndims (x);
   sz = size (x);
   if (nargin == 3)
-    if (~(isnumeric (dim) && isscalar (dim) && ...
+    if (~(or(type(dim)==[1 5 8])&& isscalar (dim) && ...
             dim == fix (dim)) || ~(1 <= dim))
       error ("unwrap: DIM must be an integer and a valid dimension");
     end
   else
     // Find the first non-singleton dimension.
-    (dim = find (sz > 1, 1)) || (dim = 1);
+    dim = find (sz > 1, 1)
+    if isempty(dim)
+      dim = 1;
+    end   
   end
-
+//
   rng = 2*%pi;
 
   // Handle case where we are trying to unwrap a scalar, or only have
   // one sample in the specified dimension (a given when dim > nd).
-  if ((dim > nd) || (m = sz(dim) == 1))
+  if ((dim > nd) || ( sz(dim) == 1))
     retval = x;
     return;
   end
 
-  if (all (isfinite (x(:))))
+  if (and(abs(x(:))<%inf ) )
 
     // Take first order difference so that wraps will show up as large values
     // and the sign will show direction.
     sz(dim) = 1;
     zero_padding = zeros (sz);
+    disp(size(zero_padding))
+    disp(size(diff (x, 1, dim)))
     d = cat (dim, zero_padding, -diff (x, 1, dim));
 
     // Find only the peaks and multiply them by the appropriate amount
@@ -62,7 +65,7 @@ function retval = unwrap (x, tol, dim)
       // Simlpified path for vector inputs.
 
       retval = x;
-      xfin_idx = isfinite (x);
+      xfin_idx = abs(x)<%inf ;
       xfin = x(xfin_idx);
       d = cat (dim, 0, -diff(xfin, 1, dim));
       p = round (abs (d)./rng) .* rng .* ...
@@ -74,7 +77,7 @@ function retval = unwrap (x, tol, dim)
       // values, mask entries with values that do not impact calcualation.
 
             // Locate nonfinite values.
-      nf_idx = ~ isfinite (x);
+      nf_idx = ~ abs(x)<%inf;
 
       if (and(nf_idx(:)))
         // Trivial case, all non-finite values
@@ -122,7 +125,12 @@ function retval = unwrap (x, tol, dim)
 
 endfunction
 // write repelmes
-
+function y = repelems(x,r)
+  y = [];
+  for i = 1:size(r,2)
+      y = [y, x(r(1,i)*ones(1, r(2,i)))];
+  end
+endfunction
 function x = __fill_nonfinite_columnwise__ (x, nonfinite_loc, zero_padding, szx, ndx)
   // Replace non-finite values of x, as indicated by logical index
   // nonfinite_loc, with next values.
@@ -142,11 +150,11 @@ function x = __fill_nonfinite_columnwise__ (x, nonfinite_loc, zero_padding, szx,
                           [1 : numel(mid_gap_sizes); mid_gap_sizes'])';
 
   // Process front edge elements
-  nf_front = nf_front & ~ all (nonfinite_loc, 1); // Remove all nf columns.
+  nf_front = nf_front & ~ and (nonfinite_loc, 1); // Remove all nf columns.
   locs_after = diff ([zero_padding; nf_front], 1, 1) == -1;
   front_gap_sizes = (sum (nf_front, 1))(any (nf_front, 1))(:);
   x(nf_front) = repelems (x(locs_after), ...
-                             [1:numel(front_gap_sizes); front_gap_sizes'])';
+                             [1:length(front_gap_sizes); front_gap_sizes'])';
 
 endfunction
 

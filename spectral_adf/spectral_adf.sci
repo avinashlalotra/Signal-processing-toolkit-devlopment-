@@ -66,11 +66,11 @@ function sde = spectral_adf (c, win, b)
     end 
     
     c=c .* w;
-    sde_temp = 2 * real (fft1 (c)) - c(1);
+    sde = 2 * real (fft1 (c)) - c(1);
     //FIX ME -- problem in zeros function while calling like this
-    // sde = [zeros(cr, 1) sde_temp] - scilab crashes 
-    zer= zeros(cr, 1);
-    sde = [zer sde_temp];
+    sde = [(zeros (cr, 1)), sde]; //- scilab crashes 
+    //zer= zeros(cr, 1);
+    //sde = [zer sde_temp];
     sde(:, 1) = (0 : cr-1)' / cr;
   
   endfunction
