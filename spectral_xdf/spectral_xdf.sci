@@ -19,9 +19,12 @@ Author: Abinash Singh <abinashsinghlalotra@gmail.com>
         If win is omitted, the triangle window is used.
         
         If b is omitted, 1 / sqrt (length (x)) is used.
-
 */
 function sde = spectral_xdf (x, win, b)
+    // check x is a vector or not
+    if ~isvector(x) 
+        error("spectral_xdf :  x must a data vector")
+    end
     // available windows - rectangle
     function c = rectangle_sw (n, b)
           c = zeros (n, 1);
