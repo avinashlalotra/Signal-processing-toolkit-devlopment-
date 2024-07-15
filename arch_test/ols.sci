@@ -6,6 +6,7 @@ function [beta, sigma, r] = ols (y, x)
       if ( ierr == 29 )
         p = %T ;
         warning("chol: Matrix is not positive definite.")
+        u = %nan
       else
         p = %F ;
       end
