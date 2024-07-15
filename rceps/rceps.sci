@@ -2,24 +2,24 @@
 Author: Abinash Singh <abinashsinghlalotra@gmail.com>
 */
  /*  
-    Description
-        Real cepstrum and minimum-phase reconstruction
+    Dependencies fft1 ifft1
     Calling Sequence
         [y,ym] = rceps(x)
     Parameters
-     `x` : A vector or a Matirx
-     'y` : Real cepstrum
-      ym` : Minimum-phase reconstruction  
-         If  called with two output arguments,
-        the minimum phase reconstruction of the signal x is returned in ym.
+        x : A vector or a Matirx
+        y : Real cepstrum
+        ym : Minimum-phase reconstruction  
+    Description
+        Real cepstrum and minimum-phase reconstruction
+        If  called with two output arguments,
+        the minimum phase reconstruction of the signal x is returned in my.
+    Example:
         // create a 45 Hz sine wave sampled at 100 Hz. 
         t = 0:0.01:1.27;
-        s1 = sin(2*pi*45*t);
+        s1 = sin(2*%pi*45*t);
         s2 = s1 + 0.5*[zeros(1,20) s1(1:108)]; //Add an echo of the signal, with half the amplitude, 0.2 seconds after the beginning of the signal.
         c = rceps(s2); // real cepstrum of signal 
         plot(t,c)
-
-        
 */
 function [y, xm]= rceps(x)
     if(argn(2)~= 1 )
