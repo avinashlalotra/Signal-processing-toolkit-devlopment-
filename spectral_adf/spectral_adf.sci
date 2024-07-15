@@ -1,6 +1,5 @@
 /*2024 Author: Abinash Singh <abinashsinghlalotra@gmail.com>*/
-/*
-  spectral_adf  
+/* spectral_adf  
   Calling Sequence
       spectral_adf (c)
       spectral_adf (c, win)
