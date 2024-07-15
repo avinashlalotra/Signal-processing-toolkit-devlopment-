@@ -31,58 +31,106 @@ ols autoreg_matrix
 ## Examples
 1. 
 ```scilab
-[a,b] = arch_fit ( [1 2 3 4],[3 4 2 5]',1) // calling sequence arch_fit(y,x,p)
+t = linspace(0,10,1000);
+
+y = cos(t);
+
+x = sin(t);
+
+[a,b] = arch_test(y,x',1)
 
 ```
 ```output
-a =
+ pval  = 
 
-   1.4396
-  -0.2278
+   0.0175825
+   0.9357096
+ lm  = 
 
-b = 0.6160
+   0.0242719
 
   ```
 
 2.
 ```scilab
-
-[a,b] = arch_fit ( [1 2 3 4],[3 4 2 5]',0,50,0.02, 1,1 )
- 
+t = linspace(0,10,1000);
+y = sin(t);
+x = [ zeros(1,300) ones(1,400) zeros(1,300);zeros(1,200) ones(1,200) zeros(1,600);zeros(1,100) ones(1,400) zeros(1,500)];
+[a,b] = arch_fit(y,x',3)
 ```
 ```output
-a = 1.4066
-b = 0.7998
+ a  = 
 
+   0.0020139
+   1.0353154
+  -0.0009762
+  -0.0334181
+ b  = 
+
+  -0.7849689
+   0.2267450
+   0.3037736
 ```
 3.
 ```scilab
-[a,b] = arch_fit ( [1 2 3 4],[3 4 2 5]',0 ,50,0.02,0,0)
-
+ t = linspace(-10,10,2000);
+y = exp(t);
+x = [sin(t);cos(t);tan(t)];
+[a,b] = arch_fit(y,x',5)
 
 ```
 ```output
-a = NaN
-b = NaN
+a  = 
+
+   69311.100
+   0.8883086
+   0.3352075
+   0.1473639
+  -0.0385322
+  -0.3485546
+ b  = 
+
+   334.06505
+  -1464.5987
+  -0.5365645
 ```
 4.
 ```scilab
-
- [a,b] = arch_fit ( [1:100],[1:100]',0 ,5000,0.001,10,12)
-
+ t = linspace(-10,10,2000);
+y = exp(t);
+x = [sin(t);cos(t);tan(t)];
+ [a,b] = arch_fit(y,x',5,1000,0.32,[1;0;1;0;1;0],[1;0;1]);
+ a,b
 ```
 ```output
-a = 2730.5
-b = 1.0739
+ a  = 
+
+   0.0001950
+   1.1362016
+  -0.1143480
+   0.0180131
+  -0.0284946
+   0.0200169
+ b  = 
+
+   1.
+  -6.465D-22
+   1.
 
 ```
 5.
 ```scilab
 
-[a,b] = arch_fit ( [1:100],ones(100,1),0,500,0.1,8,9)
+t= linspace(0,100,100);
+
+y = t .* t + 2*t + 3;
+
+ x = 3;
+
+[a,b] = arch_fit(y,x,1,1000,0.2,[1 ;1],[0; 0 ;0 ;0])
 ```
 ```output
-a = 833.25
-b = 50.500
+//Octave will return Nan vectors which means no solution  
 
+inv: Problem is singular. // implies no solution
 ```
