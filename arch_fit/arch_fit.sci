@@ -2,7 +2,19 @@
 Author: Abinash Singh <abinashsinghlalotra@gmail.com>
 */
 /*
-    :   [a, b] = arch_fit (y, x, p, iter, gamma, a0, b0)
+Dependencies : ols autoreg_matrix
+Calling Sequence
+      [a, b] = arch_fit (y, x, p)
+      [a, b] = arch_fit (y, x, p, iter, gamma, a0, b0)
+      Parameters
+      y(vector) : A time-series data vector up to time t-1 .
+      x (Matrix): A matrix of (ordinary) regressors x up to t.
+      p (scalar): The order of the regression of the residual variance.
+      iter (scaler) : Number of iterations
+      gamma (real number) : updating factor
+      a0 b0 (real numbers) : Initial values for the scoring algorithm
+
+Description:        
         Fit an ARCH regression model to the time series y using the scoring algorithm in Engle’s original ARCH paper.
         
         The model is
@@ -28,7 +40,6 @@ function [a, b] = arch_fit (y, x, p, iter, gamma, a0, b0)
     y = matrix (y, T, 1);
     [rx, cx] = size (x);
     if ((rx == 1) && (cx == 1))
-      
       x = autoreg_matrix (y, x);
     elseif (~ (rx == T))
       error ("arch_fit: either rows (X) == length (Y), or X is a scalar");
@@ -50,7 +61,6 @@ function [a, b] = arch_fit (y, x, p, iter, gamma, a0, b0)
       end
     end
     esq = e.^2;
-   
     Z = autoreg_matrix (esq, p);
     for i = 1 : iter
       h   = Z * a;

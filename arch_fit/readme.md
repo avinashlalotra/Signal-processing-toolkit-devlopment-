@@ -3,7 +3,13 @@
 
 - ` [a, b] = arch_fit (y, x, p) `
 - ` [a, b] = arch_fit (y, x, p, iter, gamma, a0, b0) `
-
+##  Parameters
+- `y`(vector) :  A time-series data vector up to time t-1 .
+- `x` (Matrix):  A matrix of (ordinary) regressors x up to t.
+- `p` (scalar):  The order of the regression of the residual variance.
+- `iter` (scaler) : Number of iterations
+- `gamma` (real number) : updating factor
+- `a0 b0` (real numbers) : Initial values for the scoring algorithm
 ## Description
 Fit an ARCH regression model to the time series y using the scoring algorithm in Engle’s original ARCH paper.
 
@@ -36,7 +42,7 @@ a =
 
 b = 0.6160
 
-    ```
+  ```
 
 2.
 ```scilab
