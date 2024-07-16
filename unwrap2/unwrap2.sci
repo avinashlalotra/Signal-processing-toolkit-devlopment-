@@ -1,11 +1,11 @@
-function retval = unwrap (x, tol, dim)
+function retval = unwrap2 (x, tol, dim)
   nargin = argn(2)
   if (nargin < 1)
     error("invalid inputs");
   end
 
   if (~ (type(x) == [ 1 5 8]) || or(type(x)==[4,6]))
-    error ("unwrap: X must be numeric");
+    error ("unwrap2: X must be numeric");
   end
 
   if (nargin < 2 || isempty (tol))
@@ -17,10 +17,11 @@ function retval = unwrap (x, tol, dim)
 
   nd = ndims (x);
   sz = size (x);
+  disp(sz)
   if (nargin == 3)
     if (~(or(type(dim)==[1 5 8])&& isscalar (dim) && ...
             dim == fix (dim)) || ~(1 <= dim))
-      error ("unwrap: DIM must be an integer and a valid dimension");
+      error ("unwrap2: DIM must be an integer and a valid dimension");
     end
   else
     // Find the first non-singleton dimension.
@@ -44,16 +45,17 @@ function retval = unwrap (x, tol, dim)
     // Take first order difference so that wraps will show up as large values
     // and the sign will show direction.
     sz(dim) = 1;
+    disp(sz)
     zero_padding = zeros (sz);
     disp(size(zero_padding))
-    disp(size(diff (x, 1, dim)))
     d = cat (dim, zero_padding, -diff (x, 1, dim));
 
     // Find only the peaks and multiply them by the appropriate amount
     // of ranges so that there are kronecker deltas at each wrap point
     // multiplied by the appropriate amount of range values.
-    p = round (abs (d)./rng) .* rng .* (((d > tol) > 0) - ((d < -tol) > 0));
-
+    
+    p = round (abs (d)./rng) .* rng .* (double(double(d > tol) > 0) - double(double(d < -tol) > 0));
+    disp(size(p))
     // Integrate this so that the deltas become cumulative steps to shift
     // the original data.
     retval = cumsum (p, dim) + x;
