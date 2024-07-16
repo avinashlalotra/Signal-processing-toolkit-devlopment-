@@ -29,9 +29,7 @@ Author: Abinash Singh <abinashsinghlalotra@gmail.com>
           
           n : (optional): Number of angular frequencies at which to evaluate the group delay. For efficient computation, n should be a product of small primes.
           
-          "whole" : (optional): Specifies frequency range. If specified:
-          
-          "whole": Frequencies range from 0 to 2π radians per sample.
+          "whole" : (optional): Specifies frequency range. If specified: Frequencies range from 0 to 2π radians per sample.
           
           Fs : (numeric value): Frequencies range from 0 to Fs Hz or Fs radians per sample.
           
