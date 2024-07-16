@@ -142,6 +142,6 @@ gd  =
        0.0115098 0.0095051 0.0043874];
   grpdelay(N,DR,1024);     
 ```
-<img src= " testcase.svg" alt="testcase"/>
+<img src= "testcase.svg" alt="testcase"/>
 
 
