@@ -200,7 +200,8 @@ function varargout = pwelch(x,varargin)
       end
       // return
     //
-    disp(compatib)
+    /*
+    disp(compatib)*/
     // Check fixed argument
     elseif ( isempty(x) || ~isvector(x) )
       error( 'pwelch: arg 1 (x) must be vector.' );
@@ -276,6 +277,7 @@ function varargout = pwelch(x,varargin)
       do_trans  = 0;
       do_coher  = 0;
       do_ypower = 0;
+      /*
       disp("Step 1")
 
       disp(compatib);
@@ -290,7 +292,7 @@ function varargout = pwelch(x,varargin)
       disp(max_overlap);
       disp(conf);
       disp(range);
-      
+      */
     //
     //  DECODE AND CHECK OPTIONAL ARGUMENTS
       end_numeric_args = 0;
@@ -660,7 +662,7 @@ function varargout = pwelch(x,varargin)
         end
         n_ffts = n_ffts +1;
       end
-     
+     /*
       disp(" Checkpoint 3")
     disp("XX-----------------------------------------------------------------------")
     disp(xx)
@@ -671,7 +673,7 @@ function varargout = pwelch(x,varargin)
     disp("Pyy-----------------------------")
     disp(Pyy)
     disp("Pxy-----------------------------------------")
-    disp(Pxy)
+    disp(Pxy)*/
       //
       // Calculate confidence interval
       //    -- incorrectly assumes that the periodogram has Gaussian probability
@@ -690,8 +692,8 @@ function varargout = pwelch(x,varargin)
           Vxx = (erfinv(conf)*sqrt(2*n_ffts/(n_ffts-1))) * sqrt(Vxx-Pxx.^2/n_ffts);
         end
       end
-      disp("--------------------------------------------------------erfinv-------------------------------------------")
-    disp(Vxx)
+      //disp("--------------------------------------------------------erfinv-------------------------------------------")
+   // disp(Vxx)
       //
       // Convert two-sided spectra to one-sided spectra (if range == 0).
       // For one-sided spectra, contributions from negative frequencies are added
@@ -699,16 +701,16 @@ function varargout = pwelch(x,varargin)
       // (half sampling) frequencies.  This keeps power equal in time and spectral
       // domains, as required by Parseval theorem.
       //(
-        disp("RAnge---------- need px x------------------------------------")
+        /*disp("RAnge---------- need px x------------------------------------")
         disp(range)
-        disp(need_Pxx)
+        disp(need_Pxx)*/
       if (  ~ range  )
-        disp("Range variable is ok")
+        //disp("Range variable is ok")
         if (modulo(Nfft,2) == 0 )    // one-sided, Nfft is even
-          disp(" i m being nailed")
+          //disp(" i m being nailed")
           psd_len = Nfft/2+1;
           if ( need_Pxx )
-            disp("Pxx is being processed")
+            //disp("Pxx is being processed")
             Pxx = Pxx(1:psd_len) + [0; Pxx(Nfft:-1:psd_len+1); 0];
             if ( conf>0 )
               Vxx = Vxx(1:psd_len) + [0; Vxx(Nfft:-1:psd_len+1); 0];
@@ -740,6 +742,7 @@ function varargout = pwelch(x,varargin)
       end
       // end MAIN CALCULATIONS
       //
+      /*
       disp(" Checkpoint 4 ")
       disp("XX-----------------------------------------------------------------------")
       disp(xx)
@@ -751,7 +754,7 @@ function varargout = pwelch(x,varargin)
       disp(Pyy)
       disp("Pxy-----------------------------------------")
       disp(Pxy)
-   
+   */
 
       // SCALING AND OUTPUT
       // Put all results in matrix, one row per spectrum
