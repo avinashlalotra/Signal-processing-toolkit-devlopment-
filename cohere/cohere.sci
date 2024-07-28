@@ -1,11 +1,10 @@
+/*2024 Author: Abinash Singh <abinashsinghlalotra@gmail.com>*/
 /*
-Function File: [Pxx, freq] = cohere(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend)
+Calling Sequence
+      [Pxx, freq] = cohere(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend)
 Estimate (mean square) coherence of signals "x" and "y".
-
 Use the Welch (1967) periodogram/FFT method.
-
 Compatible with Matlab R11 cohere and earlier.
-
 See "help pwelch" for description of arguments, hints and references — especially hint (7) for Matlab R11 defaults.
 */
 function varargout = cohere(varargin)
@@ -23,7 +22,6 @@ function varargout = cohere(varargin)
         end
       end
       varargin(nvarargin+1) = 'coher';
-      
       saved_compatib = pwelch('R11-');
       if ( nargout==0 )
         pwelch(varargin(:));
@@ -51,7 +49,6 @@ subplot(2,2,4)
 t = linspace(1,10,1000); x =sin(t);
 y = filter(0.23,x,t);
 cohere(x,y,500,100,6)
-
 -----------------------------------run seperatly-----------------------
 subplot(2,2,1)
 t = linspace(1,10,1000); x =cos(t);
@@ -60,6 +57,5 @@ cohere(x,y,800,300,7,0.56)
 subplot(2,2,2)
 t = linspace(1,10,1000); x =filter(0.3245,cos(t),t); y = filter(0.0034,x,sin(t));
 cohere(x,y,700,1000,4,0.67,"half")
-
 */ 
    
