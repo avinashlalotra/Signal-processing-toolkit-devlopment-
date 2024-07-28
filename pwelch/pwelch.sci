@@ -146,8 +146,7 @@ function varargout = pwelch(x,varargin)
       end
       // return
     //
-    /*
-    disp(compatib)*/
+   
     // Check fixed argument
     elseif ( isempty(x) || ~isvector(x) )
       error( 'pwelch: arg 1 (x) must be vector.' );
@@ -223,21 +222,6 @@ function varargout = pwelch(x,varargin)
       do_trans  = 0;
       do_coher  = 0;
       do_ypower = 0;
-      /*
-      disp("Step 1")
-      disp(compatib);
-      disp(arg2_is_y);
-      disp(x_len);
-      disp(nvarargin);
-      disp(x);
-      disp(arg_posn);
-      disp(Fs);
-      disp(plot_type);
-      disp(rm_mean);
-      disp(max_overlap);
-      disp(conf);
-      disp(range);
-      */
     //
     //  DECODE AND CHECK OPTIONAL ARGUMENTS
       end_numeric_args = 0;
@@ -444,7 +428,6 @@ function varargout = pwelch(x,varargin)
         if ( isempty(Nfft) )
           Nfft = max( 256, 2^ceil(log(seg_len)*nearly_one/log_two) );
         end
-      //
       // Matlab R14 psd(spectrum.welch) defaults
       elseif ( compatib==4 )
         if ( is_win > 1 )
@@ -605,18 +588,6 @@ function varargout = pwelch(x,varargin)
         end
         n_ffts = n_ffts +1;
       end
-     /*
-      disp(" Checkpoint 3")
-    disp("XX-----------------------------------------------------------------------")
-    disp(xx)
-    disp("yy ------------------------------------------------------")
-    disp(yy)
-    disp("Pxx ----------------------------------------------------------------")
-    disp(Pxx)
-    disp("Pyy-----------------------------")
-    disp(Pyy)
-    disp("Pxy-----------------------------------------")
-    disp(Pxy)*/
       //
       // Calculate confidence interval
       //    -- incorrectly assumes that the periodogram has Gaussian probability
@@ -635,25 +606,17 @@ function varargout = pwelch(x,varargin)
           Vxx = (erfinv(conf)*sqrt(2*n_ffts/(n_ffts-1))) * sqrt(Vxx-Pxx.^2/n_ffts);
         end
       end
-      //disp("--------------------------------------------------------erfinv-------------------------------------------")
-   // disp(Vxx)
       //
       // Convert two-sided spectra to one-sided spectra (if range == 0).
       // For one-sided spectra, contributions from negative frequencies are added
       // to the positive side of the spectrum -- but not at zero or Nyquist
       // (half sampling) frequencies.  This keeps power equal in time and spectral
       // domains, as required by Parseval theorem.
-      //(
-        /*disp("RAnge---------- need px x------------------------------------")
-        disp(range)
-        disp(need_Pxx)*/
+      //
       if (  ~ range  )
-        //disp("Range variable is ok")
         if (modulo(Nfft,2) == 0 )    // one-sided, Nfft is even
-          //disp(" i m being nailed")
           psd_len = Nfft/2+1;
           if ( need_Pxx )
-            //disp("Pxx is being processed")
             Pxx = Pxx(1:psd_len) + [0; Pxx(Nfft:-1:psd_len+1); 0];
             if ( conf>0 )
               Vxx = Vxx(1:psd_len) + [0; Vxx(Nfft:-1:psd_len+1); 0];
@@ -685,19 +648,6 @@ function varargout = pwelch(x,varargin)
       end
       // end MAIN CALCULATIONS
       //
-      /*
-      disp(" Checkpoint 4 ")
-      disp("XX-----------------------------------------------------------------------")
-      disp(xx)
-      disp("yy ------------------------------------------------------")
-      disp(yy)
-      disp("Pxx ----------------------------------------------------------------")
-      disp(Pxx)
-      disp("Pyy-----------------------------")
-      disp(Pyy)
-      disp("Pxy-----------------------------------------")
-      disp(Pxy)
-   */
       // SCALING AND OUTPUT
       // Put all results in matrix, one row per spectrum
       //   Pxx, Pxy, Pyy are sums of periodograms, so "n_ffts"
@@ -774,8 +724,6 @@ function varargout = pwelch(x,varargin)
           elseif ( plot_type == 2 )
             semilogx(freq,[abs(spectra(:,ii)) Vxxxx]);
           elseif ( plot_type == 3 )
-              disp(size(Vxxxx))
-              disp(Vxxxx)
             semilogy(freq,[abs(spectra(:,ii)) Vxxxx]);
           elseif ( plot_type == 4 )
             loglog(freq,[abs(spectra(:,ii)) Vxxxx]);
@@ -801,8 +749,9 @@ function varargout = pwelch(x,varargin)
     end
   endfunction 
   /*
+  
+// demo 1  // use "hold on" and "hold off" for octave...
    pi = %pi ; i = %i;
-   demo 1  // use "hold on" and "hold off" for octave...
    Fs = 25;
    a = [ 1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746 ];
    white = rand(1,16384);
@@ -816,7 +765,7 @@ function varargout = pwelch(x,varargin)
    pwelch(signal,'squared');
    pwelch (compat);
    hold off;
- demo 2 // use "hold on" and "hold off" for octave...
+// demo 2 // use "hold on" and "hold off" for octave...
  a = [ 1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746 ];
  white = rand(1,16384);
  signal = detrend(filter(0.70181,a,white));
@@ -828,14 +777,14 @@ function varargout = pwelch(x,varargin)
  pwelch(signal,'shift','semilogy');
  pwelch (compat);
  hold off
- demo 3 
+// demo 3 
  a = [ 1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746 ];
  white = rand(1,16384);
  signal = detrend(filter(0.70181,a,white));
  compat = pwelch ([]);
  pwelch(signal,3640,[],4096,2*pi,[],'no-strip');
  pwelch (compat);  
- demo 4 // use "hold on" and "hold off" for octave...
+// demo 4 // use "hold on" and "hold off" for octave...
  a = [ 1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746 ];
  white = rand(1,16384);
  signal = detrend(filter(0.70181,a,white));
@@ -846,7 +795,7 @@ function varargout = pwelch(x,varargin)
  pwelch(signal,64,[],256,2*pi,'no-strip');
  pwelch (compat);
  hold off;
- demo 5
+ //demo 5
  a = [ 1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746 ];
  white = rand(1,16384);
  signal = detrend(filter(0.70181,a,white));
