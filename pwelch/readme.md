@@ -260,4 +260,22 @@ prev_compat=pwelch('psd');
 ```
 <img src= "testcase4.svg">
 
+5. Demo 5
+```scilab
+5. a = [ 1.0 -1.6216505 1.1102795 -0.4621741 0.2075552 -0.018756746 ];
+ white = rand(1,16384);
+ signal = detrend(filter(0.70181,a,white));
+ compat = pwelch ('psd');
+ pwelch(signal,'squared');
+ pwelch({});
+ pwelch(white,signal,'trans','coher','short')
+ pwelch (compat);
+ ```
 
+<img src="coherence.svg">
+
+<img src="power.svg">
+
+<img src="tf1.svg">
+
+<img src="tf2.svg">
