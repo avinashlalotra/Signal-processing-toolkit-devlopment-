@@ -1,13 +1,15 @@
 # cohere
+
+## Calling Sequence
+- ` [Pxx, freq] = cohere(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend) `
 ## Description
 Estimate (mean square) coherence of signals "x" and "y".
 Use the Welch (1967) periodogram/FFT method.
 Compatible with Matlab R11 cohere and earlier.
 See "help pwelch" for description of arguments, hints and references — especially hint (7) for Matlab R11 defaults.
-### Dependencies: 
+
+## Dependencies: 
 pwelch
-## Calling Sequence
-- ` [Pxx, freq] = cohere(x,y,Nfft,Fs,window,overlap,range,plot_type,detrend) `
 ## Examples
 1. 
 ```scilab
