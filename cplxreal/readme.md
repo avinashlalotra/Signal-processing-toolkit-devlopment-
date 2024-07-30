@@ -1,16 +1,5 @@
 # cplxreal
-## Description  
-        Sort the numbers z into complex-conjugate-valued  ( zc )and real-valued elements ( zr ).
-        The positive imaginary complex numbers of each complex conjugate pair are returned in zc and the real numbers are returned in zr.
-        tol is a weighting factor in the range [0, 1) which determines the tolerance of the matching.
-        The default value is 100 * eps and the resulting tolerance for a given complex pair is tol * abs (z(i))).
-        By default the complex pairs are sorted along the first non-singleton dimension of z. If dim is specified, then the complex pairs are sorted along this dimension.
-        Signal an error if some complex numbers could not be paired.
-        Signal an error if all complex numbers are not exact conjugates (to within tol).
-        Note that there is no defined order for pairs with identical real parts but differing imaginary parts.
 
-### Dependencies: 
-    ipermute cplxreal
 ## Calling Sequence
 
 - `[zc, zr] = cplxreal (z) `
@@ -18,11 +7,28 @@
 - `[zc, zr] = cplxreal (z, tol, dim)`
 
 ## Parameters
+### INPUTS
 - ` z ` :  A vector of numbers or Matrix
 - ` tol ` : tol is a weighting factor in the range [0, 1) which determines the tolerance of the matching. Default value 100 * eps.
 - ` dim ` : If dim is specified, then the complex pairs are sorted along this dimension.
+### OUTPUTS
+- `zc` : complex conjugate pair
+- `zr` :  real numbers
+## Description  
+Sort the numbers z into complex-conjugate-valued  ( zc )and real-valued elements ( zr ).
+The positive imaginary complex numbers of each complex conjugate pair are returned in zc and the real numbers are returned in zr.
 
--
+tol is a weighting factor in the range [0, 1) which determines the tolerance of the matching.
+The default value is 100 * eps and the resulting tolerance for a given complex pair is tol * abs (z(i))).
+By default the complex pairs are sorted along the first non-singleton dimension of z. If dim is specified, then the complex pairs are sorted along this dimension.
+
+Signal an error if some complex numbers could not be paired.
+Signal an error if all complex numbers are not exact conjugates (to within tol).
+Note that there is no defined order for pairs with identical real parts but differing imaginary parts.
+
+
+## Dependencies: 
+ipermute cplxreal
 ## Examples
 1. 
 ```scilab
