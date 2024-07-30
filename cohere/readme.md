@@ -11,6 +11,7 @@ pwelch
 ## Examples
 1. 
 ```scilab
+subplot(2,2,1)
 t = linspace(0,10,1000); x = sin(t) ; y = cos(t);
 cohere(x,y)
 subplot(2,2,2)
@@ -26,6 +27,7 @@ cohere(x,y,500,100,6)
 
 2.
 ```scilab
+subplot(2,2,1)
 t = linspace(1,10,1000); x =cos(t);
 y = filter(0.9999,x,t);
 cohere(x,y,800,300,7,0.56)
