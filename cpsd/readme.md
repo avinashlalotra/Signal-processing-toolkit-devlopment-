@@ -26,21 +26,14 @@ cpsd(x,y)
 ```scilab
 cpsd(t,y,7,0.88,12,200,"half")
 ```
-
 4.
-```scilab
-t = linspace(1,10,1000); x =sin(t);
-y = filter(0.23,x,t);
-```
-
-5.
 ```scilab
 t = linspace(1,10,1000); x =cos(t);
 y = filter(0.9999,x,t);
 cpsd(x,y,8,0.33,200)
 
 ```
-6. 
+5
 ```scilab
 t = linspace(1,10,1000); x =filter(0.3245,cos(t),t); y = filter(0.0034,x,sin(t));
 cpsd(x,y,7,0.22, 400,1000)
