@@ -3,13 +3,7 @@
 
 - ` [a, b] = arch_fit (y, x, p) `
 - ` [a, b] = arch_fit (y, x, p, iter, gamma, a0, b0) `
-##  Parameters
-- `y`(vector) :  A time-series data vector up to time t-1 .
-- `x` (Matrix):  A matrix of (ordinary) regressors x up to t.
-- `p` (scalar):  The order of the regression of the residual variance.
-- `iter` (scaler) : Number of iterations
-- `gamma` (real number) : updating factor
-- `a0 b0` (real numbers) : Initial values for the scoring algorithm
+
 ## Description
 Fit an ARCH regression model to the time series y using the scoring algorithm in Engle’s original ARCH paper.
 
@@ -23,8 +17,14 @@ If invoked as arch_fit (y, k, p) with a positive integer k, fit an ARCH(k, p) pr
 
 [1, y(t-1), …, y(t-k)]
 Optionally, one can specify the number of iterations iter, the updating factor gamma, and initial values a0 and b0 for the scoring algorithm.
-
-### Dependencies: 
+##  Parameters
+- `y`(vector) :  A time-series data vector up to time t-1 .
+- `x` (Matrix):  A matrix of (ordinary) regressors x up to t.
+- `p` (scalar):  The order of the regression of the residual variance.
+- `iter` (scaler) : Number of iterations
+- `gamma` (real number) : updating factor
+- `a0 b0` (real numbers) : Initial values for the scoring algorithm
+## Dependencies: 
 ols autoreg_matrix
 
 

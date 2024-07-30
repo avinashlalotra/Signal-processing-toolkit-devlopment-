@@ -1,21 +1,12 @@
 # arch_test
- Perform a Lagrange Multiplier (LM) test for conditional heteroscedasticity.
+ 
 ## Calling Sequence
 
 - ` [pval, lm] = arch_test (y, x, p) `
-## Parameters
-- `y`: Array-like. Dependent variable of the regression model.
-- `x`: Array-like. Independent variables of the regression model.
-         If x is a scalar integer k, it represents the order of autoregression.
-- `p` : Integer. Number of lagged squared residuals to include in the heteroscedasticity model.
-
-
-Returns:
-- `pval`: Float. p-value of the LM test.
-- `lm`: Float. Lagrange Multiplier test statistic.
-
 
 ## Description
+Perform a Lagrange Multiplier (LM) test for conditional heteroscedasticity.
+
 For a linear regression model
 
 y = x * b + e
@@ -37,8 +28,19 @@ as the t-th row of x.
 Under the null, LM approximately has a chisquare distribution with p degrees of freedom and pval is the p-value (1 minus the CDF of this distribution at LM) of the test.
 
 If no output argument is given, the p-value is displayed.
+## Parameters
+- `y`: Array-like. Dependent variable of the regression model.
+- `x`: Array-like. Independent variables of the regression model.
+         If x is a scalar integer k, it represents the order of autoregression.
+- `p` : Integer. Number of lagged squared residuals to include in the heteroscedasticity model.
 
-### Dependencies: 
+
+Returns:
+- `pval`: Float. p-value of the LM test.
+- `lm`: Float. Lagrange Multiplier test statistic.
+
+
+## Dependencies: 
 ols autoreg_matrix
 
 ## Examples
