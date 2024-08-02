@@ -1,8 +1,7 @@
 # mscohere
 ## Description
 Estimate (mean square) coherence of signals x and y. Use the Welch (1967) periodogram/FFT method.
-### Dependencies: 
- pwlech
+
 ## Calling Sequence
 - `[Pxx, freq] = mscohere (x, y)` 
 - `[…] = mscohere (x, y, window)`
@@ -13,7 +12,9 @@ Estimate (mean square) coherence of signals x and y. Use the Welch (1967) period
 - `mscohere (…)`
 
 ## Parameters
-Please refer pwelch
+See "help pwelch" for description of arguments, hints and references
+### Dependencies: 
+ pwlech
 ## Examples
 1. 
 ```scilab

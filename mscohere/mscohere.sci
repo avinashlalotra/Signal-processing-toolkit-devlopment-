@@ -1,6 +1,6 @@
 /*2024 Author: Abinash Singh <abinashsinghlalotra@gmail.com>*/
-/*
-Dependency : pwelch
+/*Description:
+Estimate (mean square) coherence of signals x and y. Use the Welch (1967) periodogram/FFT method.
 Calling Sequence:
         [Pxx, freq] = mscohere (x, y) 
         […] = mscohere (x, y, window) 
@@ -8,9 +8,9 @@ Calling Sequence:
         […] = mscohere (x, y, window, overlap, Nfft) 
         […] = mscohere (x, y, window, overlap, Nfft, Fs) 
         […] = mscohere (x, y, window, overlap, Nfft, Fs, range) 
-        mscohere (…) 
-Description:
-Estimate (mean square) coherence of signals x and y. Use the Welch (1967) periodogram/FFT method.
+        mscohere (…)
+See "help pwelch" for description of arguments, hints and references
+Dependencies : pwelch
 */
 function varargout = mscohere(varargin)
     // Check fixed argument
