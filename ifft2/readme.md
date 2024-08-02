@@ -1,8 +1,12 @@
-# Function:  ifft2
+#  ifft2
 
 ## Description
-Compute the inverse two-dimensional discrete Fourier transform of A using a Fast Fourier Transform (FFT) algorithm.
+ Calculates the inverse two-dimensional discrete Fourier transform of A using a Fast Fourier Transform algorithm.
 
+ It performs inverse two-dimensional FFT on the matrix A. m and n may be used specify the number of rows and columns of A to use. If either of these is larger
+ than the size of A, A is resized and padded with zeros.
+
+ If A is a multi-dimensional matrix, each two-dimensional sub-matrix of A is treated separately.
 ## Calling Sequence
 - `ifft2 (A)`
 - `ifft2 (A, m, n)`
@@ -10,8 +14,6 @@ Compute the inverse two-dimensional discrete Fourier transform of A using a Fast
 ## Parameters
 - `A` : Input matrix for which the inverse two-dimensional discrete Fourier transform is to be calculated.
 - `m,n`: The optional arguments m and n may be used specify the number of rows and columns of A to use. If either of these is larger than the size of A, A is resized and padded with zeros.
-
-If A is a multi-dimensional matrix, each two-dimensional sub-matrix of A is treated separately
 
 ## Examples:
 1.

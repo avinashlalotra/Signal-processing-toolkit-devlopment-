@@ -1,12 +1,13 @@
 /*2024 Author: Abinash Singh <abinashsinghlalotra@gmail.com>*/
 /*
-Calling Sequence
-    ipermute (A, iperm)
 Description
     The inverse of the permute function.
     The expression
         ipermute (permute (A, perm), perm)
-    returns the original array A. */
+    returns the original array A.
+Calling Sequence
+    ipermute (A, iperm)
+*/
 function B = ipermute(A, perm)
     // ipermute : Inverse permute the dimensions of a matrix A.
     // B = ipermute(A, perm) returns the array A with dimensions inverted

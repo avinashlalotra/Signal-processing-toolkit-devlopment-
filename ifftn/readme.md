@@ -2,17 +2,19 @@
 ## Description
 Compute the inverse N-dimensional discrete Fourier transform of A using a Fast Fourier Transform (FFT) algorithm.
 
+The optional vector argument SIZE may be used specify the dimensions of the matrix to be used.
+If an element of SIZE is smaller than the corresponding dimension of A, then the dimension of A is truncated prior to performing the inverse FFT.
+
+Otherwise, if an element of SIZE is larger than the corresponding dimension then A is resized and padded with zeros.
+
 ## Calling Sequence
 
 - `ifftn(A)`
-
 - `ifftn(A,size)`
 ## Parameters
 - `A` : input matrix
-- `size` :(optional) The optional vector argument size may be used specify the dimensions of the
-array to be used. If an element of size is smaller than the corresponding dimension of A, then
-the dimension of A is truncated prior to performing the inverse FFT. Otherwise, if an element of 
-size is larger than the corresponding dimension then A is resized and padded with zeros
+- `size` :(optional) dimensions of the
+array to be used. 
 ## Examples
 1.
 ```scilab
