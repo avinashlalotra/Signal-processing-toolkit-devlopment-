@@ -1,8 +1,8 @@
 # rceps
 ## Description
 Real cepstrum and minimum-phase reconstruction
-## Dependencies
- fft1 ifft1
+If called with two output arguments,
+the minimum phase reconstruction of the signal x is returned in ym.
 ## Calling Sequence
 - `[y,ym] = rceps(x)`
 ## Parameters
@@ -11,10 +11,9 @@ Real cepstrum and minimum-phase reconstruction
 # Output
 - `y` : Real cepstrum
 - `ym` : Minimum-phase reconstruction
-If called with two output arguments,
 
-the minimum phase reconstruction of the signal x is returned in ym.
-
+## Dependencies
+ fft1 , ifft1
 ## Examples
 1. 
 ```scilab
