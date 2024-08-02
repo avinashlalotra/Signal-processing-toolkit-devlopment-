@@ -1,23 +1,18 @@
-/*2024 
-Author: Abinash Singh <abinashsinghlalotra@gmail.com>
-*/
-/*
-This function computes the inverse type I discrete sine transform.
-    Calling Sequence
-        Y = idst1(X)
-        Y = idst1(X, N)
-    Parameters
-        X: Matrix or integer
-        N: If N is given, then X is padded or trimmed to length N before computing the transform.
-    Description
-        This function computes the inverse type I discrete sine transform of X If N is given, 
+/*2024 Author: Abinash Singh <abinashsinghlalotra@gmail.com>*/
+/*Description
+        This function computes the inverse type I discrete sine transform of X If N is given,
         then X is padded or trimmed to length N before computing the transform.
         If X is a matrix, compute the transform along the columns of the the matrix.
-    Examples
+Calling Sequence
+        Y = idst1(X)
+        Y = idst1(X, N)
+Parameters
+        X: Matrix or integer
+        N: If N is given, then X is padded or trimmed to length N before computing the transform.
+Examples
         idst1([1,3,6])
     ans = 
-         3.97487  -2.50000   0.97487 
-*/
+         3.97487  -2.50000   0.97487 */
 function x = idst1 (y, n)
   nargin=argn(2)
   if (nargin < 1 || nargin > 2)

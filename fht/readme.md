@@ -1,9 +1,10 @@
 # fht: Fast Hartley Transform Function 
 ## Description
-
+ This function calculates the Fast Hartley transform of real input D.
+        If D is a matrix, the Hartley transform is calculated along the columns by default.
+        If N is specified, the first N elements along the specified dimension are used for the transform.
+        If DIM is specified, the transform is calculated along the specified dimension.
 ## Calling sequences
-There are three ways to call the fht function:
-
 - `fht(d)`
 
 - `fht(d, n)`
@@ -25,16 +26,6 @@ If n is smaller, d is truncated.
 
 By default, the transform is computed along columns (dim=1) for matrices.
 
-# Details
-The fht function calculates the FHT of the real input d.
-
-If d is a matrix, the FHT is computed along the columns by default (similar to dim=1).
-
-The n and dim parameters allow you to control the output size and transformation direction.
-
-n: Specifying n allows you to zero-pad or truncate the output to a desired size.
-
-dim: Setting dim to a specific value performs the FHT along that particular dimension.
 
 ## Examples
 1. 

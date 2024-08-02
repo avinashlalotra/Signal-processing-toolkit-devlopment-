@@ -1,6 +1,5 @@
 /*2024 Author: Abinash Singh <abinashsinghlalotra@gmail.com>*/
-/*
-Calling Sequence
+/*Calling Sequence
    [Pxx, freq] = cpsd (x, y)
    […] = cpsd (x, y, window)
    […] = cpsd (x, y, window, overlap)
@@ -9,6 +8,7 @@ Calling Sequence
    […] = cpsd (x, y, window, overlap, Nfft, Fs, range)
    cpsd (…)
 Estimate cross power spectrum of data x and y by the Welch (1967) periodogram/FFT method.
+See "help pwelch" for description of arguments, hints and references
 */
 function varargout = cpsd(varargin)
     // Check fixed argument

@@ -1,12 +1,9 @@
 /*2024 Author: Abinash Singh <abinashsinghlalotra@gmail.com>*/
-/*
-      Dependencies
-        fft1 ifft1 ipermute
-      Calling Sequence  and  Parameters
+/*Calling Sequence
           h = hilbert (f)  
           h = hilbert (f, N)
           h = hilbert (f, N, dim)
-      Description
+Description
           Analytic extension of real valued signal.
           h = hilbert (f) computes the extension of the real valued signal f to an analytic signal.
           If f is a matrix, the transformation is applied to each column.
@@ -14,11 +11,13 @@
           real (h) contains the original signal f. imag (h) contains the Hilbert transform of f.
           hilbert (f, N) does the same using a length N Hilbert transform. The result will also have length N.
           hilbert (f, [], dim) or hilbert (f, N, dim) does the same along dimension dim.
-      Example
-          //the magnitude of the hilbert transform eliminates the carrier
-          t=linspace(0,10,1024);
-          x=5*cos(0.2*t).*sin(100*t);
-          plot(t,x,t,abs(hilbert(x)));
+Dependencies
+          fft1, ifft1x ipermute
+Example
+            //the magnitude of the hilbert transform eliminates the carrier
+            t=linspace(0,10,1024);
+            x=5*cos(0.2*t).*sin(100*t);
+            plot(t,x,t,abs(hilbert(x)));
           */
 function f=hilbert(f, N ,dim )
   // ------ PRE: initialization and dimension shifting ---------

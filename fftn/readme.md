@@ -1,5 +1,5 @@
 # fftn: N-Dimensional Fast Fourier Transform
-This document describes the fftn function, which calculates the N-dimensional discrete Fourier transform (DFT) 
+Computes the N-dimensional discrete Fourier transform (DFT) 
 of an input array using a Fast Fourier Transform (FFT) algorithm.
 
 ## Syntax

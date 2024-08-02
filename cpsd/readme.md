@@ -1,8 +1,8 @@
 # cpsd
 ## Description
 Estimate cross power spectrum of data x and y by the Welch (1967) periodogram/FFT method.
-### Dependencies: 
-pwelch
+See "help pwelch" for description of arguments, hints and references 
+
 ## Calling Sequence
 - `[Pxx, freq] = cpsd (x, y)`
 - `[…] = cpsd (x, y, window)`
@@ -11,6 +11,8 @@ pwelch
 - `[…] = cpsd (x, y, window, overlap, Nfft, Fs)`
 - `[…] = cpsd (x, y, window, overlap, Nfft, Fs, range)`
 - `cpsd (…)`
+## Dependencies: 
+pwelch
 ## Examples
 1. 
 ```scilab

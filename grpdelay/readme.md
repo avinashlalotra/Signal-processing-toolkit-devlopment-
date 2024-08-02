@@ -1,7 +1,29 @@
 #  grpdelay
+## Description
 Compute the group delay of a filter.
-### Dependencies: 
-fft1 
+Group delay, g(w) = -d/dw [arg{H(e^jw)}], is the rate of change of phase with respect to frequency. It can be computed as:
+
+              d/dw H(e^-jw)
+       g(w) = -------------
+                H(e^-jw)
+where
+
+        H(z) = B(z)/A(z) = sum(b_k z^k)/sum(a_k z^k).
+By the quotient rule,
+
+                   A(z) d/dw B(z) - B(z) d/dw A(z)
+       d/dw H(z) = -------------------------------
+                              A(z) A(z)
+Substituting into the expression above yields:
+
+               A dB - B dA
+       g(w) =  ----------- = dB/B - dA/A
+                   A B
+Note that,
+
+       d/dw B(e^-jw) = sum(k b_k e^-jwk)
+       d/dw A(e^-jw) = sum(k a_k e^-jwk)
+which is just the FFT of the coefficients multiplied by a ramp.
 ## Calling Sequence
 - `[g, w] = grpdelay (b) ` : returns the group 
 delay g of the FIR filter with coefficients b. The response is 
@@ -36,31 +58,9 @@ If the denominator of the computation becomes too small, the group delay is set 
 - `f` : (optional): Vector of specific frequencies (in Hz) at which to evaluate the group delay.
 
 - `Fs` : (optional): Sampling rate in Hz. Used to specify the frequency range when f or "whole" is specified.
-## Description
-Compute the group delay of a filter.
-Group delay, g(w) = -d/dw [arg{H(e^jw)}], is the rate of change of phase with respect to frequency. It can be computed as:
 
-              d/dw H(e^-jw)
-       g(w) = -------------
-                H(e^-jw)
-where
-
-        H(z) = B(z)/A(z) = sum(b_k z^k)/sum(a_k z^k).
-By the quotient rule,
-
-                   A(z) d/dw B(z) - B(z) d/dw A(z)
-       d/dw H(z) = -------------------------------
-                              A(z) A(z)
-Substituting into the expression above yields:
-
-               A dB - B dA
-       g(w) =  ----------- = dB/B - dA/A
-                   A B
-Note that,
-
-       d/dw B(e^-jw) = sum(k b_k e^-jwk)
-       d/dw A(e^-jw) = sum(k a_k e^-jwk)
-which is just the FFT of the coefficients multiplied by a ramp.
+### Dependencies: 
+fft1 
 ## Examples
 1. 
 ```scilab

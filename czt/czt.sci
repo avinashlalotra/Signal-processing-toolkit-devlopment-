@@ -1,28 +1,23 @@
-/*2024 
-Author: Abinash Singh <abinashsinghlalotra@gmail.com>
-*/
-/*
-Chirp Z Transform
-    Calling Sequence
+/*2024 Author: Abinash Singh <abinashsinghlalotra@gmail.com>*/
+/*Description
+        Chirp z-transform. Compute the frequency response starting at a and stepping by w for m steps. a is a point in the complex plane,
+        and w is the ratio between points in each step (i.e., radius increases exponentially, and angle increases linearly).
+  Calling Sequence
         czt (x)
         czt (x, m)
         czt (x, m, w)
         czt (x, m, w, a)
-    Parameters 
+  Parameters
         x: Input scalar or vector
         m: Total Number of steps
         w: ratio between points in each step
-        a: point in the complex plane 
-    Description
-        Chirp z-transform. Compute the frequency response starting at a and stepping by w for m steps. a is a point in the complex plane, 
-        and w is the ratio between points in each step (i.e., radius increases exponentially, and angle increases linearly).
-    Examples: This example uses the czt function to determine the frequency components of a signal, as shown in the following
+        a: point in the complex plane
+  Examples: This example uses the czt function to determine the frequency components of a signal, as shown in the following
     t=linspace(0,50,1000); 
     f=linspace(0,3,1000);    
     x_t=sin(t) + cos(t*2*%pi);  
     x_f=czt(x_t);   
-    plot(f,abs(x_f)); 
-*/
+    plot(f,abs(x_f)); */
 function y = czt(x, m, w, a)
     funcprot(0);
     nargin=argn(2);

@@ -11,7 +11,8 @@ Compute the inverse 2-D discrete cosine transform of matrix x.
 ## Parameters
 - `x` : A Matrix
 - `[m,n]` : zero-pads or crops the matrix A to size m-by-n before applying the inverse transformation.
-
+## Dependencies
+idct1
 ## Examples
 1. 
 ```scilab

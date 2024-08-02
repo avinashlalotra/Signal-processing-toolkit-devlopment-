@@ -1,5 +1,10 @@
 /*2024 Author: Abinash Singh <abinashsinghlalotra@gmail.com>*/
-/*
+/*Description
+        Sort the numbers z into complex-conjugate-valued and real-valued elements.
+        The positive imaginary complex numbers of each complex conjugate pair are returned in zc and the real numbers are returned in zr.
+        Signal an error if some complex numbers could not be paired.
+        Signal an error if all complex numbers are not exact conjugates (to within tol).
+        Note that there is no defined order for pairs with identical real parts but differing imaginary parts.
 Calling Sequence:
         [zc, zr] = cplxreal (z)
         [zc, zr] = cplxreal (z, tol)
@@ -13,16 +18,9 @@ Parameters
         Outputs
             zc - complex conjugate pair
             zr -  real numbers
-Description
-        Sort the numbers z into complex-conjugate-valued and real-valued elements.
-        The positive imaginary complex numbers of each complex conjugate pair are returned in zc and the real numbers are returned in zr.
-        Signal an error if some complex numbers could not be paired.
-        Signal an error if all complex numbers are not exact conjugates (to within tol).
-        Note that there is no defined order for pairs with identical real parts but differing imaginary parts.
-        Example:
-          with 2 real zeros, one of them equal to 0
-             [zc, zr] = cplxreal (roots ([1, 0, 0, 1, 0]))
-*/
+Example:
+        with 2 real zeros, one of them equal to 0
+        [zc, zr] = cplxreal (roots ([1, 0, 0, 1, 0])) */
 function [zc, zr] = cplxreal (z, tol, dim)
   if (nargin < 1 || nargin > 3)
     error("invalid inputs");
