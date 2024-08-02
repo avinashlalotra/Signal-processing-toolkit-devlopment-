@@ -1,13 +1,4 @@
 #  spectral_adf
-## Calling Sequence
-
-- ` spectral_adf (c) `
-- ` spectral_adf (c, win) `
-- ` spectral_adf (c, win, b) `
-## Parameters
-- `c` : Vector of autocovariances
-- `win` : The window name . Default window is "triangle"
-- `b` : Bandwidth. Default is 1/sqrt(length(c))
 ## Description
 Return the spectral density estimator given a vector of autocovariances c, window name win, and bandwidth, b.
 
@@ -17,11 +8,18 @@ If win is omitted, the triangle window is used.
 
 If b is omitted, 1 / sqrt (length (c)) is used.
 
+## Calling Sequence
+
+- ` spectral_adf (c) `
+- ` spectral_adf (c, win) `
+- ` spectral_adf (c, win, b) `
+## Parameters
+- `c` : Vector of autocovariances
+- `win` : The window name . Default window is "triangle"
+- `b` : Bandwidth. Default is 1/sqrt(length(c))
+
 ### Dependencies: 
-fft1 
-
-
--
+fft1
 ## Examples
 1. 
 ```scilab

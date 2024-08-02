@@ -10,16 +10,10 @@
       b : Bandwidth. Default is 1/sqrt(length(c))
   Description
       Return the spectral density estimator given a vector of autocovariances c, window name win, and bandwidth, b.
-
       The window name, e.g., "triangle" or "rectangle" is used to search for a function called win_lw.
-
       If win is omitted, the triangle window is used.
-
       If b is omitted, 1 / sqrt (length (c)) is used.
-
-  Dependencies:
-      fft1
-*/
+  Dependencies: fft1  */
 function sde = spectral_adf (c, win, b)
     //c should be a vector
     if ~isvector(c)
