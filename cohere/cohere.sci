@@ -5,8 +5,7 @@ Calling Sequence
 Estimate (mean square) coherence of signals "x" and "y".
 Use the Welch (1967) periodogram/FFT method.
 Compatible with Matlab R11 cohere and earlier.
-See "help pwelch" for description of arguments, hints and references — especially hint (7) for Matlab R11 defaults.
-*/
+See "help pwelch" for description of arguments, hints and references — especially hint (7) for Matlab R11 defaults. */
 function varargout = cohere(varargin)
       if ( nargin<2 )
         error( 'cohere: Need at least 2 args. Use help cohere.' );

@@ -15,7 +15,7 @@ Parameters:
         x: Input array containing radian phases to be unwrapped.
         tol (optional): Tolerance parameter specifying the maximum jump allowed between consecutive phases before adding or subtracting 2π. Defaults to 𝜋
         dim (optional): Dimension along which to unwrap the phases. If unspecified, dim defaults to the first non-singleton dimension of the array x.
-Dependencies : ipermute */
+Dependencies : ipermute*/
 function retval = unwrap2 (x, tol, dim)
   nargin = argn(2)
   if (nargin < 1)
