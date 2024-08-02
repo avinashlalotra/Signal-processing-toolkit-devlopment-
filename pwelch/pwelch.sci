@@ -737,7 +737,7 @@ function varargout = pwelch(x,varargin)
           elseif ( plot_type == 2 )
             semilogx(freq,[abs(spectra(:,ii)) Vxxxx]);
           elseif ( plot_type == 3 )
-            semilogy(freq,[abs(spectra(:,ii)) Vxxxx]);
+            semilogy(freq,[abs(spectra(:,ii)) postives(Vxxxx)]);
           elseif ( plot_type == 4 )
             loglog(freq,[abs(spectra(:,ii)) Vxxxx]);
           elseif ( plot_type == 5 )  // db
