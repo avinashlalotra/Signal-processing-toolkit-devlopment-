@@ -20,27 +20,26 @@ tfe(x,y)
 
 2.
 ```scilab
-tfe(t,x)
-tfe(t,y)
+tfe(t,x,512,1000)
+tfe(t,y,200,100,5)
 ```
 3.
 ```scilab
-    
 t = linspace(1,10,1000); x =sin(t);
 y = filter(0.23,x,t);
-tfe(x,y)
+tfe(x,y,100,2000,4,0.45,"half")
 ```
 4.
 ```scilab
-t = linspace(1,10,1000); x =cos(t);
-y = filter(0.9999,x,t);
-tfe(x,y)
+t = linspace(1,10,1000); x =filter(0.3245,cos(t),t); y = filter(0.0034,x,sin(t));
+tfe(x,y,3,2500,8,"shift","semilogy","no-strip")
 
 ```
 5.
 ```scilab
-t = linspace(1,10,1000); x =filter(0.3245,cos(t),t); y = filter(0.0034,x,sin(t));
-tfe(x,y)
+t = linspace(1,10,1000); x =cos(t);
+y = filter(0.9999,x,t);
+tfe(x,y,2,200,6,0.456,"whole","squared")
 
 ```
 
