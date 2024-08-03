@@ -37,7 +37,7 @@ y = cos(t);
 
 x = sin(t);
 
-[a,b] = arch_test(y,x',1)
+[a,b] = arch_fit(y,x',1)
 
 ```
 ```output

@@ -24,6 +24,7 @@ Description:
         Returns:
             pval: Float. p-value of the LM test.
             lm: Float. Lagrange Multiplier test statistic.*/
+        Dependencies : ols, autoreg_matrix
 //helper function
 function cdf = chi2cdf ( X, n)
     df = resize_matrix ( n , size (X) , "" , n);
