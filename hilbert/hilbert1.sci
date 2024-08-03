@@ -1,8 +1,8 @@
 /*2024 Author: Abinash Singh <abinashsinghlalotra@gmail.com>*/
 /*Calling Sequence
-          h = hilbert (f)  
-          h = hilbert (f, N)
-          h = hilbert (f, N, dim)
+          h = hilbert1 (f)  
+          h = hilbert1 (f, N)
+          h = hilbert1 (f, N, dim)
 Description
           Analytic extension of real valued signal.
           h = hilbert (f) computes the extension of the real valued signal f to an analytic signal.
@@ -12,14 +12,14 @@ Description
           hilbert (f, N) does the same using a length N Hilbert transform. The result will also have length N.
           hilbert (f, [], dim) or hilbert (f, N, dim) does the same along dimension dim.
 Dependencies
-          fft1, ifft1x ipermute
+          fft1, ifft1, ipermute
 Example
             //the magnitude of the hilbert transform eliminates the carrier
             t=linspace(0,10,1024);
             x=5*cos(0.2*t).*sin(100*t);
             plot(t,x,t,abs(hilbert(x)));
           */
-function f=hilbert(f, N ,dim )
+function f=hilbert1(f, N ,dim )
   // ------ PRE: initialization and dimension shifting ---------
   nargin = argn(2); 
   if (nargin<1 || nargin>3)
