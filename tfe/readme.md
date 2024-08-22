@@ -16,25 +16,32 @@ pwelch
 t = linspace(0,10,1000); x =sin(t);y=cos(t);
 tfe(x,y)
 ```
+<img src="tfe_case1.svg">
+<img src="tfe_case1.5.svg">
 
 
 2.
 ```scilab
-tfe(t,x,512,1000)
 tfe(t,y,200,100,5)
 ```
+<img src="tfe_case2.svg">
+<img src="tfe_case2.5.svg">
 3.
 ```scilab
 t = linspace(1,10,1000); x =sin(t);
-y = filter(0.23,x,t);
+y = filter(0.23,x,t);            // issue in pwelch
 tfe(x,y,100,2000,4,0.45,"half")
 ```
 4.
+
 ```scilab
 t = linspace(1,10,1000); x =filter(0.3245,cos(t),t); y = filter(0.0034,x,sin(t));
 tfe(x,y,3,2500,8,"shift","semilogy","no-strip")
 
 ```
+<img src="tfe_case4.svg">
+<img src="tfe_case4.5.svg">
+
 5.
 ```scilab
 t = linspace(1,10,1000); x =cos(t);
@@ -42,4 +49,5 @@ y = filter(0.9999,x,t);
 tfe(x,y,2,200,6,0.456,"whole","squared")
 
 ```
-
+<img src="tfe_case5.svg">
+<img src="tfe_case5.5.svg">

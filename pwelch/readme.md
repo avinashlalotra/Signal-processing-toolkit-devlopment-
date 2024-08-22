@@ -218,7 +218,7 @@ prev_compat=pwelch('psd');
    pwelch (compat);
 ```
 
-<img src= "testcase1.svg">
+<img src= "pwelch_case1.svg">
 
 
 2. Demo 2
@@ -233,7 +233,7 @@ prev_compat=pwelch('psd');
  pwelch(signal,'shift','semilogy');
  pwelch (compat);
 ```
-<img src= "testcase2.svg">
+<img src= "pwelch_case2.svg">
 
 3. Demo 3
 ```scilab
@@ -244,7 +244,7 @@ prev_compat=pwelch('psd');
  pwelch(signal,3640,[],4096,2*pi,[],'no-strip');
  pwelch (compat);  
 ```
-<img src= "testcase3.svg">
+<img src= "pwelch_case3.svg">
 
 4. Demo 4
 ```scilab
@@ -258,7 +258,7 @@ prev_compat=pwelch('psd');
  pwelch (compat);
 
 ```
-<img src= "testcase4.svg">
+<img src= "pwelch_case4.svg">
 
 5. Demo 5
 ```scilab
@@ -272,10 +272,10 @@ prev_compat=pwelch('psd');
  pwelch (compat);
  ```
 
-<img src="coherence.svg">
+<img src="pwelch_coherence.svg">
 
-<img src="power.svg">
+<img src="pwelch_power.svg">
 
-<img src="tf1.svg">
+<img src="pwelch_tf1.svg">
 
-<img src="tf2.svg">
+<img src="pwelch_tf2.svg">
