@@ -43,7 +43,7 @@ subplot(2,2,4)
 
 plot(f,y(:,2))
 ```
-<img src="testcase1.svg"/>
+<img src="adf_case1.svg"/>
 
 2.
 ```scilab
@@ -57,7 +57,7 @@ subplot(2,2,2)
 
 plot(x,y(:,2))
 ```
-<img src="testcase2.svg"/>
+<img src="adf_case2.svg"/>
 
 3.
 ```scilab
@@ -128,4 +128,4 @@ plot(x,y(:,2))
 
 
 ```
-<img src="testcase5.svg"/>
+<img src="adf_case3.svg"/>

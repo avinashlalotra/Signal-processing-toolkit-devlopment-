@@ -31,7 +31,7 @@ If x is a matrix, the transform will be performed column-by-column.
     plot(f,abs(x_f)); 
 
 ```
-<img src="testcase.svg" alt="testcase" />
+<img src="czt_t_case.svg" alt="testcase" />
 
 2.
 ```scilab

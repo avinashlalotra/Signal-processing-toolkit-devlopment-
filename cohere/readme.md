@@ -25,7 +25,7 @@ t = linspace(1,10,1000); x =sin(t);
 y = filter(0.23,x,t);
 cohere(x,y,500,100,6)
 ```
-<img src="testcase1234.svg">
+<img src="cohere_t_case1.svg">
 
 2.
 ```scilab
@@ -37,4 +37,4 @@ subplot(2,2,2)
 t = linspace(1,10,1000); x =filter(0.3245,cos(t),t); y = filter(0.0034,x,sin(t));
 cohere(x,y,700,1000,4,0.67,"half")
 ```
-<img src="testcase56.svg">
+<img src="cohere_t_case2.svg">

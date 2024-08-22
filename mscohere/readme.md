@@ -30,7 +30,7 @@ t = linspace(1,10,1000); x =sin(t);
 y = filter(0.23,x,t);
 mscohere(x,y,7,0.70,300)
 ```
-<img src="testcase1234.svg">
+<img src="mscohere_case1.svg">
 
 2.
 ```scilab
@@ -42,5 +42,5 @@ subplot(2,2,2)
 t = linspace(1,10,1000); x =filter(0.3245,cos(t),t); y = filter(0.0034,x,sin(t));
 mscohere(x,y,8,0.49,300,100,"onesided")
 ```
-<img src="testcase56.svg">
+<img src="mscohere_case2.svg">
 

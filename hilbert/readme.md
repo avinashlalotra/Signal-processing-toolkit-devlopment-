@@ -27,7 +27,7 @@ plot(t,real(z),t,imag(z));
 
 ```
 
-<img src="testcase1.svg"/>
+<img src="hilbert_case1.svg"/>
 
 2.
 ```scilab
@@ -36,7 +36,7 @@ plot(t,real(z),t,imag(z));
  x=5*cos(0.2*t).*sin(100*t);
 plot(t,x,t,abs(hilbert(x)));
 ```
-<img src="testcase2.svg"/>
+<img src="hilbert_case2.svg"/>
 
 3.
 ```scilab
@@ -45,7 +45,7 @@ x = cos (t) + sin(t);
 plot(t(1:5000),x(1:5000),t(1:5000),abs(hilbert(x,5000)))
 
 ```
-<img src="testcase3.svg"/>
+<img src="hilbert_case3.svg"/>
 
 4.
 ```scilab
@@ -53,7 +53,7 @@ t=linspace(0,100,100000);
 x = cos(t).*sin(t);
 plot(t,x,t,abs(hilbert(x)))
 ```
-<img src="testcase4.svg"/>
+<img src="hilbert_case4.svg"/>
 
 5.
 ```Scilab
@@ -68,4 +68,4 @@ plot(t,x(2,:),t,abs(y(2,:)))
 subplot(2,2,3)
 plot(t,x(3,:),t,abs(y(3,:)))
 ```
-<img src="testcase5.svg"/>
+<img src="hilbert_case5.svg"/>

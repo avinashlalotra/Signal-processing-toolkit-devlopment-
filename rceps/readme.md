@@ -21,7 +21,7 @@ the minimum phase reconstruction of the signal x is returned in ym.
  plot(y,xm)
 ```
 <span>
-   <img src='testcase1.svg'>
+   <img src='rceps_case1.svg'>
 </span>
 
 2. 
@@ -31,7 +31,7 @@ plot(y,xm);
 ```
 
 <span>
-<img src='testcase2.svg'>
+<img src='rceps_case2.svg'>
 </span>
 
 3. 
@@ -58,7 +58,7 @@ xm =
 plot(y,xm)
 ```
 <span>
-    <img src='testcase4.svg'>
+    <img src='rceps_case3.svg'>
 </span>
 5.
 
@@ -68,5 +68,5 @@ plot(y,xm)
 
 ```
 <span>
-    <img src='testcase5.png'>
+    <img src='rceps_case4.png'>
 </span>

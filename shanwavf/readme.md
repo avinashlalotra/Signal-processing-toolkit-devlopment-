@@ -49,7 +49,7 @@ ylabel("imag( psi(x))")
 
 ```
 
-<img title="OUTPUT" alt="Alt text" src="testcase1.svg">
+<img title="OUTPUT" alt="Alt text" src="shanwavf_case1.svg">
 
 2. 
 ```scilab
@@ -69,21 +69,21 @@ xlabel("x")
 ylabel("imag( psi(x))")
 
 ```
-<img title="OUTPUT" alt="Alt text" src="testcase2.svg">
+<img title="OUTPUT" alt="Alt text" src="shanwavf_case2.svg">
 
 3.
 ```scilab
 [psi,x]=shanwavf(-8,8,1000,2,1);
 plot(x,abs(psi))
 ```
-<img title="OUTPUT" alt="Alt text" src="testcase3.svg">
+<img title="OUTPUT" alt="Alt text" src="shanwavf_case3.svg">
 
 4.
 ```scilab
 [psi,x]=shanwavf(2,15,2000,18,1);
 plot(x,psi)
 ```
-<img title="OUTPUT" alt="Alt text" src="testcase4.svg">
+<img title="OUTPUT" alt="Alt text" src="shanwavf_case4.svg">
 
 5.
 ```scilab
@@ -98,4 +98,4 @@ xlabel("x")
 ylabel("imag( psi(x))")
 
 ```
-<img title="OUTPUT" alt="Alt text" src="testcase5.svg">
+<img title="OUTPUT" alt="Alt text" src="shanwavf_case5.svg">
