@@ -1,4 +1,25 @@
-function q = marcumq (a, b, m, tol,max_iter)
+// Function File: q = marcumq (a, b)
+// Function File: q = marcumq (a, b, m)
+// Function File: q = marcumq (a, b, m, tol)
+
+/*
+Compute the generalized Marcum Q function of order `m` with noncentrality parameter `a` and argument `b`. 
+If the order `m` is omitted, it defaults to 1. An optional relative tolerance `tol` may be included, 
+and the default value is `eps`.
+
+If the input arguments are commensurate vectors, this function will produce a table of values.
+
+This function computes Marcum’s Q function using the infinite Bessel series, 
+which is truncated when the relative error is less than the specified tolerance. 
+The accuracy is limited by that of the Bessel functions, so reducing the tolerance is probably not useful.
+
+References:
+- Marcum, "Tables of Q Functions", Rand Corporation.
+- R.T. Short, "Computation of Noncentral Chi-squared and Rice Random Variables", 
+  www.phaselockedsystems.com/publications
+*/
+
+function q = marcumq (a, b, m, tol)
 
   if ((nargin < 2) || (nargin > 5))
     error(" marcumq : wrong numbers of input arguments ");
@@ -75,20 +96,12 @@ function q = mq (a, b, m, tol)
     N = 0;
   end
 
+  while  (abs (t / S) > tol)
     t = d * besseli (abs (k), z, 1);
     S = S + t;
     d = d * x;
     N = k;
-    k = k + 1
-    iter = 0 //  iterations 
-  while  (abs (t / S) < tol)
-    if (iter == max_iter) then break end // max iterations reached 
-    t = d * besseli (abs (k), z, 1);
-    S = S + t;
-    d = d * x;
-    N = k;
-    k = k + 1
-    iter = iter + 1
+    k = k + 1 ;
   end
   q = c + s * exp (-(a - b)^2 / 2) * S;
 
@@ -108,8 +121,9 @@ function [ta , tb] = tablify(a,b)
   end
 endfunction
 /*
-%% Tests for number and validity of arguments.
-error marcumq (1)
+// Tests for number and validity of arguments.
+
+error marcumq (1) q = c+s*exp(-(a-b)^2 / 2 )*S
 error marcumq (-1, 1, 1, 1, 1)
 error marcumq (-1, 1)
 error marcumq (1, -1)
@@ -118,20 +132,6 @@ error marcumq (1, 1, -1)
 error marcumq (1, 1, 1.1)
 
 // Notes on tests and accuracy.
-// -----------------------------------
-// The numbers used as the reference (Q) in the tables below are
-// from J.I. Marcum, "Table of Q Functions", Rand Technical Report
-// RM-339, 1950/1/1.
-//
-// There is one discrepancy in the tables.  Marcum has
-//   Q(14.00,17.10) = 0.001078
-// while we compute
-//   Q(14.00,17.10) = 0.0010785053 = 0.001079
-// This is obviously a non-problem.
-//
-// As further tests, I created several different versions of the
-// Q function computation, including a Bessel series expansion and
-// numerical integration.  All of them agree to with 10^(-16).
 
 test
  a = [0.00; 0.05; 1.00; 2.00; 3.00; 4.00; 5.00; 6.00; 7.00; 8.00; 9.00; 10.00;
@@ -165,9 +165,9 @@ test
       1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
       1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000];
 q = marcumq (a, b);
-assert (q, Q, 1);
+assert_checkalmostequal (q, Q, %eps,1e-4);
 
-test passed
+test 
  a = [0.00; 0.05; 1.00; 2.00; 3.00; 4.00; 5.00; 6.00; 7.00; 8.00; 9.00; 10.00;
       11.00; 12.00; 13.00; 14.00; 15.00; 16.00; 17.00; 18.00; 19.00; 20.00;
       21.00; 22.00; 23.00; 24.00];
@@ -199,10 +199,10 @@ test passed
       1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
       1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000];
  q = marcumq (a, b);
- assert (q, Q, 1);
+ assert_checkalmostequal(q, Q, %eps,1e-4);
 
 
-test passed
+test 
  a = [0.00; 0.05; 1.00; 2.00; 3.00; 4.00; 5.00; 6.00; 7.00; 8.00; 9.00; 10.00;
       11.00; 12.00; 13.00; 14.00; 15.00; 16.00; 17.00; 18.00; 19.00; 20.00;
       21.00; 22.00; 23.00; 24.00];
@@ -234,7 +234,7 @@ test passed
       1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
       1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000];
  q = marcumq (a, b);
- assert (q, Q, 1);
+ assert_checkalmostequal (q, Q,%eps,1e-4);
 
 
 test 
@@ -269,14 +269,13 @@ test
       1.000000, 1.000000, 0.999956;
       1.000000, 1.000000, 1.000000];
  q = marcumq (a, b);
- assert (q, Q, 1);
+ assert_checkalmostequal(q, Q, %eps,1e-4);
 
 // The tests for M>1 were generating from Marcum's tables by
 // using the formula
 //   Q_M(a,b) = Q(a,b) + exp(-(a-b)^2/2)*sum_{k=1}^{M-1}(b/a)^k*exp(-ab)*I_k(ab)
 
-test
-FIXME : accuracy is not good for M > 1
+test 
  M = 2;
  a = [0.00; 0.05; 1.00; 2.00; 3.00; 4.00; 5.00; 6.00; 7.00; 8.00; 9.00; 10.00;
       11.00; 12.00; 13.00; 14.00; 15.00; 16.00; 17.00; 18.00; 19.00; 20.00;
@@ -309,11 +308,10 @@ FIXME : accuracy is not good for M > 1
       1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
       1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000];
  q = marcumq (a, b, M);
- assert (q, Q, 1);
+ assert_checkalmostequal (q, Q, %eps,1e-4);
 
 test 
-FIXME :  accuracy is not good for M > 1
-FIXES :  figure out the reason for inaccuracy besseli function or scilab .
+
  M = 5;
  a = [0.00; 0.05; 1.00; 2.00; 3.00; 4.00; 5.00; 6.00; 7.00; 8.00; 9.00; 10.00;
       11.00; 12.00; 13.00; 14.00; 15.00; 16.00; 17.00; 18.00; 19.00; 20.00;
@@ -346,10 +344,9 @@ FIXES :  figure out the reason for inaccuracy besseli function or scilab .
       1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
       1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000];
  q = marcumq (a, b, M);
- assert (q, Q, 1);
+ assert_checkalmostequal (q, Q, %eps,1e-4);
 
-test 
-FIXME : accuracy is not good for M > 1 
+test passed
  M = 10;
  a = [0.00; 0.05; 1.00; 2.00; 3.00; 4.00; 5.00; 6.00; 7.00; 8.00; 9.00; 10.00;
       11.00; 12.00; 13.00; 14.00; 15.00; 16.00; 17.00; 18.00; 19.00; 20.00;
@@ -382,6 +379,6 @@ FIXME : accuracy is not good for M > 1
       1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000;
       1.000000, 1.000000, 1.000000, 1.000000, 1.000000, 1.000000];
  q = marcumq (a, b, M);
- assert (q, Q, 1);
+ assert_checkalmostequal (q, Q, %eps,1e-4);
 
 */
