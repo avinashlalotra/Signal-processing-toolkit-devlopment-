@@ -110,8 +110,8 @@ function [h_r, f_r] = freqz (b, a, n, region, Fs)
       w = 2*%pi*f/Fs;
     end
     k = max (length (b), length (a));
-    hb = polyval (postpad (b, k), exp (j*w));
-    ha = polyval (postpad (a, k), exp (j*w));
+    hb = polyval (postpad (b, k), exp (%i*w));
+    ha = polyval (postpad (a, k), exp (%i*w));
   else
     // polyval(fliplr(P),exp(jw)) is O(p n) and fft(x) is O(n log(n)),
     // where p is the order of the polynomial P.  For small p it

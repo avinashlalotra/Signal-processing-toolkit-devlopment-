@@ -1,80 +1,81 @@
-function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
+// FIXME: implement Steiglitz-McBride iterations
+// FIXME: improve numerical stability for high order filters (matlab is a bit better)
+// FIXME: modify to accept more argument configurations
+function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane,varargin)
 
-  if max(size(nB)) > 1, zB = nB(2); nB = nB(1); else zB = 0; end
+  if nargin < 4  then 
+    error("invfreq : Incorrect number of input arguments ")
+  end
+
+  if ~isvector(H) && ~isscalar(H) then 
+    error("invfreq : H is the desired frequency response , a vector expected")
+  end
+
+  if ~isvector(F) && ~isscalar(F) then 
+    error("invfreq : F is a vector of frequency samples in radians")
+  end
+
+  if max(size(nB)) > 1 then zB = nB(2); nB = nB(1); else zB = 0; end
   n = max(nA, nB);
   m = n+1; mA = nA+1; mB = nB+1;
   nF = max(size(F));
-  if nargin < 5 || isempty(W), W = ones(1, nF); end
-  if nargin < 6, iter = []; end
-  if nargin < 7  tol = []; end
-  if nargin < 8 || isempty(tr), tr = ''; end
-  if nargin < 9, plane = 'z'; end
-  if nargin < 10, varargin = {}; end
-
+  if nargin < 5 || isempty(W) then W = ones(1, nF); end
+  if nargin < 6 then iter = []; end
+  if nargin < 7  then tol = []; end
+  if nargin < 8 || isempty(tr) then  tr = ''; end
+  if nargin < 9 then plane = 'z'; end
+  if nargin < 10 then varargin = {}; end
   if ( strcmp (plane, "s") &&  strcmp (plane, "z"))
-    error ("invfreq: invealid PLANE argument %s, expected  s  or  z ", plane)
+    error (sprintf("invfreq: invealid PLANE argument %s, expected  s  or  z ", plane))
   end
 
   fname = ["invfreq", plane];
 
-  if (nF ~= max(size(H)))
+  if (nF ~= max(size(H))) then
     error ("%s: Length of H and F must be the same\n", fname)
   end
 
-  if (~ isempty (iter) || ~ isempty (tol))
-    warning (["%s: iterative algorithm not yet implemented, ", ...
-              "ITER and TOL arguments are ignored\n"], fname);
+  if (~ isempty (iter) || ~ isempty (tol)) then
+    warning (sprintf("%s: iterative algorithm not yet implemented, ", ...
+              "ITER and TOL arguments are ignored\n", fname));
   end
-  disp("Checkpoint 1") // invfreq([%i 1+2*%i 0],[1 2 3],4,4) passed
 
- // Displaying the variables
-  disp("H = "), disp(H)
-  disp("F = "), disp(F)
-  disp("nB = "), disp(nB)
-  disp("nA = "), disp(nA)
-  disp("W = "), disp(W)
-  disp("iter = "), disp(iter)
-  disp("tol = "), disp(tol)
-  disp("tr = "), disp(tr)
-  disp("plane = "), disp(plane)
-  disp("varargin = "), disp(varargin)
-  prop = varargin;
-  // should we normalize freqs to avoid matrices with rank deficiency ?
-  norm = %f;
-  // by default, use Ordinary Least Square to solve normal equations
-  method = 'LS';
-  if max(size(prop)) > 0
-    indi = 1; while indi <= max(size(prop))
-      switch prop{indi}
-        case 'norm'
-          if (indi < max(size(prop)) && ~type(prop{indi+1}) == 10 )
-            norm = logical(prop{indi+1});
-            prop(indi:indi+1) = [];
-            continue
-          else
-            norm = true; prop(indi) = [];
-            continue
-          end
-        case 'method'
-          if indi < max(size(prop)) && type(prop{indi+1}) == 10
-            method = prop{indi+1};
-            prop(indi:indi+1) = [];
-            continue
-          else
-            error('invfreq.m: incorrect/missing method argument');
-          end
-        otherwise // FIXME: just skip it for now
-          disp(sprintf("Ignoring unknown argument %s", varargin{indi}));
-          indi = indi + 1;
+//////////////////////////////////////////////////////////////
+norm = %f ; // should we normalize freqs to avoid matrices with rank deficiency ?
+method = 'LS'; // by default, use Ordinary Least Square to solve normal equations
+prop = varargin;
+if length(prop) > 0 then 
+  indi = 1;
+  while indi < length(prop)
+      switch prop(indi)
+          case 'norm'
+              if indi < length(prop) && ~(type(prop(indi+1)) == 10)
+                  norm = prop(indi+1);
+                  indi = indi + 2; // Skip the processed element
+              else
+                  norm = %t; // Default true
+                  indi = indi + 1;
+              end
+              
+          case 'method'
+              if indi < length(prop) && type(prop(indi+1)) == 10 && strcmp(prop(indi+1), "norm")
+                  method = prop(indi+1);
+                  indi = indi + 2; // Skip the processed element
+              else
+                  error("invfreq : incorrect/missing method argument");
+                  indi = indi + 1;
+              end
+              
+          otherwise
+              disp("Ignoring unknown or incomplete argument");
+              indi = indi + 1;
       end
-    end
-    disp("Intermediate checkpoint")
-    disp("norm"),disp(norm)
-    disp("indi"),disp(indi)
-    disp("method :"),disp(method)
-
   end
+end
+
+
 ////////////////////////////////////////////////////////////////
+
 
   Ruu = zeros(mB, mB); Ryy = zeros(nA, nA); Ryu = zeros(nA, mB);
   Pu = zeros(mB, 1);   Py = zeros(nA,1);
@@ -88,30 +89,25 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
   s = sqrt(-1)*F;
   switch plane
     case 'z' 
-      if max(F) > %pi || min(F) < 0
+      if max(F) > %pi || min(F) < 0 then
         disp('hey, you frequency is outside the range 0 to %pi, making my own')
         F = linspace(0, %pi, max(size(H)));
         s = sqrt(-1)*F;
       end
       s = exp(-s);
     case 's'
-      if max(F) > 1e6 && n > 5,
-        if ~norm,
+      if max(F) > 1e6 && n > 5 then 
+        if ~norm then 
           disp('Be careful, there are risks of generating singular matrices');
-          disp('Call invfreqs as (..., norm, true) to avoid it');
+          disp('Call invfreqs as (..., norm, 1) to avoid it');
         else
           Fmax = max(F); s = sqrt(-1)*F/Fmax;
         end
       end
   end
-  disp("Checkpoint 2 --------------------------------------------------------------")
-  disp("Ruu"),disp(Ruu)
-  disp("Pu") , disp(Pu)
-  disp("s"),disp(s)
-  if norm 
-    disp("Fmax") ,disp(Fmax)
-  end  
+
   //////////////////////////////
+  /////////////////////////////
   for k=1:nF,
     Zk = (s(k).^[0:n]).';
     Hk = H(k);
@@ -136,8 +132,8 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
     Zk = Zk.*s;
   end
   k = k+1;
-  if k <= nB, Rr(:, 1+k) = Zk; end
-  if k <= nA, Rr(:, mB+k) = -Zk.*H; end
+  if k <= nB then Rr(:, 1+k) = Zk; end
+  if k <= nA then Rr(:, mB+k) = -Zk.*H; end
 
   // complex to real equation system -- this ensures real solution
   Rr = Rr(:, 1+zB:$);
@@ -146,42 +142,14 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
   // Rn= [Ruu(1+zB:mB, 1+zB:mB), -Ryu(:, 1+zB:mB)';  -Ryu(:, 1+zB:mB), Ryy];
   // Pn= [Pu(1+zB:mB); -Py];
   ////////////////////////////////////////////////
-  disp("Checkpoint 3 Start----------------------------")
-  disp("ZK"),disp(Zk) 
-  disp("HK"),disp(Hk)// passed for //invfreq([%i 1+2*%i 0],[1 2 3],4,4)
-
-  disp("aHks"),disp(aHks)
-  disp("RK"),disp(Rk)
-  disp("rRK"),disp(rRk)
-  disp("Ruu"),disp(Ruu)
-  disp("Ryy"),disp(Ryy)
-  disp("Ryu"),disp(Ryu)
-  disp("Pu"),disp(Pu)
-  disp("Py"),disp(Py)
-  disp("Rr"),disp(Rr)
-  disp("Pr"),disp(Pr)
-  disp("-------------------Checkpoint 3 complete---------------------------")
-  disp("Method"),disp(method)
   switch method
     case {'ls' 'LS'}
       // avoid scaling errors with Theta = R\P;
       // [Q, R] = qr([Rn Pn]); Theta = R(1:$, 1:$-1)\R(1:$, $);
       [Q, R] = qr([Rr Pr]); Theta = pinv(R(1:$-1, 1:$-1)) * R(1:$-1, $);
       //////////////////////////////////////////////////
-      //////////////////checkpoint for theta///////////
-      disp("Checkpoint for theta --------------------------------------------")
-      disp("R(1:end-1, 1:end-1)"),disp(R(1:$-1, 1:$-1)) //passed for //invfreq([%i 1+2*%i 0],[1 2 3],4,4)
-      disp("R(1:end-1, end)"),disp(R(1:$-1,$))
-      disp("-------------------------------------------------------------")
-      /////////////////////checkpoint over/////////////
       // SigN = R($, $-1);
       SigN = R($, $);
-      disp("Checkpoint: method ls ---------------------------------")
-      disp("Q"),disp(Q)
-      disp("R"),disp(R) //passed for //invfreq([%i 1+2*%i 0],[1 2 3],4,4)
-      disp("Theta"),disp(Theta)
-      disp("SigN"),disp(SigN)
-      disp("Checkpoint method LS complete --------------------------")
     case {'tls' 'TLS'}
       // [U, S, V] = svd([Rn Pn]);
       // SigN = S($, $-1);
@@ -209,15 +177,11 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
                Theta];
       SigN = S($, $);
     otherwise
-      error("invfreq: unknown method %s", method);
+      error(sprintf("invfreq : unknown method %s", method));
   end
 
   B = [zeros(zB, 1); Theta(1:mB-zB)].';
   A = [1; Theta(mB-zB+(1:nA))].';
-  disp("Checkpoint B A I ------start ----------------------")
-  disp("B"),disp(B)
-  disp("A"),disp(A)
-  disp("Checkpoint B A I --------complete ------------------")
   if ~strcmp(plane,'s')
     B = B(mB:-1:1);
     A = A(mA:-1:1);
@@ -228,3 +192,79 @@ function [B, A, SigN] = invfreq(H, F, nB, nA, W, iter, tol, tr, plane, varargin)
     end
   end
 endfunction
+
+/*
+// method - LS
+test case 1 // passed
+
+[B,A,Sign] = invfreq(1,1,1,1,1,[],[],'','z','norm',1,'method','LS')
+assert_checkequal(B,[0.6314 0.3411])
+assert_checkequal(A,[1 -0.3411])
+assert_checkequal(Sign,0)
+
+[B,A,Sign] = invfreq(1,1,1,1,1,[],[],'','s')
+assert_checkequal(B,[0 1])
+assert_checkequal(A,[0 1])
+assert_checkequal(Sign,0)
+
+
+test case 2 // passed 
+order = 6 
+fc = 1/2 
+n = 128 
+B = [    0.029588   0.177529   0.443823   0.591764   0.443823   0.177529   0.029588] ;
+A = [ 1.0000e+00  -6.6613e-16   7.7770e-01  -2.8192e-16   1.1420e-01  -1.4472e-17   1.7509e-03];
+[H,w] = freqz(B,A,n) ; 
+[Bh , Ah] = invfreq(H,w,order,order);
+[Hh,wh] = freqz(Bh,Ah,n);
+plot(w,[abs(H), abs(Hh)])
+xlabel("Frequency (rad/sample)");
+ylabel("Magnitude");
+legend('Original','Measured');
+err = norm(H-Hh);
+disp(sprintf('L2 norm of frequency response error = %f',err));
+
+test case 3 // passed 
+// buttter worth filter of order 12 and fc=1/4
+B = [ 1.1318e-06   1.3582e-05   7.4702e-05   2.4901e-04   5.6026e-04   8.9642e-04   1.0458e-03   8.9642e-04 5.6026e-04   2.4901e-04   7.4702e-05   1.3582e-05   1.1318e-06];
+A = [ 1.0000e+00  -5.9891e+00   1.7337e+01  -3.1687e+01   4.0439e+01  -3.7776e+01   2.6390e+01  -1.3851e+01  5.4089e+00  -1.5296e+00   2.9688e-01  -3.5459e-02   1.9688e-03];
+[H,w] = freqz(B,A,128);
+[Bh,Ah] = invfreq(H,w,4,4);
+[Hh,wh] = freqz(Bh,Ah,128);
+disp(sprintf('||frequency response error||= %f',norm(H-Hh)));
+
+
+method TLS 
+
+test case 1 // passed
+
+B = [ 1.1318e-06   1.3582e-05   7.4702e-05   2.4901e-04   5.6026e-04   8.9642e-04   1.0458e-03   8.9642e-04 5.6026e-04   2.4901e-04   7.4702e-05   1.3582e-05   1.1318e-06];
+A = [ 1.0000e+00  -5.9891e+00   1.7337e+01  -3.1687e+01   4.0439e+01  -3.7776e+01   2.6390e+01  -1.3851e+01  5.4089e+00  -1.5296e+00   2.9688e-01  -3.5459e-02   1.9688e-03];
+[H,w] = freqz(B,A,128);
+[Bh,Ah] = invfreq(H,w,4,4,[],[],[],'','z','norm',1,'method','TLS');
+[Hh,wh] = freqz(Bh,Ah,128);
+disp(sprintf('||frequency response error||= %f',norm(H-Hh)));
+
+
+
+
+method MLS - passed 
+
+
+// elliptic filter with  ellip (5, 1, 90, [.1 .2])
+n = 128 
+B = [ 1.3214e-04  -6.6404e-04   1.4928e-03  -1.9628e-03   1.4428e-03  0  -1.4428e-03   1.9628e-03 -1.4928e-03   6.6404e-04  -1.3214e-04] ;
+A = [ 1.0000    -8.6483    34.6032   -84.2155   137.9276  -158.7598   130.0425   -74.8636    29.0044    -6.8359  0.7456];
+[H,w] = freqz(B,A,n) ; 
+
+[Bh,Ah] = invfreq(H,w,4,4,[],[],[],'','z','norm',1,'method','MLS');
+[Hh,wh] = freqz(Bh,Ah,n);
+plot(w,[abs(H), abs(Hh)])
+xlabel("Frequency (rad/sample)");
+ylabel("Magnitude");
+legend('Original','Measured');
+err = norm(H-Hh);
+disp(sprintf('L2 norm of frequency response error = %f',err));
+
+
+*/
