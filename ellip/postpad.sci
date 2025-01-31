@@ -20,7 +20,6 @@ function res = postpad(x,l,c,dim)
         c = 0 ;
     end
     if nargin <= 4 then 
-        warning("dim argument functionality not implemented yet")
         if size(x,1) == 1 then
             dim = 1 ;
         elseif size(x,2) == 1 then 
