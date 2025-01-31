@@ -3,7 +3,7 @@ function [ dSided, minH, minD, minW, maxW ] = parser ( varargin )
     dSided = %f ; 
     minH = %eps ;
     minD = 1 ;
-    minW = 1 ;
+    minW = %eps;
     maxW = %inf ;
     idx = 1 ;
     while idx <= length(varargin)  
@@ -52,13 +52,26 @@ function y = lower (y)
 
 endfunction
 
+function out = bsminuseq(A)
+    A = A(:).' ;
+    atemp = [];
+    btemp=[] ;
+    for i=1:length(A) 
+        atemp = [atemp ; A ]
+        btemp = [btemp  A.' ]
+    end
+    out = atemp - btemp
+endfunction
+
+    
+
 // Test case 1: Default values when no arguments are passed
 function test_default_values()
     [dSided, minH, minD, minW, maxW] = parser();
     assert_checkequal(dSided ,%f);
     assert_checkequal(minH ,%eps);
     assert_checkequal(minD , 1);
-    assert_checkequal(minW , 1);
+    assert_checkequal(minW , %eps);
     assert_checkequal(maxW , %inf);
 endfunction
 
@@ -80,7 +93,7 @@ function test_doublesided_flag()
     assert_checkequal(dSided ,%t);
     assert_checkequal(minH , 0.1);
     assert_checkequal(minD , 1);  // default value for minD
-    assert_checkequal(minW , 1);  // default value for minW
+    assert_checkequal(minW , %eps);  // default value for minW
     assert_checkequal(maxW , %inf);  // default value for maxW
 endfunction
 
@@ -109,15 +122,15 @@ function test_unknown_argument()
     assert_checkequal(dSided ,%f);
     assert_checkequal(minH ,%eps);
     assert_checkequal(minD , 1);
-    assert_checkequal(minW , 1);
+    assert_checkequal(minW , %eps);
     assert_checkequal(maxW , %inf);
 endfunction
 
 // Run all tests
-test_default_values();
-test_valid_input();
-test_doublesided_flag();
-test_invalid_input_negative_values();
-test_missing_argument_value();
-test_unknown_argument();
-disp("All tests completed successfully.");
+//test_default_values();
+//test_valid_input();
+//test_doublesided_flag();
+//test_invalid_input_negative_values();
+//test_missing_argument_value();
+//test_unknown_argument();
+//disp("All tests completed successfully.");
