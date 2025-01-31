@@ -27,31 +27,36 @@ function res = prepad(x,l,c,dim)
     if nargin < 3 then 
         c = 0 ;
     end
-    if nargin <= 4 then 
-        if size(x,1) == 1 then
-            dim = 1 ;
-        elseif size(x,2) == 1 then 
-            dim = 2 ;
-        else
-            dim = 2 ; // FIXME : dim argument is not functional
-        end
+    if nargin < 4 then 
+        dim = find(size(x)>1)
+        if isempty(dim) then dim = 2 end
+        if isvector(dim) then dim = dim(1) end
     end
+
     if l < size(x,dim) then
-        error("l must be greater then dimension of x")
+        if isvector(x) then 
+            start = length(x) - l+1;
+            res=x(start:$)
+            return;
+        else
+            error("prepad : l must be greter than dim size for matrices")
+        end
+        
     end
     
-    select dim
-    case 1 then
-        res = [c*ones(size(x,1),l-size(x,2)) x];
-    case 2 then
-        res = [c*ones(l-size(x,1),size(x,2));x];
+    if dim == 1 then 
+        res = [ c* ones( l - size(x,1) , size(x,2)) ; x]
+    elseif dim == 2 then 
+        res = [ c* ones( size(x,1) , l - size(x,2)) x]
+    else
+        error("prepad : Invalid value for arg dim 1 or 2 expected")
     end
 endfunction
 
 /*
 #test for row vectors
-prepad([1 2 3 4],6) //passed
-prepad([1 ;2 ;3 ;4],6) // passed
-prepad([1 2 3 4;5 6 7 8;9 10 11 12],6) // passed
-prepad([1 2 ;3 4;5 6],6,-1) //passed
+prepad([1 2 3 4],6) 
+prepad([1 ;2 ;3 ;4],6) 
+prepad([1 2 3 4;5 6 7 8;9 10 11 12],6) 
+prepad([1 2 ;3 4;5 6],6,-1) 
 */
