@@ -1,4 +1,61 @@
+// Copyright (C) 2018 - IIT Bombay - FOSSEE
+// This file must be used under the terms of the CeCILL.
+// This source file is licensed as described in the file COPYING, which
+// you should have received as part of this distribution.  The terms
+// are also available at
+// http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
+// Original Source : https://octave.sourceforge.io/signal/
+// Modifieded by: Abinash Singh , SOE CUSAT
+// Last Modified on : 3 Feb 2024
+// Organization: FOSSEE, IIT Bombay
+// Email: toolbox@scilab.in
+
 function [pks ,idx, varargout] = findpeaks (data, varargin)
+/*
+
+  [pks, loc, extra] = findpeaks (data)
+  … = findpeaks (…, property, value)
+  … = findpeaks (…, "DoubleSided")
+  Finds peaks on data.
+
+  Peaks of a positive array of data are defined as local maxima. For double-sided data, they are maxima of the positive part and minima of the negative part. data is expected to be a single column vector.
+
+  The function returns the value of data at the peaks in pks. The index indicating their position is returned in loc.
+
+  The third output argument is a structure with additional information:
+
+  "parabol"
+  A structure containing the parabola fitted to each returned peak. The structure has two fields, "x" and "pp". The field "pp" contains the coefficients of the 2nd degree polynomial and "x" the extrema of the interval where it was fitted.
+
+  "height"
+  The estimated height of the returned peaks (in units of data).
+
+  "baseline"
+  The height at which the roots of the returned peaks were calculated (in units of data).
+
+  "roots"
+  The abscissa values (in index units) at which the parabola fitted to each of the returned peaks realizes its width as defined below.
+
+  This function accepts property-value pair given in the list below:
+
+  "MinPeakHeight"
+  Minimum peak height (non-negative scalar). Only peaks that exceed this value will be returned. For data taking positive and negative values use the option "DoubleSided". Default value eps.
+
+  "MinPeakDistance"
+  Minimum separation between (positive integer). Peaks separated by less than this distance are considered a single peak. This distance is also used to fit a second order polynomial to the peaks to estimate their width, therefore it acts as a smoothing parameter. The neighborhood size is equal to the value of "MinPeakDistance". Default value 1.
+
+  "MinPeakWidth"
+  Minimum width of peaks (positive integer). The width of the peaks is estimated using a parabola fitted to the neighborhood of each peak. The width is calculated with the formula
+
+  a * (width - x0)^2 = 1
+  where a is the concavity of the parabola and x0 its vertex. Default value 1.
+
+  "MaxPeakWidth"
+  Maximum width of peaks (positive integer). Default value Inf.
+
+  "DoubleSided"
+  Tells the function that data takes positive and negative values. The base-line for the peaks is taken as the mean value of the function. This is equivalent as passing the absolute value of the data after removing the mean.
+*/
 
   if (nargin < 1)
     error("findpeaks:InsufficientInputArguments\nfindpeaks: DATA must be given");
@@ -7,28 +64,13 @@ function [pks ,idx, varargout] = findpeaks (data, varargin)
   if (~(isvector (data) && length (data) >= 3))
     error ("findpeaks:InvalidArgument\nfindpeaks: DATA must be a vector of at least 3 elements");
   end
-
   transpose = (size(data,1) == 1);
-
   if (transpose)
     data = data.';
   end
-
- 
   __data__ = abs (detrend (data, 'c'));
  // --- Parse arguments --- //
 [ dSided, minH, minD, minW, maxW ] = parser ( varargin(:) );
-
-// checkpoint parser
-disp("checkpoint parser started")
-disp("dSided"); disp(dSided);
-disp("minH"); disp(minH);
-disp("minD"); disp(minD);
-disp("minW"); disp(minW);
-disp("maxW"); disp(maxW);
-disp("checkpoint parser closed")
-// checkpoint closed
-
 
   if (dSided) 
     temp = __data__
@@ -43,9 +85,7 @@ disp("checkpoint parser closed")
   df1=df1([1; [1:length(df1)].']);
   df2 = diff (data, 2)
   df2=df2([1; 1; [1:length(df2)].']);
-   disp("df1");disp(size(df1))
-  disp("df2");disp(size(df2))
-
+ 
   // check for changes of sign of 1st derivative and negativity of 2nd
   // derivative.
   // <= in 1st derivative includes the case of oversampled signals.
@@ -61,23 +101,9 @@ disp("checkpoint parser closed")
 
   // Treat peaks separated less than minD as one
   D  = abs (bsminuseq (idx_s));
-  disp("idx_s :") ;disp(idx_s)
-  disp("D") ;disp(D)
-  D  =  D +  diag(ones(1,size(D,1))*%nan);                // eliminate diagonal cpmparison
-  
-  
-  
-    // Checkpoint 1 ---------------
-    disp("Checkpoint 1 started")
-    disp("D");disp(D);
-    disp("tf");disp(tf);
-    disp("Checkpoint 1 closed")
-    ///// checkpoint  1 closed 
-    
-    
+  D  =  D +  diag(ones(1,size(D,1))*%nan);                // eliminate diagonal cpmparison  
     
   if (or(D(:) < minD)) //  FIXME : this branch is not tested
-    disp("I am executing ") 
     i          = 1;
     peak       = cell ();
     node2visit = 1:size(D,1);
@@ -134,17 +160,6 @@ disp("checkpoint parser closed")
   n            = length (idx);
   np           = length (data);
   struct_count = 0;
-
-
-    // Checkpoint 2 ---------------
-    disp("Checkpoint 2 started")
-    disp("extra");disp(extra);
-    disp("idx_pruned");disp(idx_pruned);
-    disp("n");disp(n);
-    disp("np");disp(np);
-    disp("Checkpoint 2 closed")
-    ///// checkpoint  2 closed 
-    
     
   for i=1:n
     ind = (floor (max(idx(i)-minD/2,1)) : ...
@@ -168,15 +183,6 @@ disp("checkpoint parser closed")
       pp(3) = H + pp(1) * xm^2;
     end
     
-     // Checkpoint 3.0 ---------------
-    disp("Checkpoint 3.0 started")
-    disp("pp");disp(pp);
-    disp("xm");disp(xm);
-    disp("ind");disp(ind);
- 
-    disp("Checkpoint 3.0 closed")
-    ///// checkpoint  3.0 closed 
-    
     // debug
 //    x = linspace(ind(1)-1,ind(end)+1,10);
 //    set(h(4),"xdata",x,"ydata",polyval(pp,x),"visible","on")
@@ -188,20 +194,11 @@ disp("checkpoint parser closed")
 //    rz    = roots ([pp(1:2) pp(3)-thrsh]);
 //    width = abs (diff (rz));
     width = sqrt (abs(1 / pp(1)));
-    disp("width");disp(width)
-    /// checkpoint bool
-    disp("width > maxW "); disp( width > maxW );
-    disp("width < minW "); disp( width < minW );
-    disp("pp(1) > 0 "); disp( pp(1) > 0 );
-    disp(" H < minH"); disp( H > minH );
-    disp(" data(idx(i)) < 0.99*H"); disp(  data(idx(i)) < 0.99*H);
-    disp("abs (idx(i) - xm) > minD/2)");disp(abs(idx(i)-xm) > minD/2)
-    /// checkpoint bool 
     
     if ( (width > maxW || width < minW) || pp(1) > 0 || H < minH || data(idx(i)) < 0.99*H ||abs (idx(i) - xm) > minD/2) then
       idx_pruned = setdiff (idx_pruned, idx(i)); 
       disp("i am executing from width > maxW || ... || ....")
-    elseif (nargout > 2) //  FIXME : this branch is not tested 
+    elseif (nargout > 2) 
       struct_count=struct_count+1;
       extra.parabol(struct_count).x  = ind([1 $]);
       extra.parabol(struct_count).pp = pp;

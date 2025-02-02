@@ -1,5 +1,19 @@
+// Copyright (C) 2018 - IIT Bombay - FOSSEE
+// This file must be used under the terms of the CeCILL.
+// This source file is licensed as described in the file COPYING, which
+// you should have received as part of this distribution.  The terms
+// are also available at
+// http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
+/// Author : Abinash Singh , SOE CUSAT
+// Modifieded by: Abinash Singh , SOE CUSAT
+// Last Modified on : 3 Feb 2024
+// Organization: FOSSEE, IIT Bombay
+// Email: toolbox@scilab.in
+
 function [ dSided, minH, minD, minW, maxW ] = parser ( varargin )
     // Default values
+    // This is an helper function for findpeaks
+    // It parses the input arguments and returns the values of the options
     dSided = %f ; 
     minH = %eps ;
     minD = 1 ;
@@ -44,6 +58,8 @@ function [ dSided, minH, minD, minW, maxW ] = parser ( varargin )
 endfunction
 
 function y = lower (y)
+    // This function converts the input string to lower case
+    //  Returns the input without modification if its not a string
     if type(y) == 10 then 
         y = convstr(y, 'l') ;
     else
@@ -53,6 +69,8 @@ function y = lower (y)
 endfunction
 
 function out = bsminuseq(A)
+    // This function returns the difference between the elements of the input array
+    // This is only useful for the findpeaks function
     A = A(:).' ;
     atemp = [];
     btemp=[] ;
@@ -62,75 +80,3 @@ function out = bsminuseq(A)
     end
     out = atemp - btemp
 endfunction
-
-    
-
-// Test case 1: Default values when no arguments are passed
-function test_default_values()
-    [dSided, minH, minD, minW, maxW] = parser();
-    assert_checkequal(dSided ,%f);
-    assert_checkequal(minH ,%eps);
-    assert_checkequal(minD , 1);
-    assert_checkequal(minW , %eps);
-    assert_checkequal(maxW , %inf);
-endfunction
-
-// Test case 2: Test with known valid input
-function test_valid_input()
-    [dSided, minH, minD, minW, maxW] = parser('minpeakheight', 0.1, 'minpeakdistance', 2, 'minpeakwidth', 3, 'maxpeakwidth', 5);
-    
-    assert_checkequal(dSided ,%f);
-    assert_checkequal(minH , 0.1);
-    assert_checkequal(minD , 2);
-    assert_checkequal(minW , 3);
-    assert_checkequal(maxW , 5);
-endfunction
-
-// Test case 3: Test with 'doublesided' flag
-function test_doublesided_flag()
-    [dSided, minH, minD, minW, maxW] = parser('doublesided', 'minpeakheight', 0.1);
-    
-    assert_checkequal(dSided ,%t);
-    assert_checkequal(minH , 0.1);
-    assert_checkequal(minD , 1);  // default value for minD
-    assert_checkequal(minW , %eps);  // default value for minW
-    assert_checkequal(maxW , %inf);  // default value for maxW
-endfunction
-
-// Test case 4: Test invalid input (negative values)
-function test_invalid_input_negative_values()
-    try 
-        [dSided, minH, minD, minW, maxW] = parser('minpeakheight', -0.1);
-    catch
-        disp(lasterror());
-    end
-endfunction
-
-// Test case 5: Test invalid input (missing values for required arguments)
-function test_missing_argument_value()
-    try
-        [dSided, minH, minD, minW, maxW] = parser('minpeakheight');
-    catch
-        disp(lasterror());
-    end
-endfunction
-
-// Test case 6: Test with an unknown argument
-function test_unknown_argument()
-    [dSided, minH, minD, minW, maxW] = parser('unknownarg', 5);
-    
-    assert_checkequal(dSided ,%f);
-    assert_checkequal(minH ,%eps);
-    assert_checkequal(minD , 1);
-    assert_checkequal(minW , %eps);
-    assert_checkequal(maxW , %inf);
-endfunction
-
-// Run all tests
-//test_default_values();
-//test_valid_input();
-//test_doublesided_flag();
-//test_invalid_input_negative_values();
-//test_missing_argument_value();
-//test_unknown_argument();
-//disp("All tests completed successfully.");
