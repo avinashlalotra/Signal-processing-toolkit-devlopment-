@@ -5,6 +5,8 @@
 // are also available at
 // http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
 // Author: Abinash Singh , SOE CUSAT
+// Modifieded by: Abinash Singh , SOE CUSAT
+// Last Modified : 3 Feb 2024
 // Organization: FOSSEE, IIT Bombay
 // Email: toolbox@scilab.in
 /*
@@ -93,6 +95,7 @@ function [s,g] = cell2sos(c)
             g=k;
         end    
 endfunction
+
 /* 
 cll = {{[3 6 7] [1 1 2]} 
        {[1 4 5] [1 9 3]}

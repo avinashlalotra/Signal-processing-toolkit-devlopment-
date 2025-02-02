@@ -1,12 +1,12 @@
 // Copyright (C) 2018 - IIT Bombay - FOSSEE
-//
 // This file must be used under the terms of the CeCILL.
 // This source file is licensed as described in the file COPYING, which
 // you should have received as part of this distribution.  The terms
 // are also available at
 // http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
 // Original Source : https://octave.sourceforge.io/signal/
-// Modifieded by:Sonu Sharma, RGIT Mumbai
+// Modifieded by: Abinash Singh , SOE CUSAT
+// Last Modified on : 3 Feb 2024
 // Organization: FOSSEE, IIT Bombay
 // Email: toolbox@scilab.in
 
@@ -148,10 +148,8 @@ function [a, b, c, d] = ellip (n, rp, rs, w, varargin)
         error("ellip: yet not implemented in state-space form OR invalid number of o/p arguments")
     end
 endfunction
+
 /*
-
-demo
-
 %% Test input validation // all passed
 error [a, b] = ellip ()
 error [a, b] = ellip (1)

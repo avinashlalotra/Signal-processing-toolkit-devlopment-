@@ -1,5 +1,3 @@
-// working fine
-
 // Copyright (C) 2018 - IIT Bombay - FOSSEE
 //
 // This file must be used under the terms of the CeCILL.
@@ -8,6 +6,8 @@
 // are also available at
 // http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
 // Author:Sonu Sharma, RGIT Mumbai
+// Last Modified on : 3 Feb 2024
+// Modified by: Abinash Singh , SOE CUSAT
 // Organization: FOSSEE, IIT Bombay
 // Email: toolbox@scilab.in
 
@@ -57,6 +57,7 @@ function [num, den] = zp2tf (z, p, k)
 
 endfunction
 /*
+Note : This function is tested aganist octave's signal processing toolbox.
 [num,den] = zp2tf([1 3 4 5],[-4 -3 1 4],7) //passed
 [num,den] = zp2tf([15 78 6 23],[2 1],965) //passed
 
