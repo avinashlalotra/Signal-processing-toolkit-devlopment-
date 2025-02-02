@@ -4,8 +4,10 @@
 // you should have received as part of this distribution.  The terms
 // are also available at
 // http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
+// Original contribution: FOSSEE, IIT Bombay
 // Original Source : https://octave.sourceforge.io/signal/
-// Modifieded by: Abinash Singh , SOE CUSAT
+// Modifieded by: Abinash Singh
+// Date of Modification: 3 Feb 2024
 // Organization: FOSSEE, IIT Bombay
 // Email: toolbox@scilab.in
 
@@ -117,12 +119,14 @@ function [a, b, c, d] = besself (n, w, varargin)
         c = gain;
     else
         // output ss results
+        // FIXME : test zp2ss 
         //[a, b, c, d] = zp2ss (zero, pole, gain);
         error("besself: yet not implemented in state-space form OR invalid number of o/p arguments")
     end
 endfunction
 
 /*
+Note : This function is tested with Octave's outputs as a reference.
 # Test input validation
 [a, b] = besself () // error passed
 [a, b] = besself (1) // error passed

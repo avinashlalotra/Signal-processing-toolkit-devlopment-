@@ -55,6 +55,7 @@ function [Zz, Zp, Zg] = bilinear(Sz, Sp, Sg, T)
 
     if nargin==3
         T = Sg;
+        //  FIXME : tf2zp is not tested yet
         [Sz, Sp, Sg] = tf2zp(Sz, Sp);
     elseif nargin~=4
         error("bilinear: invalid number of inputs")
@@ -111,9 +112,11 @@ function [Zz, Zp, Zg] = bilinear(Sz, Sp, Sg, T)
 ieee(0);
 endfunction
 /*
-#bug - not working with three arguments
-[Zb,Za] = bilinear([1 0],[1 1],1,0.5) // passed 
+// FIXME- not working with three argument
 
+Note : This function is tested with Octave's outputs as a reference.
+
+[Zb,Za] = bilinear([1 0],[1 1],1,0.5) // passed 
 [Zb, Za] = bilinear([], [], 1, 1) // error PASSED
 [Zb, Za] = bilinear([0], [], 1, 0.5) // error PASSED
 [Zb, Za] = bilinear([], [0], 1, 0.5) // PASSED

@@ -1,5 +1,3 @@
-// working fine
-
 // Copyright (C) 2018 - IIT Bombay - FOSSEE
 //
 // This file must be used under the terms of the CeCILL.
@@ -9,7 +7,8 @@
 // http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
 // Original contribution: FOSSEE, IIT Bombay
 // Original Source : https://octave.sourceforge.io/signal/
-// Modifieded by: Sonu Sharma, RGIT Mumbai
+// Modifieded by: Abinash Singh
+// Date of Modification: 3 Feb 2024
 // Organization: FOSSEE, IIT Bombay
 // Email: toolbox@scilab.in
 
@@ -51,16 +50,13 @@ function [zero, pole, gain]=besselap(n)
 
     funcprot(0);
     [nargout, nargin] = argn() ;
-
     if (nargin>1 | nargin<1)
         error("besselap : wrong number of input argument")
     end
-
     // interpret the input parameters
     if (~(length(n)==1 & n == round(n) & n > 0))
         error ("besselap: filter order n must be a positive integer");
     end
-
     p0=1;
     p1=[1 1];
     for nn=2:n
@@ -72,17 +68,15 @@ function [zero, pole, gain]=besselap(n)
         p1=px+py;
     end
     // p1 now contains the reverse bessel polynomial for n
-
     // scale it by replacing s->s/w0 so that the gain becomes 1
     p1=p1.*p1(length(p1)).^((length(p1)-1:-1:0)/(length(p1)-1));
-
     zero=[];
     pole=roots(p1);
     gain=1;
-
 endfunction
 
 /* 
+Note : The function is tested with Octave's outputs as a reference.
 # all passed 
 [zero, pole, gain] = besselap (1) 
 [zero, pole, gain] = besselap (2)

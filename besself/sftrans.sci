@@ -6,7 +6,8 @@
 // are also available at
 // http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
 // Original Source : https://octave.sourceforge.io/signal/
-// Modifieded by:Sonu Sharma, RGIT Mumbai
+// Modifieded by: Abinash Singh , CUSAT KOCHI
+// Last Modified on : 3 Feb 2024
 // Organization: FOSSEE, IIT Bombay
 // Email: toolbox@scilab.in
 
@@ -179,6 +180,8 @@ function [Sz, Sp, Sg] = sftrans (Sz, Sp, Sg, W, stop)
     end
 endfunction
 /**
+Note : This function is tested with Octave's outputs as a reference.
+
 [Sz_new , Sp_new , Sg_new ] = sftrans([0.5;-0.5],[0.3 ; -0.3],2,0.5,0) // passed
 [Sz_new , Sp_new , Sg_new ] = sftrans([0.5;-0.5],[0.3 ; -0.3],2,0.5,1)  // passed
 [Sz_new, Sp_new, Sg_new] = sftrans([0.5], [0.3], 1, [1.0, 2.0], 0)      //passed

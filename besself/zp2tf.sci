@@ -5,7 +5,9 @@
 // you should have received as part of this distribution.  The terms
 // are also available at
 // http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
-// Author:Sonu Sharma, RGIT Mumbai
+// Original Source : https://octave.sourceforge.io/signal/
+// Modifieded by: Abinash Singh , CUSAT KOCHI
+// Last Modified on : 3 Feb 2024
 // Organization: FOSSEE, IIT Bombay
 // Email: toolbox@scilab.in
 

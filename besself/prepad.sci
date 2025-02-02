@@ -5,6 +5,8 @@
 // are also available at
 // http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
 // Author: Abinash Singh , SOE CUSAT
+// Modifieded by: Abinash Singh , SOE CUSAT
+// Last Modified on : 3 Feb 2024
 // Organization: FOSSEE, IIT Bombay
 // Email: toolbox@scilab.in
 
@@ -59,4 +61,6 @@ prepad([1 2 3 4],6)
 prepad([1 ;2 ;3 ;4],6) 
 prepad([1 2 3 4;5 6 7 8;9 10 11 12],6) 
 prepad([1 2 ;3 4;5 6],6,-1) 
+
+// FIXME : Tests for 2d and high dimesnsional matrices
 */

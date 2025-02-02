@@ -5,7 +5,10 @@
 // you should have received as part of this distribution.  The terms
 // are also available at
 // http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
-//Original contribution: FOSSEE, IIT Bombay
+// Original Source : https://octave.sourceforge.io/signal/
+// Modifieded by: Abinash Singh , CUSAT KOCHI
+// Last Modified on : 3 Feb 2024
+// Organization: FOSSEE, IIT Bombay
 // Email: toolbox@scilab.in
 
 function [z,p,k]=tf2zp(num,den)
@@ -100,6 +103,7 @@ function [z,p,k]=tf2zp(num,den)
     z=roots(num);
 endfunction
 /*
+Note : This function is tested with Octave's outputs as a reference.
 [z p k] = tf2zp([9.6500e+02  -1.1773e+05   3.8648e+06  -4.5127e+071.5581e+08],[ 1  -3   2]) //pass
 [z p k] = tf2zp([1 2 3 4],[ 1  -3   2]) //pass
 [z p k] = tf2zp([4 5 6],[1]) // pass
