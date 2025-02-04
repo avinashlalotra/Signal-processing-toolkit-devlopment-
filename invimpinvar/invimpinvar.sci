@@ -1,4 +1,32 @@
+// Copyright (C) 2018 - IIT Bombay - FOSSEE
+// This file must be used under the terms of the CeCILL.
+// This source file is licensed as described in the file COPYING, which
+// you should have received as part of this distribution.  The terms
+// are also available at
+// http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
+// Original Source : https://octave.sourceforge.io/signal/
+// Modifieded by: Abinash Singh , SOE CUSAT
+// Last Modified on : Feb 2024
+// Organization: FOSSEE, IIT Bombay
+// Email: toolbox@scilab.in
+
 // Impulse invariant conversion from s to z domain
+/*
+    [b_out, a_out] = invimpinvar (b, a, fs, tol) 
+    [b_out, a_out] = invimpinvar (b, a, fs) 
+    [b_out, a_out] = invimpinvar (b, a) 
+
+    Converts digital filter with coefficients b and a to analog, conserving impulse response.
+
+    This function does the inverse of impinvar so that the following example should restore the original values of a and b.
+
+    [b, a] = impinvar (b, a);
+    [b, a] = invimpinvar (b, a);
+
+    If fs is not specified, or is an empty vector, it defaults to 1Hz.
+
+    If tol is not specified, it defaults to 0.0001 (0.1%) 
+*/
 function [b_out, a_out] = invimpinvar (b_in, a_in, fs, tol)
 
   if (nargin <2)
@@ -37,44 +65,13 @@ function [b_out, a_out] = invimpinvar (b_in, a_in, fs, tol)
       i=i+1; // Next residue
       m=m+1; // Next multiplicity
     end
-
-    // Checkpoint for input arguments of inv_z_res
-    disp("Starting checkpoint for input arguments of inv_z_res");
-    disp("Residues (r_in):");
-    disp(r_in(i-m+1:i));
-    disp("Pole (first_pole):");
-    disp(first_pole);
-    disp("Sampling time (ts):");
-    disp(ts);
-    disp("Closing checkpoint for input arguments of inv_z_res");
-
-
     [r, sm, k]= inv_z_res(r_in(i-m+1:i), first_pole, ts); // Find s-domain residues
-
-    disp("Starting checkpoint for output arguments of inv_z_res");
-    disp("Residues (r):");
-    disp(r);
-    disp("Poles (sm):");
-    disp(sm);
-    disp("Constant term (k):");
-    disp(k);
-    disp("Closing checkpoint for output arguments of inv_z_res");
-
     k_in            = k_in - k;                                        // Just to check, should end up zero for physical system
     sm_out(i-m+1:i) = sm;                                       // Copy s-domain pole(s) to output
     r_out(i-m+1:i)  = r;                                        // Copy s-domain residue(s) to output
 
     i=i+1; // Next z-domain residue/pole
   end
-
-  // Checkpoint for input arguments of inv_residue
-  disp("Starting checkpoint for input arguments of inv_residue");
-  disp("Residues (r_out):");
-  disp(r_out);
-  disp("Poles (sm_out):");
-  disp(sm_out);
-  disp("Closing checkpoint for input arguments of inv_residue");
-
   [b_out, a_out] = inv_residue(r_out, sm_out , 0, tol);
   a_out          = to_real(a_out);      // Get rid of spurious imaginary part
   b_out          = to_real(b_out);
