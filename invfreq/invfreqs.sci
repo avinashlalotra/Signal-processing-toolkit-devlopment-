@@ -1,20 +1,52 @@
-
-// @example
-//       B = [1/2 1];
-//       A = [1 1];
-//       w = linspace(0,4,128);
-//       H = freqs(B,A,w);
-//       [Bh,Ah] = invfreqs(H,w,1,1);
-//       Hh = freqs(Bh,Ah,w);
-//       plot(w,[abs(H);abs(Hh)])
-//       legend('Original','Measured');
-//       err = norm(H-Hh);
-//       disp(sprintf('L2 norm of frequency response error = %f',err));
-// @end example
-// @end deftypefn
-
+// Copyright (C) 2018 - IIT Bombay - FOSSEE
+// This file must be used under the terms of the CeCILL.
+// This source file is licensed as described in the file COPYING, which
+// you should have received as part of this distribution.  The terms
+// are also available at
+// http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
+// Original Source : https://octave.sourceforge.io/signal/
+// Modifieded by: Abinash Singh , SOE CUSAT
+// Last Modified on : 3 Feb 2024
+// Organization: FOSSEE, IIT Bombay
+// Email: toolbox@scilab.in
 // FIXME: check invfreq.sci for todo's
 
+/*
+  :[B,A] = invfreqs(H,F,nB,nA)
+  :[B,A] = invfreqs(H,F,nB,nA,W) 
+  :[B,A] = invfreqs(H,F,nB,nA,W,iter,tol,'trace') 
+
+    Fit filter B(s)/A(s)to the complex frequency response H at frequency points F.
+
+    A and B are real polynomial coefficients of order nA and nB.
+
+    Optionally, the fit-errors can be weighted vs frequency according to the weights W.
+
+    Note: all the guts are in invfreq.m
+
+    H: desired complex frequency response
+
+    F: frequency (must be same length as H)
+
+    nA: order of the denominator polynomial A
+
+    nB: order of the numerator polynomial B
+
+    W: vector of weights (must be same length as F)
+
+    Example:
+          //FIXME : freqs is not available in scilab. Implement it.
+          B = [1/2 1];
+          A = [1 1];
+          w = linspace(0,4,128);
+          H = freqs(B,A,w); 
+          [Bh,Ah] = invfreqs(H,w,1,1);
+          Hh = freqs(Bh,Ah,w);
+          plot(w,[abs(H);abs(Hh)])
+          legend('Original','Measured');
+          err = norm(H-Hh);
+          disp(sprintf('L2 norm of frequency response error = %f',err));
+*/
 function [B, A, SigN] = invfreqs(H,F,nB,nA,W,iter,tol,tr, varargin)
 
   if nargin < 9
