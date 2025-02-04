@@ -1,5 +1,16 @@
-// Example usage of freqz in different formats:
+// Copyright (C) 2018 - IIT Bombay - FOSSEE
+// This file must be used under the terms of the CeCILL.
+// This source file is licensed as described in the file COPYING, which
+// you should have received as part of this distribution.  The terms
+// are also available at
+// http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
+// Original Source : https://octave.sourceforge.io/signal/
+// Modifieded by: Abinash Singh , SOE CUSAT
+// Last Modified on : 3 Feb 2024
+// Organization: FOSSEE, IIT Bombay
+// Email: toolbox@scilab.in
 
+// Example usage of freqz in different formats:
 // [h, w] = freqz (b, a, n, "whole")
 // [h, w] = freqz (b)
 // [h, w] = freqz (b, a)
@@ -170,6 +181,36 @@ function [h_r, f_r] = freqz (b, a, n, region, Fs)
     h_r = h;
     f_r = f;
   
+
+endfunction
+function freqz_plot (w, h, freq_norm)
+  if (nargin < 2)
+    error("Invalid numbers of inputs");
+  end
+
+  if nargin < 3 then
+    freq_norm = %f 
+  end
+  n = size(max(w));
+  mag = 20 * log10 (abs (h));
+  phase = unwrap2 (angle (h));
+
+  if (freq_norm)
+    x_label = 'Normalized Frequency (\times\pi rad/sample)';
+  else
+    x_label = "Frequency (Hz)";
+  end
+  subplot (2, 1, 1);
+  plot (w, mag);
+  xgrid;
+  xlabel (x_label);
+  ylabel ("Magnitude (dB)");
+
+  subplot (2, 1, 2);
+  plot (w, phase*360/(2*%pi));
+  xgrid;
+  xlabel (x_label);
+  ylabel ("Phase (degrees)");
 
 endfunction
 /*
