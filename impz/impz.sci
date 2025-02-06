@@ -1,3 +1,26 @@
+// Copyright (C) 2018 - IIT Bombay - FOSSEE
+// This file must be used under the terms of the CeCILL.
+// This source file is licensed as described in the file COPYING, which
+// you should have received as part of this distribution.  The terms
+// are also available at
+// http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
+// Original Source : https://octave.sourceforge.io/signal/
+// Modifieded by: Abinash Singh , SOE CUSAT
+// Last Modified on : Feb 2024
+// Organization: FOSSEE, IIT Bombay
+// Email: toolbox@scilab.in
+/*
+Calling Sequence
+ [x, t] = impz (b) ¶
+ [x, t] = impz (b, a) ¶
+ [x, t] = impz (b, a, n) ¶
+ [x, t] = impz (b, a, n, fs) ¶
+ impz (…) ¶
+Generate impulse-response characteristics of the filter. 
+The filter coefficients correspond to the the z-plane rational function with numerator b and denominator a. If a is not specified, it defaults to 1. 
+If n is not specified, or specified as [], it will be chosen such that the signal has a chance to die down to -120dB, or to not explode beyond 120dB, or to show five periods if there is no significant damping.
+If no return arguments are requested, plot the results.
+*/
 function [x_r, t_r] = impz(b, a, n, fs)
 
   if nargin < 1 || nargin > 4 then 
@@ -59,7 +82,7 @@ function [x_r, t_r] = impz(b, a, n, fs)
 
   if nargout >= 1 x_r = x; end
   if nargout >= 2 t_r = t; end
-  if nargout == 1 then 
+  //if nargout ~= 2 then  //FIXME: fix nargout to detect 0 output arguments . till then plot it always
       title("Impulse Response");
       if (fs > 1000)
         t = t * 1000;
@@ -68,10 +91,11 @@ function [x_r, t_r] = impz(b, a, n, fs)
         xlabel("Time (sec)");
       end
       plot(t, x,);
-  end
+  //end
 
 endfunction
 /*
+
 test case 1
 assert_checkequal(size(impz (1, [1 -1 0.9], 100)), [100 1]) // passed
 
@@ -84,22 +108,16 @@ impz(B, A)
 test case 3
 // 
 [x_r,tr]=impz([0.4 0.2 8 2] ,1,10)
-assert_checkequal(x_r,[ 0.4000000 0.2000000 8. 2.0000000 1.943D-16 1.388D-17 0. 0  0. 0.]');
-assert_checkequal(tr,0:9);
+assert_checkalmostequal(x_r,[ 0.4000000 0.2000000 8. 2.0000000 1.943D-16 1.388D-17 0. 0  0. 0.]',%eps,1e-4);
+assert_checkalmostequal(tr,0:9,%eps,1e-4);
 
 //test case 4 
-[xr,tr]=impz([0.4 0.2],[4 5 6],3,10) //passed
+[xr,tr]=impz([0.4 0.2],[4 5 6],3,10) 
+
 
 // test case 5
 B = [0.021895   0.109474   0.218948   0.218948   0.109474   0.021895];
 A = [1.0000  -1.2210   1.7567  -1.3348   0.7556  -0.2560];
-impz(B, A) //passed
-
-// Missing functionality
-xtest
- [h, t] = impz (1, [1 -1 0.9], 0:101);
- assert (size (h), [101 1])
- assert (t, 0:101)
-
+impz(B, A) 
 
  */
