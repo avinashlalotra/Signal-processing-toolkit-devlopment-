@@ -1,13 +1,15 @@
 // Copyright (C) 2018 - IIT Bombay - FOSSEE
-//
 // This file must be used under the terms of the CeCILL.
 // This source file is licensed as described in the file COPYING, which
 // you should have received as part of this distribution.  The terms
 // are also available at
 // http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
-// Author:[insert name]
+// Original Source : https://octave.sourceforge.io/signal/
+// Modifieded by: Abinash Singh , SOE CUSAT
+// Last Modified on : Feb 2024
 // Organization: FOSSEE, IIT Bombay
 // Email: toolbox@scilab.in
+
 function [pxx, f] = periodogram (x, varargin)
     //Calling Sequence:
     //[PXX, F] = periodogram (X, WIN, NFFT, FS)
@@ -41,16 +43,6 @@ function [pxx, f] = periodogram (x, varargin)
     //     RANGE
     //          range of spectrum.  "onesided" computes spectrum from
     //          [0..nfft/2+1].  "twosided" computes spectrum from [0..nfft-1].
-    //
-    //
-    //Test cases:
-    ////1.
-    //n=0:319;
-    //x=cos(%pi/4*n)+rand(size(n,"r"),"normal");
-    //[pxx,w]=periodogram(x,ones(1,320),256,2000,"onesided");
-    //plot2d(w,10*log10(pxx))
-    //xtitle('periodogram','frequency','magnitude(db)')
-    //xgrid()
     //
     //
     
@@ -150,9 +142,6 @@ function [pxx, f] = periodogram (x, varargin)
       if (ran == 1)  // onesided
         if (modulo(nfft,2)==0)  // nfft is even
           psd_len = (nfft/2)+1;
-          disp(size(Pxx))
-          disp(psd_len)
-          disp(nfft)
           Pxx = Pxx(1:psd_len) + [0; Pxx(nfft:-1:psd_len+1); 0];
         else                 // nfft is odd
           psd_len = (nfft+1)/2;
@@ -160,7 +149,7 @@ function [pxx, f] = periodogram (x, varargin)
         end
       end
     
-      if (nargout ~= 1)
+      //if (nargout() ~= 1) FIXME: fix nargout
         if (ran == 1)
           f = (0:nfft/2)' / nfft;
         elseif (ran == 2)
@@ -171,8 +160,8 @@ function [pxx, f] = periodogram (x, varargin)
         else
           f =f* fs;
         end
-      end
-    if (nargout > 0)
+      //end
+    if (nargout() ~= 2)
         if (use_w_freq)
           plot (f/(2*%pi), 10*log10 (Pxx));
           xlabel ("normalized frequency [x pi rad]");
@@ -187,63 +176,56 @@ function [pxx, f] = periodogram (x, varargin)
     pxx = Pxx;
 endfunction
 
-    /*
-    // Test cases for periodogram function
-        // Test basic functionality with simple sine wave : passed
-            t = 0:0.01:1;
-            x = sin(2*pi*10*t);  // 10 Hz sine wave
-            [Pxx, w] = periodogram(x); // passed
-            
-        // Test with complex input : passed
-            x = complex(0:0.01:1, 0:0.01:1);
-            [Pxx, w] = periodogram(x); //passed
-                
-        // Test with custom window : passed
-            x = cos(0:0.01:1);
-            win = hamming(100);
-            [Pxx1, w1] = periodogram(x, win);
-            [Pxx2, w2] = periodogram(x);  // Default rectangular window
-                
-        // Test with custom nfft : passed
-            x = tan(0:0.01:1);
-            nfft = 512;
-            [Pxx, w] = periodogram(x, [], nfft);
-                
-        // Test with custom sampling rate : passed
-            t = 0:0.01:1;
-            x = sin(2*pi*10*t);
-            Fs = 100;  // 100 Hz sampling rate
-            [Pxx, f] = periodogram(x, [], [], Fs);
-            
-        // Test range specification : passed
-            x = sin(0:0.01:1);
-            [Pxx1, w1] = periodogram(x, [], [], [], 'onesided');
-            [Pxx2, w2] = periodogram(x, [], [], [], 'twosided');
+/*
+pi = %pi; // ezecute on scilab  only
 
-        // Test with known signal for peak detection : passed
-            Fs = 1000;
-            t = 0:1/Fs:1-1/Fs;
-            f0 = 100;  % 100 Hz signal
-            x = sin(2*pi*f0*t);
-            [Pxx, f] = periodogram(x, [], [], Fs);
+t = 0:0.01:1;
+x = sin(2*pi*10*t); 
+periodogram(x);
             
-            % Find frequency peak
-            [~, idx] = max(Pxx);
-            detected_freq = f(idx);
+x = complex(0:0.01:1, 0:0.01:1);
+periodogram(x); 
+        
+x = cos(0:0.01:1);
+win = hamming(101);
+periodogram(x, win);
+ 
+    
+
+x = tan(0:0.01:1);
+nfft = 512;
+periodogram(x, [], nfft);
+        
+
+t = 0:0.01:1;
+x = sin(2*pi*10*t);
+Fs = 100;  
+periodogram(x, [], [], Fs)
             
-// Test error cases
+    
+
+x = sin(0:0.01:1);
+periodogram(x, [], [], [], 'onesided');
+
+x = sin(0:0.01:1);
+periodogram(x, [], [], [], 'twosided')
+
+
+Fs = 1000;
+t = 0:1/Fs:1-1/Fs;
+f0 = 100;  
+x = sin(2*pi*f0*t);
+[Pxx, f] = periodogram(x, [], [], Fs);
+[_, idx] = max(Pxx);
+detected_freq = f(idx);
+
+          
+// Test error : invalid window length 
+x = randn(100,1);
+win = hamming(50); 
+periodogram(x, win)
                 
-    // Test invalid window length :passed
-                x = randn(100,1);
-                win = hamming(50);  // Wrong length window
-                periodogram(x, win)
-                
-    // Test invalid nfft (negative)
-                periodogram(x, [], -256)
-                
-    // Test invalid sampling rate
-                periodogram(x, [], [], -100)
-                
-    // Test invalid range specification
-                periodogram(x, [], [], [], 'invalid')
-    */
+// Test invalid nfft (negative)
+periodogram(x, [], -256)
+    
+*/
