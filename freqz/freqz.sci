@@ -223,7 +223,7 @@ testif HAVE_FFTW # correct values and fft-polyval consistency
  
 //passed
 testif HAVE_FFTW # whole-half consistency
- b = [1 1 1]/3; # 3-sample average
+ b = [1 1 1]/3;
  [h,w] = freqz (b,1,32,"whole");
  
  [h2,w2] = freqz (b,1,16,"half");
