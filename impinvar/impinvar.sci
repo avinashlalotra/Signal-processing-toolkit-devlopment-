@@ -1,3 +1,34 @@
+// Copyright (C) 2018 - IIT Bombay - FOSSEE
+// This file must be used under the terms of the CeCILL.
+// This source file is licensed as described in the file COPYING, which
+// you should have received as part of this distribution.  The terms
+// are also available at
+// http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
+// Original Source : https://octave.sourceforge.io/signal/
+// Modifieded by: Abinash Singh , SOE CUSAT
+// Last Modified on : Feb 2024
+// Organization: FOSSEE, IIT Bombay
+// Email: toolbox@scilab.in
+
+/*
+Calling Sequence
+[b_out, a_out] = impinvar (b, a, fs, tol) 
+[b_out, a_out] = impinvar (b, a, fs) 
+[b_out, a_out] = impinvar (b, a) 
+Converts analog filter with coefficients b and a to digital, conserving impulse response.
+
+If fs is not specified, or is an empty vector, it defaults to 1Hz.
+
+If tol is not specified, it defaults to 0.0001 (0.1%) This function does the inverse of impinvar so that the following example should restore the original values of a and b.
+
+invimpinvar implements the reverse of this function.
+
+[b, a] = impinvar (b, a);
+[b, a] = invimpinvar (b, a);
+Reference: Thomas J. Cavicchi (1996) “Impulse invariance and multiple-order poles”. IEEE transactions on signal processing, Vol 44 (9): 2344–2347
+
+
+*/
 function [b_out, a_out] = impinvar (b_in, a_in, fs , tol)
 
   if (nargin <2)
