@@ -71,30 +71,6 @@ function [B, A, SigN] = invfreqs(H,F,nB,nA,W,iter,tol,tr, varargin)
 endfunction
 /*
 demo
-// octave 
-
- B = [1 0 0];
- A = [1 6 15 15]/15;
- w = linspace(0, 8, 128);
- H0 = freqz(B, A, w);
- Nn = (randn(size(w))+j*randn(size(w)))/sqrt(2);
- order = length(A) - 1;
- [Bh, Ah, Sig0] = invfreqs(H0, w, [length(B)-1 2], length(A)-1);
- Hh = freqz(Bh,Ah,w);
- [BLS, ALS, SigLS] = invfreqs(H0+1e-5*Nn, w, [2 2], order, [], [], [], [], "method", "LS");
- HLS = freqz(BLS, ALS, w);
- [BTLS, ATLS, SigTLS] = invfreqs(H0+1e-5*Nn, w, [2 2], order, [], [], [], [], "method", "TLS");
- HTLS = freqs(BTLS, ATLS, w);
- [BMLS, AMLS, SigMLS] = invfreqs(H0+1e-5*Nn, w, [2 2], order, [], [], [], [], "method", "QR");
- HMLS = freqz(BMLS, AMLS, w);
- plot(w,[abs(H0); abs(Hh)])
- xlabel("Frequency (rad/sec)");
- ylabel("Magnitude");
- legend('Original','Measured');
- err = norm(H0-Hh);
- disp(sprintf('L2 norm of frequency response error = %f',err));
- 
- // scilab passed
  B = [1 0 0];
  A = [1 6 15 15]/15;
  w = linspace(0, 8, 128);
@@ -115,6 +91,4 @@ demo
  legend('Original','Measured');
  err = norm(H0-Hh);
  disp(sprintf('L2 norm of frequency response error = %f',err));
- 
-
 */
