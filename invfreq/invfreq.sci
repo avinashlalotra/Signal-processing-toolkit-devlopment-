@@ -31,15 +31,6 @@
     plane=’s’: F on jw axis (continuous-time spectra, s-plane design)
 
     H(k) = spectral samples of filter frequency response at points zk, where zk=exp(sqrt(-1)*F(k)) when plane=’z’ (F(k) in [0,.5]) and zk=(sqrt(-1)*F(k)) when plane=’s’ (F(k) nonnegative)
-
-    Example:
-
-        [B,A] = butter(12,1/4);
-        [H,w] = freqz(B,A,128);
-        [Bh,Ah] = invfreq(H,F,4,4);
-        Hh = freqz(Bh,Ah);
-        disp(sprintf('||frequency response error||= %f',norm(H-Hh)));
-
 */
 // FIXME: implement Steiglitz-McBride iterations
 // FIXME: improve numerical stability for high order filters (matlab is a bit better)

@@ -34,18 +34,6 @@
 
     W: vector of weights (must be same length as F)
 
-    Example:
-          //FIXME : freqs is not available in scilab. Implement it.
-          B = [1/2 1];
-          A = [1 1];
-          w = linspace(0,4,128);
-          H = freqs(B,A,w); 
-          [Bh,Ah] = invfreqs(H,w,1,1);
-          Hh = freqs(Bh,Ah,w);
-          plot(w,[abs(H);abs(Hh)])
-          legend('Original','Measured');
-          err = norm(H-Hh);
-          disp(sprintf('L2 norm of frequency response error = %f',err));
 */
 function [B, A, SigN] = invfreqs(H,F,nB,nA,W,iter,tol,tr, varargin)
 
