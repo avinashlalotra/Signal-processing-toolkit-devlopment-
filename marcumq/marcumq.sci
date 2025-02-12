@@ -1,8 +1,26 @@
-// Function File: q = marcumq (a, b)
-// Function File: q = marcumq (a, b, m)
-// Function File: q = marcumq (a, b, m, tol)
+// Copyright (C) 2018 - IIT Bombay - FOSSEE
+// This file must be used under the terms of the CeCILL.
+// This source file is licensed as described in the file COPYING, which
+// you should have received as part of this distribution.  The terms
+// are also available at
+// http://www.cecill.info/licences/Licence_CeCILL_V2-en.txt
+// Original Source : https://octave.sourceforge.io/signal/
+// Modifieded by: Abinash Singh , SOE CUSAT
+// Last Modified on : Feb 2024
+// Organization: FOSSEE, IIT Bombay
+// Email: toolbox@scilab.in
 
 /*
+Calling Sequence 
+ q = marcumq (a, b)
+ q = marcumq (a, b, m)
+ q = marcumq (a, b, m, tol)
+ 
+Input and Output parameters
+a — Noncentrality parameter --- nonnegative scalar | array of nonnegative numbers 
+b — Argument of Marcum Q-function --- nonnegative scalar | array of nonnegative numbers
+m — Order of generalized Marcum Q-function --- positive integer | array of positive integers
+
 Compute the generalized Marcum Q function of order `m` with noncentrality parameter `a` and argument `b`. 
 If the order `m` is omitted, it defaults to 1. An optional relative tolerance `tol` may be included, 
 and the default value is `eps`.
@@ -121,18 +139,6 @@ function [ta , tb] = tablify(a,b)
   end
 endfunction
 /*
-// Tests for number and validity of arguments.
-
-error marcumq (1) q = c+s*exp(-(a-b)^2 / 2 )*S
-error marcumq (-1, 1, 1, 1, 1)
-error marcumq (-1, 1)
-error marcumq (1, -1)
-error marcumq (1, 1, 0)
-error marcumq (1, 1, -1)
-error marcumq (1, 1, 1.1)
-
-// Notes on tests and accuracy.
-
 test
  a = [0.00; 0.05; 1.00; 2.00; 3.00; 4.00; 5.00; 6.00; 7.00; 8.00; 9.00; 10.00;
       11.00; 12.00; 13.00; 14.00; 15.00; 16.00; 17.00; 18.00; 19.00; 20.00;
