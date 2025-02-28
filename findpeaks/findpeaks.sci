@@ -227,11 +227,11 @@ end
     pks = pks.';
     idx = idx.';
   end
-
+    idx = idx(:); // Octave Compatibility
   if (nargout() > 2)
     varargout(1) = extra;
   end
-
+    
 endfunction
 /*
 demo
