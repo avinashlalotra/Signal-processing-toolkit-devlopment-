@@ -130,6 +130,7 @@ assert_checkalmostequal(a_out,[1 -1.9801 0.9802],%eps,1e-4)
 [b_out, a_out] = impinvar([1 1 1], [1 3 3 1], 100) // test passed
 
 // FIXME : builtin  filter doesn't accepts complex parameters
+// These test cases will through errors
 // [b_out, a_out] = impinvar([1], [1 0 1], 100) 
 // [b_out, a_out] = impinvar([1 1], [1 0 1], 100) 
 // [b_out, a_out] = impinvar([1], [1 0 2 0 1], 100)
