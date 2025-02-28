@@ -80,3 +80,26 @@ err = norm(H0-Hh);
 disp(sprintf('L2 norm of frequency response error = %f',err));
         
 */
+/*
+order = 9; 
+fc = 1/2; 
+n = 128;
+B0 = [5.1819e-03   4.6637e-02   1.8655e-01   4.3528e-01   6.5292e-01   6.5292e-01   4.3528e-01   1.8655e-01  4.6637e-02   5.1819e-03];
+A0 = [  1.0000e+00  -8.6736e-16   1.2010e+00  -7.7041e-16   4.0850e-01  -1.7013e-16   4.2661e-02  -9.0155e-18 9.6666e-04  -5.3661e-20];
+[H0, w] = freqz(B0, A0, n);
+Nn = (randn(size(w,1),size(w,2))+i*randn(size(w,1),size(w,2)))/sqrt(2);
+[Bh, Ah, Sig0] = invfreqz(H0, w, order, order);
+[Hh, wh] = freqz(Bh, Ah, n);
+[BLS, ALS, SigLS] = invfreqz(H0+1e-5*Nn, w, order, order, [], [], [], [], "method", "LS");
+[HLS _ ] = freqz(BLS, ALS, n);
+[BTLS, ATLS, SigTLS] = invfreqz(H0+1e-5*Nn, w, order, order, [], [], [], [], "method", "TLS");
+[HTLS _ ]= freqz(BTLS, ATLS, n);
+[BMLS, AMLS, SigMLS] = invfreqz(H0+1e-5*Nn, w, order, order, [], [], [], [], "method", "QR");
+[HMLS _ ] = freqz(BMLS, AMLS, n);
+plot(w,[abs(H0) abs(Hh)])
+xlabel("Frequency (rad/sample)");
+ylabel("Magnitude");
+legend('Original','Measured');
+err = norm(H0-Hh);
+disp(sprintf('L2 norm of frequency response error = %f',err));
+*/

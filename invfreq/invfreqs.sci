@@ -58,7 +58,7 @@ function [B, A, SigN] = invfreqs(H,F,nB,nA,W,iter,tol,tr, varargin)
 
 endfunction
 /*
-demo
+demo 
  B = [1 0 0];
  A = [1 6 15 15]/15;
  w = linspace(0, 8, 128);
@@ -70,7 +70,7 @@ demo
  [BLS, ALS, SigLS] = invfreqs(H0+1e-5*Nn, w, [2 2], order, [], [], [], [], "method", "LS");
  [HLS,_] = freqz(BLS, ALS, w);
  [BTLS, ATLS, SigTLS] = invfreqs(H0+1e-5*Nn, w, [2 2], order, [], [], [], [], "method", "TLS");
- [HTLS,_] = freqs(BTLS, ATLS, w);
+ [HTLS,_] = freqz(BTLS, ATLS, w);
  [BMLS, AMLS, SigMLS] = invfreqs(H0+1e-5*Nn, w, [2 2], order, [], [], [], [], "method", "QR");
  [HMLS,_] = freqz(BMLS, AMLS, w);
  plot(w,[abs(H0); abs(Hh)])
@@ -80,3 +80,29 @@ demo
  err = norm(H0-Hh);
  disp(sprintf('L2 norm of frequency response error = %f',err));
 */
+/*  Octave version
+ B = [1 0 0];
+ A = [1 6 15 15]/15;
+ w = linspace(0, 8, 128);
+ [H0 ,_ ] = freqz(B, A, w);
+ Nn = (randn(size(w,1),size(w,2))+i*randn(size(w,1),size(w,2)))/sqrt(2);
+ order = length(A) - 1;
+ [Bh, Ah, Sig0] = invfreqs(H0, w, [length(B)-1 2], length(A)-1);
+ [Hh ,_ ] = freqz(Bh,Ah,w);
+ [BLS, ALS, SigLS] = invfreqs(H0+1e-5*Nn, w, [2 2], order, [], [], [], [], "method", "LS");
+ [HLS,_] = freqz(BLS, ALS, w);
+ [BTLS, ATLS, SigTLS] = invfreqs(H0+1e-5*Nn, w, [2 2], order, [], [], [], [], "method", "TLS");
+ [HTLS,_] = freqz(BTLS, ATLS, w);
+ [BMLS, AMLS, SigMLS] = invfreqs(H0+1e-5*Nn, w, [2 2], order, [], [], [], [], "method", "QR");
+ [HMLS,_] = freqz(BMLS, AMLS, w);
+ plot(w,[abs(H0); abs(Hh)])
+ xlabel("Frequency (rad/sec)");
+ ylabel("Magnitude");
+ legend('Original','Measured');
+ err = norm(H0-Hh);
+ disp(sprintf('L2 norm of frequency response error = %f',err));
+*/
+
+
+
+
