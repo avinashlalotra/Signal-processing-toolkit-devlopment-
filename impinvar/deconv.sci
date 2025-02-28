@@ -24,11 +24,6 @@ end
   if (ly > la)
     x = zeros (size (y,1) - size (a,1) + 1,size(y,2)-size(a,2)+1);
     x(1) = 1;
-    disp("deconv : checkpoint started")
-    disp("y");disp(y)
-    disp("a");disp(a)
-    disp("x");disp(x)
-    disp("deconv : checkpoint ended")
     [b, r] = filter (y, a, x);
     r = r * a(1);
   elseif (ly == la)

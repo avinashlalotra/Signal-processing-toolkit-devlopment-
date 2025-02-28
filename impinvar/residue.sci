@@ -101,29 +101,13 @@ function [r, p, k, e] = residue (b, a, varargin)
     // Construct a system of equations relating the individual
     // contributions from each residue2 to the complete numerator.
     A = zeros (border+1, border+1);
-    
-    // bug     l must be greater then dimession of x
-    disp("residue: Values inside b and border");
-    disp("b:"); disp(b);
-    disp("border:"); disp(border);
-    disp("residue : Values inside b and border closed");
+  
     B = prepad (matrix (b, [length(b), 1]), border+1, 0);
     B = B(:); // incase b have only 1 element
-    // prepad output check
-     disp("sizeB");disp(size(B))
     for ip = 1:length (p)
       ri = zeros (size (p,1),size(p,2));
       ri(ip) = 1;
      // A(:,ip) = prepad (rresidue (ri, p, [], tol), border+1, 0).';// invalid index error
-    // bugppoint 1 statrt
-    disp("Bugpoint 1 started")
-    disp("ri");disp(ri);
-    disp("p");disp(p);
-    disp("tol");disp(tol)
-    disp("ip") ; disp(ip);
-    disp("border");disp(border)
-    disp("Bugpoint 1 closed")
-    // bigpoint 1 closed
      temprr=rresidue (ri, p, [], tol)
      ppr=prepad(temprr,border+1,0)
      A(:,ip) = ppr 
@@ -134,13 +118,6 @@ function [r, p, k, e] = residue (b, a, varargin)
     //        It would be better to construct A and B so they are not close to
     //        singular in the first place.
     d = max (abs (A),'c');
-
-    disp("Checkpoint for bug  Operator ./: Wrong dimensions for operation [1x2] ./ [2x1], same dimensions expected.");
-    disp("A:"); disp(A);
-    disp("B:"); disp(B);
-    disp("d:"); disp(d);
-    disp("Checkpoint closed: Operator ./: Wrong dimensions for operation [1x2] ./ [2x1], same dimensions expected.");
-
 
     r = (diag (d) \ A) \ (B ./ d);
   
