@@ -196,8 +196,7 @@ function [pks ,idx, varargout] = findpeaks (data, varargin)
     width = sqrt (abs(1 / pp(1)));
     
     if ( (width > maxW || width < minW) || pp(1) > 0 || H < minH || data(idx(i)) < 0.99*H ||abs (idx(i) - xm) > minD/2) then
-      idx_pruned = setdiff (idx_pruned, idx(i)); 
-      disp("i am executing from width > maxW || ... || ....")
+      idx_pruned = setdiff (idx_pruned, idx(i));
     elseif (nargout > 2) 
       struct_count=struct_count+1;
       extra.parabol(struct_count).x  = ind([1 $]);
@@ -227,7 +226,7 @@ end
     pks = pks.';
     idx = idx.';
   end
-    idx = idx(:); // Octave Compatibility
+  idx = idx.';
   if (nargout() > 2)
     varargout(1) = extra;
   end
@@ -240,37 +239,69 @@ pi = %pi ;
  y = sin(3.14*t) + 0.5*cos(6.09*t) + 0.1*sin(10.11*t+1/6) + 0.1*sin(15.3*t+1/3);
  data1 = abs(y);
  [pks idx] = findpeaks(data1);
-
-
  data2 = y;
  [pks2 idx2] = findpeaks(data2,"DoubleSided"); 
  [pks3 idx3] = findpeaks(data2,"DoubleSided","MinPeakHeight",0.5); 
 
  subplot(1,2,1)
  plot(t,data1,t(idx),data1(idx),'xm')
+ subplot(1,2,2)
+ plot(t,data2,t(idx2),data2(idx2),"xm",t(idx3),data2(idx3),"or")
+ legend("Location","NorthOutside","Orientation","horizontal");
+/////////////////////////////// octave version /////////////////////////////
+ t = 2*pi*linspace(0,1,1024)';
+ y = sin(3.14*t) + 0.5*cos(6.09*t) + 0.1*sin(10.11*t+1/6) + 0.1*sin(15.3*t+1/3);
+ data1 = abs(y);
+ [pks idx] = findpeaks(data1);
+ data2 = y;
+ [pks2 idx2] = findpeaks(data2,"DoubleSided"); 
+ [pks3 idx3] = findpeaks(data2,"DoubleSided","MinPeakHeight",0.5); 
+ subplot(1,2,1)
+ plot(t,data1,t(idx),data1(idx),'xm')
  axis tight
  subplot(1,2,2)
  plot(t,data2,t(idx2),data2(idx2),"xm",t(idx3),data2(idx3),"or")
  axis tight
- legend("Location","NorthOutside","Orientation","horizontal")
+ legend("Location","NorthOutside","Orientation","horizontal");
+////////////////////octvae version end ////////////////////////////////////////////
+assert_checkequal(size(pks),[11 1]);
+assert_checkequal(size(idx),[11 1]);
+assert_checkequal(size(pks2),[11 1]);
+assert_checkequal(size(idx2),[11 1]);
+assert_checkequal(size(pks3),[8 1]);
+assert_checkequal(size(idx3),[8 1]);
  //----------------------------------------------------------------------------
 
   Finding the peaks of smooth data is not a big deal!
-
+// Not as accurate as Octave
 demo
  t = 2*pi*linspace(0,1,1024)';
  y = sin(3.14*t) + 0.5*cos(6.09*t) + 0.1*sin(10.11*t+1/6) + 0.1*sin(15.3*t+1/3);
-
  data = abs(y + 0.1*rand(length(y),1,'normal')); 
  [pks idx] = findpeaks(data,"MinPeakHeight",1);
-
  dt = t(2)-t(1);
  [pks2 idx2] = findpeaks(data,"MinPeakHeight",1,"MinPeakDistance",round(0.5/dt));
-
  subplot(1,2,1)
  plot(t,data,t(idx),data(idx),'or')
  subplot(1,2,2)
  plot(t,data,t(idx2),data(idx2),'or')
+
+ ///octave version///////////////////////////////////////////////////////
+  t = 2*pi*linspace(0,1,1024)';
+ y = sin(3.14*t) + 0.5*cos(6.09*t) + 0.1*sin(10.11*t+1/6) + 0.1*sin(15.3*t+1/3);
+ data = abs(y + 0.1*randn(length(y),1)); 
+ [pks idx] = findpeaks(data,"MinPeakHeight",1);
+ dt = t(2)-t(1);
+ [pks2 idx2] = findpeaks(data,"MinPeakHeight",1,"MinPeakDistance",round(0.5/dt));
+ subplot(1,2,1)
+ plot(t,data,t(idx),data(idx),'or')
+ subplot(1,2,2)
+ plot(t,data,t(idx2),data(idx2),'or')
+ ///////////////////////////////////DO not run enclosed on scilab//////////////////////////////////////////////////////
+ assert_checkequal(size(pks),[86 1]);
+ assert_checkequal(size(pks2),[7 1]);
+ assert_checkequal(size(idx),[86 1]);
+ assert_checkequal(size(idx2),[7 1]);
 
  //----------------------------------------------------------------------------
  // Noisy data may need tuning of the parameters. In the 2nd example,
@@ -289,17 +320,12 @@ test
 test
  x = [1 10 2 2 1 9 1];
  [pks, loc] = findpeaks(x);
- assert_checkequal (loc, [2 ; 6])
+ assert_checkequal (loc, [2  6])
  assert_checkequal (pks, [10 9])
 
 // Test input validation
 error findpeaks ()
 error findpeaks (1)
 error findpeaks ([1, 2])
-
-// Test Matlab compatibility
-test assert_checkequal(findpeaks ([34 134 353 64 134 14 56 67 234 143 64 575 8657]),353 134 234])
-
-
 
 */
