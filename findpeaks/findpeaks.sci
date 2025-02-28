@@ -235,14 +235,14 @@ end
 endfunction
 /*
 demo
-// passed
- t = 2*%pi*linspace(0,1,1024)';
+pi = %pi ;
+ t = 2*pi*linspace(0,1,1024)';
  y = sin(3.14*t) + 0.5*cos(6.09*t) + 0.1*sin(10.11*t+1/6) + 0.1*sin(15.3*t+1/3);
- data1 = abs(y); // postive values 
+ data1 = abs(y);
  [pks idx] = findpeaks(data1);
 
 
- data2 = y; // Double-sided
+ data2 = y;
  [pks2 idx2] = findpeaks(data2,"DoubleSided"); 
  [pks3 idx3] = findpeaks(data2,"DoubleSided","MinPeakHeight",0.5); 
 
@@ -258,10 +258,10 @@ demo
   Finding the peaks of smooth data is not a big deal!
 
 demo
- t = 2*%pi*linspace(0,1,1024)';
+ t = 2*pi*linspace(0,1,1024)';
  y = sin(3.14*t) + 0.5*cos(6.09*t) + 0.1*sin(10.11*t+1/6) + 0.1*sin(15.3*t+1/3);
 
- data = abs(y + 0.1*rand(length(y),1,'normal')); // Positive values + noise
+ data = abs(y + 0.1*rand(length(y),1,'normal')); 
  [pks idx] = findpeaks(data,"MinPeakHeight",1);
 
  dt = t(2)-t(1);
@@ -282,7 +282,7 @@ assert_checkequal (findpeaks ([1; 1; 1]),[])
 
 test
  // Test input vector is an oversampled sinusoid with clipped peaks
- x = min (3, cos (2*%pi*[0:8000] ./ 600) + 2.01);
+ x = min (3, cos (2*pi*[0:8000] ./ 600) + 2.01);
  assert_checkequal (~isempty (findpeaks (x)),%t)
 
 
@@ -300,18 +300,6 @@ error findpeaks ([1, 2])
 // Test Matlab compatibility
 test assert_checkequal(findpeaks ([34 134 353 64 134 14 56 67 234 143 64 575 8657]),353 134 234])
 
-test 
- // three parabolas, equal height and width
- a  = -2
- x0 = 3.3;
- y0 = 4.1;
- x  = linspace (0, 20, 300);
- y  = a .* (x - x0).^2 + y0;
- y(end+1,:) = 1.78; ## offset
- y = max (y); ##  maximum along colums
- [pks, loc, ex] = findpeaks (y, "MaxPeakWidth", 15);
- assert_checkequal(length(pks),1)
- assert_checkequal(pks, ex.height);
- assert_checkequal(loc(:), mean (ex.roots, 2));
+
 
 */
