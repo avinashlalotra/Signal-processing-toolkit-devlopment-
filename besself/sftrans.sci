@@ -72,7 +72,8 @@ function [Sz, Sp, Sg] = sftrans (Sz, Sp, Sg, W, stop)
     // Sz  =
     //
     //    20.    10.    6.6666667
-
+    // dependencies
+    // 
     funcprot(0);
     [nargout nargin]= argn();
 

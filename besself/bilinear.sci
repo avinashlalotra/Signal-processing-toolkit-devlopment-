@@ -48,7 +48,8 @@ function [Zz, Zp, Zg] = bilinear(Sz, Sp, Sg, T)
     // b  =
     //
     //    0.  - 0.1666667  - 0.3333333    2.5
-
+    // Dependencies
+    // tf2zp postpad zp2tf prepad
     funcprot(0);
     [nargout nargin] = argn();
     ieee(2);
