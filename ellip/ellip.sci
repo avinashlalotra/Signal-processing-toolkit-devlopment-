@@ -59,7 +59,8 @@ function [a, b, c, d] = ellip (n, rp, rs, w, varargin)
     //         column 5
     //
     //    0.0202774
-
+    // Dependencies
+    // ellipap sftrans bilinear zp2tf
     funcprot(0);
     [nargout nargin] = argn();
 
