@@ -38,7 +38,8 @@ function [y, i] = bitrevorder (x)
     // y  =
     //
     //    i      3.    1.    6.i
-
+    // Dependencies
+    // digitrevorder
     funcprot(0);
     [nargout, nargin] = argn() ;
 
