@@ -1,5 +1,6 @@
 
-
+// Dependencies
+// prepad deconv mpoles
 function [r, p, k, e] = residue (b, a, varargin)
 
     if (nargin < 2 || nargin > 4)

@@ -26,6 +26,8 @@ invimpinvar implements the reverse of this function.
 [b, a] = impinvar (b, a);
 [b, a] = invimpinvar (b, a);
 Reference: Thomas J. Cavicchi (1996) “Impulse invariance and multiple-order poles”. IEEE transactions on signal processing, Vol 44 (9): 2344–2347
+Dependencies
+  residue
 
 
 */
@@ -105,6 +107,7 @@ endfunction
 function p_out = polyrev (p_in)
 
     p_out = p_in($:-1:1);
+
   
 endfunction
 function p_out = to_real(p_in)
