@@ -32,6 +32,8 @@
   W: vector of weights (must be same length as F)
 
 */
+// Dependencies
+// invfreq
 function [B, A, SigN] = invfreqz(H, F, nB, nA, W, iter, tol, tr, varargin)
 
   if nargin < 9
