@@ -33,15 +33,6 @@ function [M , iM] = cummax(varargin)
     //     M = cummax(v)
     //        
     // Expected output: [8 9 9 10 10 10 10 10 10 10]
-    //
-    // Authors
-    // Ayush Baid
-    //
-    // See Also
-    // cummax | cumprod | cumsum | max | max
-    
-    
-
     [numOutArgs,numInArgs] = argn(0);
     
     // ** Checking number of arguments

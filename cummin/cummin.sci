@@ -35,14 +35,6 @@ function [M ,iM ]= cummin(varargin)
     //        
     // Expected output: [8 8 1 1 1 1 1 1 1 1]
     //
-    // Authors
-    // Ayush Baid
-    //
-    // See Also
-    // cummax | cumprod | cumsum | max | min
-    
-    
-
     [numOutArgs,numInArgs] = argn(0);
     
     // ** Checking number of arguments
