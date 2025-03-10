@@ -45,7 +45,8 @@ function [pxx, f] = periodogram (x, varargin)
     //          [0..nfft/2+1].  "twosided" computes spectrum from [0..nfft-1].
     //
     //
-    
+    // Dependencies
+    // hamming fft1
     [nargout,nargin]=argn();
       // check input arguments
       if (nargin < 1 | nargin > 5)
