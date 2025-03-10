@@ -26,7 +26,10 @@
     If fs is not specified, or is an empty vector, it defaults to 1Hz.
 
     If tol is not specified, it defaults to 0.0001 (0.1%) 
-*/
+  Dependencies
+    residue
+    inv_residue
+    */
 function [b_out, a_out] = invimpinvar (b_in, a_in, fs, tol)
 
   if (nargin <2)
