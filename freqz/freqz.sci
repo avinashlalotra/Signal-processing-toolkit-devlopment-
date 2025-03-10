@@ -45,6 +45,8 @@ freqz (...)
 
 Plot the magnitude and phase response of `h` rather than returning them.
 */
+// Dependencies
+// fft1 unwrap2 postpad 
 function [h_r, f_r] = freqz (b, a, n, region, Fs)
 
   if (nargin < 1)
