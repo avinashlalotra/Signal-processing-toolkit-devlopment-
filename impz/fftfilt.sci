@@ -31,13 +31,7 @@ function y = fftfilt(b, x, varargin)
     //      x = sin(1:2000);
     //      b = [1 1/4;1/3 1/5];
     //      y = fftfilt(b,x);
-    //
-    // Authors
-    // Ayush Baid
-
-
-
-
+    
     [numOutArgs,numInArgs] = argn(0);
     
 // ** Checking number of arguments
