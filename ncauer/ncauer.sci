@@ -39,7 +39,8 @@ function [Zz, Zp, Zg] = ncauer(Rp, Rs, n)
     //  -0.10199 + 0.64039i  -0.03168 + 0.96777i  -0.10199 - 0.64039i  -0.03168 - 0.96777i  -0.14368 + 0.00000i
     //
     //Zg =  0.0030628
-    
+    // Dependencies
+    // ellipap
     
     funcprot(0);
     lhs = argn(1)
